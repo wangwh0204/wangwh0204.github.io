@@ -1,0 +1,705 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Modern Operating Systems 2nd | 知行合一，修学储能，敬天爱人，终身学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="steven wang">
+    
+
+    
+    <meta name="description" content="&amp;lt;&amp;lt;Modern Operating Systems 2nd&amp;gt;&amp;gt;的中文版&amp;lt;&amp;lt;现代操作系统&amp;gt;&amp;gt;读书笔记。">
+<meta name="keywords" content="OS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modern Operating Systems 2nd">
+<meta property="og:url" content="http://wangwh0204.github.io/2011/08/10/modern-operating-systems/index.html">
+<meta property="og:site_name" content="知行合一，修学储能，敬天爱人，终身学习">
+<meta property="og:description" content="&amp;lt;&amp;lt;Modern Operating Systems 2nd&amp;gt;&amp;gt;的中文版&amp;lt;&amp;lt;现代操作系统&amp;gt;&amp;gt;读书笔记。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2011-08-09T16:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Modern Operating Systems 2nd">
+<meta name="twitter:description" content="&amp;lt;&amp;lt;Modern Operating Systems 2nd&amp;gt;&amp;gt;的中文版&amp;lt;&amp;lt;现代操作系统&amp;gt;&amp;gt;读书笔记。">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.jpg" alt="知行合一，修学储能，敬天爱人，终身学习" title="知行合一，修学储能，敬天爱人，终身学习"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="知行合一，修学储能，敬天爱人，终身学习">知行合一，修学储能，敬天爱人，终身学习</a></h1>
+				<h2 class="blog-motto">Focus on Real-World Computing (Computer Graphics, Computer Vision, Robotics), applying to Smart Robots</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:wangwh0204.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2011/08/10/modern-operating-systems/" title="Modern Operating Systems 2nd" itemprop="url">Modern Operating Systems 2nd</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="steven wang" target="_blank" itemprop="author">steven wang</a>
+		
+  <p class="article-time">
+    <time datetime="2011-08-09T16:00:00.000Z" itemprop="datePublished"> 发表于 2011-08-10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01-引论"><span class="toc-number">1.</span> <span class="toc-text">01 引论</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02-进程与线程"><span class="toc-number">2.</span> <span class="toc-text">02 进程与线程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#03-存储管理"><span class="toc-number">3.</span> <span class="toc-text">03 存储管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04-文件系统"><span class="toc-number">4.</span> <span class="toc-text">04 文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05-输入-输出"><span class="toc-number">5.</span> <span class="toc-text">05 输入/输出</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-实例研究1：Linux"><span class="toc-number">6.</span> <span class="toc-text">10 实例研究1：Linux</span></a></li></ol>
+		
+		</div>
+		
+		<p>&lt;&lt;Modern Operating Systems 2nd&gt;&gt;的中文版&lt;&lt;现代操作系统&gt;&gt;读书笔记。<a id="more"></a></p>
+<h1 id="01-引论"><a href="#01-引论" class="headerlink" title="01 引论"></a>01 引论</h1><p>多数计算机有一些对程序员可见的专门寄存器。<br>其中一个是程序计数器(PC)，保存将要取出的下一条指令的内存地址。在指令取出后，程序计数器就被更新以便指向后续的指令。<br>另一个是寄存器是堆栈指针，它指向内存中当前栈的顶端。该栈含有已经进入但是还没有退出的每个过程的一个context，在一个过程的堆栈框架中保存了有关的输入参数，局部变量以及那些没有保存在寄存器中的临时变量。<br>程序状态字(Program Status Word, PSW)寄存器。这个寄存器包含了条件码，CPU优先级，模式(用户或内核态)，以及各种控制位。在系统调用和I/O中，PSW的作用很重要。</p>
+<p>CPU, 存储器，I/O设备<br>I/O设备一般包括两个部分：设备控制器和设备本身。所有设备寄存器的集合构成了I/O端口空间。在有些计算机中，设备寄存器被映射到操作系统的地址空间，可以像普通存储字一样读出和写入，在这种计算机中，不需要专门的I/O指令，用户程序可以被硬件阻挡在外，防止其接触这些寄存器地址。而另一些计算机中，设备寄存器被放入一个专门的I/O端口空间中，每个寄存器都有一个端口地址。在这些机器中，提供在内核态中可以使用的专门IN和OUT指令，供设备驱动程序读写这些寄存器用。前一种方式不需要专门的I/O指令，但是占用一些地址空间；后一种相反。</p>
+<p>实现I/O的方式有三种：busy waiting, interrupt, DMA</p>
+<ol>
+<li><p>在最简单的方式中，用户程序发出一个系统调用，内核将其翻译成一个对应设备驱动程序的过程调用。然后设备驱动程序启动I/O并在一个连续不断的循环中检查该设备，看该设备是否完成了工作(一般有一些二进制位用来指示设备仍在忙碌中)。当I/O结束后，设备驱动程序把数据送到指定的地方（若有此需要），并返回。然后操作系统将控制返回给调用者。这种方式称为忙等待(busy waiting)，其缺点是要占据CPU，CPU一直轮询设备直到对应的I/O操作完成。</p>
+</li>
+<li><p>第二种方式是设备驱动程序启动设备并且让该设备在操作完成时发出一个中断，设备驱动程序此时返回，操作系统接着在需要时阻塞调用者并安排其他工作进行。当设备驱动程序检测到该设备的操作完毕，它发出一个中断通知操作完成。</p>
+</li>
+</ol>
+<ul>
+<li>设备驱动程序通过写设备寄存器通知设备控制器做什么，然后设备控制器启动设备。</li>
+<li>当设备控制器传送完毕被告知的要进行读写的字节数量后，使用特定的总线发信号给中断控制器芯片。</li>
+<li>如果中断控制器准备接收中断，它会在CPU芯片的一个管脚上声明。</li>
+<li>中断控制器将该设备的编号放到总线上，CPU可以读总线。一旦CPU决定取中断，通常PC和PSW就被压入当前堆栈中，并且CPU被切换到用户态。</li>
+<li>当中断处理程序开始后，它取走已入栈的PC和PSW，并保存，然后查询设备状态。在中断处理程序全部完成之后，返回到先前运行的用户程序中尚未执行的头一条指令。</li>
+</ul>
+<ol>
+<li>第三种方式是，为I/O使用一种特殊的DMA芯片，他可以控制在内存和某些控制器之间的位流，而无须持续的CPU干预。CPU对DMA芯片进行设置，说明要传送的字节数，有关的设备和内存地址及操作方向，接着启动DMA.当DMA芯片完成时，它引发一个中断。</li>
+</ol>
+<p>系统调用 read</p>
+<p>地址<br>0xffffffff</p>
+<p>返回调用者<br>陷入内核                            库过程 read<br>把用于read的代码放在寄存器中</p>
+<p>用户空间                </p>
+<p>增加SP<br>调用read<br>压入fd                            调用 read 的用户程序<br>压入&amp;buffer<br>压入nbytes</p>
+<p>内核空间            查找系统调用，运行系统调用处理程序, 返回调用者</p>
+<p>计算机由处理器，存储器以及I/O设备组成，这些部件通过总线连接。<br>所有操作系统构建所依赖的基本概念是进程，存储管理，I/O管理，文件管理和安全。<br>任何操作系统的核心是它可处理的系统调用集。</p>
+<h1 id="02-进程与线程"><a href="#02-进程与线程" class="headerlink" title="02 进程与线程"></a>02 进程与线程</h1><p>操作系统中最核心的概念是进程：这是对正在运行程序的一个抽象。操作系统的其他所有内容都是围绕着进程的概念展开。</p>
+<p>在UNIX系统中，只有一个系统调用可以用来创建新进程:fork。这个系统调用会创建一个与调用进程相同的副本。</p>
+<p>进程三种状体：</p>
+<ol>
+<li>运行态 (该时刻进程实际占用CPU)</li>
+<li>就绪态 (可运行，但因为其他进程正在运行而暂时停止)</li>
+<li>阻塞态 (除非某种外部事件发生，否则进程不能运行)</li>
+</ol>
+<p>调度程序力图在整体效率和进程的竞争公平性之间取得平衡。<br>有关调度处理的一个关键问题是何时进行调度决策。<br>1.在创建一个新进程之后，需要决定是运行父进程还是子进程。由于这两种进程都处于就绪状态，所以这是一种正常的调度决策，可以任意决定。</p>
+<ol>
+<li>在一个进程退出时必须做出调度决策。一个进程不再运行，所以必须从就绪进程集中选择另外某个进程，如果没有就绪的进程，通常会运行一个系统提供的空闲进程。</li>
+<li>当一个进程阻塞在I/O和信号量上或由于其他原因阻塞时，必须选择另一个进程运行。</li>
+<li>在一个I/O终端发生时，必须做出调度决策。</li>
+</ol>
+<p>不同的环境需要不同的调度算法。</p>
+<p>调度算法的目标：<br>所有系统：</p>
+<ul>
+<li>公平，给每个进程公平的CPU份额</li>
+<li>策略强制执行，看到所宣布的策略执行</li>
+<li>平衡，保持系统的所有部分都忙碌</li>
+</ul>
+<p>批处理系统</p>
+<ul>
+<li>吞吐量，每小时最大作业数</li>
+<li>周转时间，从提交到终止间的最小时间</li>
+<li>CPU利用率，保持CPU始终忙碌</li>
+</ul>
+<ol>
+<li>先来先服务</li>
+<li>最短作业优先</li>
+<li>最短剩余时间优先</li>
+</ol>
+<p>交互式系统</p>
+<ul>
+<li>响应时间，快速响应请求</li>
+<li>均衡性，满足用户的期望</li>
+</ul>
+<ol>
+<li>轮转调度<br>每个进程被分配一个时间段，称为时间片，即允许该进程在该时间段中运行。此算法的缺点在于<br>context switch所消耗的时间</li>
+<li>优先级调度</li>
+<li>多级队列</li>
+<li>最短进程优先</li>
+<li>保证调度</li>
+<li>彩票调度</li>
+<li>公平分享调度</li>
+</ol>
+<p>实时系统</p>
+<ul>
+<li>满足截止时间，避免丢失数据</li>
+<li>可预测性，在多媒体系统中避免品质降低</li>
+</ul>
+<h1 id="03-存储管理"><a href="#03-存储管理" class="headerlink" title="03 存储管理"></a>03 存储管理</h1><p>memory hierarchy</p>
+<p>就像 进程 概念创造了一类抽象的CPU以运行程序一样，地址空间 为程序创造了一种抽象的内存。</p>
+<p>有两种处理内存超载的通用方法。最简单的策略是交换swapping技术，即把一个进程完整调入内存，使该进程运行一段时间，然后把它存回磁盘。另一种策略是虚拟内存(virtual memory)，该策略甚至能使程序在只有一部分被调入内存的情况下运行。</p>
+<p>虚拟内存的基本思想是：每个程序拥有自己的地址空间，这个空间被分割成多个块，每一块称为一页page。每一页有连续的地址范围，这些页被映射到物理内存，但并不是所有的页都必须在内存中才能运行程序。当程序引用到一部分在物理内存中的地址空间时，由硬件立刻执行必要的映射。当程序引用到一部分不在物理内存的地址空间时，由操作系统负责将缺失的部分装入物理内存并重新执行失败的指令。</p>
+<p>由程序产生的地址称为虚拟地址，它们构成了一个虚拟地址空间。在没有虚拟内存的计算机上，系统直接将虚拟地址送到内存总线上，读写操作使用具有同样地址的物理内存字；而在使用虚拟内存的情况下，虚拟地址不是被直接送到内存总线上，而是被送到内存管理单元MMU，MMU把虚拟地址映射为物理内存地址。</p>
+<p>虚拟地址空间按照固定大小划分成称为页面page的若干单元，在物理内存中对应的单元称为page frame.RAM与磁盘之间的交换总是以整个page为单元进行的。</p>
+<p>当MMU发现虚拟page没有被映射，于是使CPU陷入到操作系统，这个陷阱称为缺页中断 page fault。<br>操作系统找到一个很少使用的page frmae且把它的内容写入磁盘，随后把需要访问的page读到刚才回收的page frame中，修改映射关系，然后重新启动引起陷阱的指令。</p>
+<p>一种最简单的实现，虚拟地址到物理地址的映射可以概括如下：虚拟地址被分成虚拟页号(高位)和偏移量(低位部分)两部分。虚拟页号可用作页表的索引，以找到该虚拟页面对应的页表项，由页表项可以找到页框号，然后把页框号拼接到偏移量的高位端，以替换掉虚拟页号，形成送往内存的物理地址。</p>
+<p>在任何分页式系统中，都需要考虑两个主要问题:</p>
+<ol>
+<li>虚拟地址到物理地址的映射必须非常快</li>
+<li>如果虚拟地址空间很大，页表也会很大。</li>
+</ol>
+<p>有一种方案用来加速分页。这种方案的建立基于这样一种现象：大多数程序总是对少量的页面进行多次的访问，而不是相反。通过在MMU中设置一种硬件设备，将虚拟地址直接映射到物理地址，而不必再访问页表。该设备称为TLB(Translation Lookaside Buffer)</p>
+<p>当发生page fault时，操作系统必须在内存中选择一个页面将其换出内存，以便为即将调入的页面腾出空间。有如下几种 页面置换算法，用来达到目的:</p>
+<ul>
+<li>最优页面置换算法</li>
+<li>最近未使用页面置换算法</li>
+<li>先进先出页面置换算法</li>
+<li>第二次机会页面置换算法</li>
+<li>时钟页面置换算法</li>
+<li>最近最少使用页面置换算法 LRU (Least Recently Used)</li>
+<li>工作集页面置换算法</li>
+<li>工作集时钟页面置换算法</li>
+</ul>
+<h1 id="04-文件系统"><a href="#04-文件系统" class="headerlink" title="04 文件系统"></a>04 文件系统</h1><p>就像我们看到的操作系统提取处理器的概念来建立 进程 的抽象，以及提取物理存储器的概念来建立进程(虚拟)地址空间的抽象那样，我们使用 文件 这个抽象来为磁盘建模。</p>
+<p>绝大多数UNIX操作系统都是用虚拟文件系统(Virtual File System, VFS)概念尝试将多种文件系统统一成一个有序的框架。</p>
+<p>当系统启动时，根文件系统在VFS中注册。当一个文件系统注册时，它做的最基本的工作就是提供一个包含VFS所需要的函数地址的列表。</p>
+<h1 id="05-输入-输出"><a href="#05-输入-输出" class="headerlink" title="05 输入/输出"></a>05 输入/输出</h1><p>I/O设备一般由机械部件和电子部件两部分组成。电子部件称为设备控制器(device controller)或适配器(adapter)</p>
+<p>每个控制器有几个寄存器用来与CPU进行通信。通过写入这些寄存器，操作系统可以命令设备发送数据，接收数据，开启或关闭，或者执行某些其它操作。通过读写这些寄存器，操作系统可以了解设备的状态，是否准备好接收一个新的命令等。除了控制器外，许多设备还有一个操作系统可以读写的数据缓冲区。</p>
+<p>CPU与设备的控制寄存器和数据缓冲器的通信方式有：</p>
+<ol>
+<li>每个控制寄存器被分配一个I/O端口(I/O port)号，所有的I/O端口形成I/O端口空间，并且受到保护使得普通的用户程序不能对其进行访问(只有操作系统可以访问)，通过特殊的I/O命令交互。</li>
+<li>将所有控制寄存器映射到内存空间。每个控制寄存器被分配唯一的一个内存地址，并且不会有内存被分配这一地址，称为内存映射I/O(memory-mapped I/O)</li>
+</ol>
+<p>DMA<br>通常，系统中只有一个DMA控制器，由它调控到多个设备的数据传送，而这些数据传送经常是同时发生的。</p>
+<p>DMA控制器包含若干个可以被CPU读写的寄存器，其中包括一个内存地址寄存器，一个字节计数寄存器和一个或多个控制寄存器。控制寄存器指定要使用的I/O端口，传送方向(从I/O设备读或写到I/O设备)，传送单位(每次一个字节或每次一个字)以及在一次突发传送中要传送的字节数。</p>
+<p>没有DMA时，磁盘的读过程：首先，控制器从磁盘驱动器串行地，一位一位地读一个块(一个或多个扇区)，直到将整块信息放入控制器的内部缓冲区中。接着，它计算校验和，以保证没有读错误发生。然后控制器产生一个中断，当操作系统运行时，它重复地从控制器的缓冲区一次一个字节或一个字地读取该块的信息，并将其存入内存中。</p>
+<p>使用DMA时，磁盘的读过程：首先，CPU通过设置DMA控制器的寄存器对它进行编程，所以DMA控制器知道将什么数据传送到什么地方。DMA控制器还要向磁盘控制器发出一个命令，通知它从磁盘读数据到其内部的缓冲区中，并且对校验和进行校验。如果磁盘控制器的缓冲区的数据是有效的，那么DMA就可以开始了。DMA控制器通过在总线上发出一个读请求道磁盘控制器而发起DMA传送，这一读请求看起来与任何其他读请求是一样的，并且磁盘控制器并不知道或并不关心它是来自CPU还是来自DMA控制器。一般情况下，要写的内存地址在总线的地址线上，所以当磁盘控制器从其内部缓冲区读取下一个字的时候，它知道将该字写到什么地方。写到内存是另一个标准总线周期。当写操作完成时，磁盘控制器在总线上发出一个应答信号给DMA控制器。于是，DMA控制器步增要使用的内存地址，并且步减字节计数。如果字节计数仍然大于0，则重复第2步到第4步，直到字节计数到达0.此时DMA控制器将中断CPU以便让CPU知道传送现在已经完成了。</p>
+<p>I/O可以以三种根本不同的方式实现：程序控制I/O(programmed I/O)，中断驱动I/O，使用DMA的I/O<br>Programmed I/O : CPU需要不断查询设备状态以了解设备是否准备就绪，这一行为称为轮询(polling)或忙等待(busy waiting)</p>
+<p>大多数电梯使用一种不同的算法来协调效率和公平性这两个相互冲突的目标。电梯保持按一个方向移动，直到在那个方向上没有请求为止，然后改变方向。这个算法在磁盘世界和电梯世界都被称为 电梯算法(elevator algorithm).</p>
+<p>5.5 时钟<br>时钟由三个部件构成：晶体振荡器，计数器和存储寄存器。当把一块石英晶体适当的切割并安装在一定的压力之下时，它就可以产生非常精确的周期性信号，典型的频率范围是几百兆赫兹，具体的频率值与所选的晶体有关。它给计算机的各种电路提供同步信号，该信号被送到计数器，使其递减计数至0。当计数器变为0，产生一个CPU中断。这些周期性的中断称为 时钟滴答(clock tick)</p>
+<p> 每当启动一个进程时，调度程序就将一个计数器初始化为以时钟滴答为单位的该进程时间片的取值，每次时钟中断时，时钟驱动程序将时间片计数器减1，当计数器变为0时，时钟驱动程序调用调度程序以激活另一个进程。</p>
+<h1 id="10-实例研究1：Linux"><a href="#10-实例研究1：Linux" class="headerlink" title="10 实例研究1：Linux"></a>10 实例研究1：Linux</h1><p>一个偶然事件往往能够决定历史。</p>
+<p>cat    将多个文件连接到标准输出<br>chmod 修改文件保护模式<br>cp    复制一个或多个文件<br>cut    从一个文件中剪切一段文字<br>find    查找指定模式的文件<br>grep     在文件中检索给定模式<br>head    提取文件的前几行<br>ls    列出目录<br>make    编译文件生成二进制文件<br>mkdir    创建目录<br>od    以八进制显示一个文件<br>paste    将一段文字粘贴到一个文件中<br>ps    列出正在运行的进程<br>rm    删除一个或多个文件<br>rmdir 删除一个目录<br>sort    对文件中的所有行按照字母序进行排列<br>tail    提取文件的最后几行</p>
+<p>10.2.5 内核结构</p>
+<pre><code>系统调用 
+</code></pre><hr>
+<pre><code>I/O部件                    内存管理部件        进程管理部件
+</code></pre><hr>
+<p>|              虚拟文件系统                | 虚拟内存    |        信号处理<br>—————————————          | 页面替换    |        进程/线程创建和终止<br>终端         | 套接字         | 文件系统        | 页面缓存  |        CPU调度<br>字符设备驱动 | 网络协议         | 通用块层        |———–|<br>         | 网络设备驱动     | I/O调度器<br>                    | 块设备驱动程序</p>
+<p>10.4 Linux的内存管理<br>每个Linux进程都有一个地址空间，逻辑上有三段组成：代码，数据和堆栈段。<br>代码段 包含了形成程序可执行代码的机器指令。通常，代码段是只读的。<br>数据段 包含了所有程序变量，字符串，数字和其他数据的存储。它有两部分，初始化数据和未初始化数据(BSS)。跟代码段不同，数据段可以改变。程序总是修改它的变量。Linux允许数据段随着内存的分配和回收而增长和缩减，通过这种机制来解决动态分配的问题。C库函数malloc经常使用系统调用brk来分配内存。<br>堆栈段 在大多数机器里，它从虚拟地址空间的顶部或附近开始，并且向下生长。</p>
+<p>32位机器上的每个Linux进程通常有3GB的虚拟地址空间，还有1GB留给其页表和其他内核数据。在用户态下运行时，内核的1GB是不可见的，但是当进程陷入内核时是可以访问的。内核内存通常驻留在低端物理内存中，但是被映射到每个进程虚拟地址空间顶部的1GB中，在地址0x000000和0xFFFFFFFF之间。</p>
+<p>物理内存管理<br>Linux区分三种内存区域(zone)</p>
+<ul>
+<li>ZONE_DMA 用来DMA操作的页</li>
+<li>ZONE_NORMAL 正常规则映射的页</li>
+<li>ZONE_HIGHMEM 高内存地址的页，并不永久性映射</li>
+</ul>
+<p>内存区域的确切边界和布局是硬件体系结构相关的。</p>
+<p>Linux的物理内存由三部分组成。前两部分是内核和内存映射表，并”钉”在内存中(页面从来不换出)，内存的其余部分被划分为页框。</p>
+<p>Linux支持多种内存分配机制。分配物理内存页框的主要机制是页面分配器，它使用了著名的伙伴算法。</p>
+<p>VFS<br>Superblock ,Dentry, I-node, File</p>
+<p>为了设计一个成功的操作系统，设计人员对于需要什么必须有清晰的思路，缺乏目标将使随后的决策非常难于做出。</p>
+<p>不同的系统会有所不同，嵌入式系统就不同于服务器系统。对于通用的操作系统而言，需要留心4个基本的要素：</p>
+<ul>
+<li>定义抽象概念</li>
+<li>提供基本操作</li>
+<li>确保隔离</li>
+<li>管理硬件</li>
+</ul>
+<p>指导原则：</p>
+<ul>
+<li>简单<br>Keep It Simple &amp; Stupid</li>
+<li>完备<br>爱因斯坦：万事都应该尽可能简单，但是不能过于简单</li>
+<li>效率</li>
+</ul>
+<p>机制与策略的分离</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/reading/">reading</a>►<a class="article-category-link" href="/categories/technology/">technology</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/OS/">OS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://wangwh0204.github.io/2011/08/10/modern-operating-systems/" data-title="Modern Operating Systems 2nd | 知行合一，修学储能，敬天爱人，终身学习" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2011/09/01/rapid-development/" title="Rapid Development">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Rapid Development</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2011/06/02/linux-kernel-development/"  title="Linux Kernel Development 2nd">
+ <strong>下一篇：</strong><br/> 
+ <span>Linux Kernel Development 2nd
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01-引论"><span class="toc-number">1.</span> <span class="toc-text">01 引论</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02-进程与线程"><span class="toc-number">2.</span> <span class="toc-text">02 进程与线程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#03-存储管理"><span class="toc-number">3.</span> <span class="toc-text">03 存储管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04-文件系统"><span class="toc-number">4.</span> <span class="toc-text">04 文件系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05-输入-输出"><span class="toc-number">5.</span> <span class="toc-text">05 输入/输出</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-实例研究1：Linux"><span class="toc-number">6.</span> <span class="toc-text">10 实例研究1：Linux</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+		
+		  
+			<li><a href="/categories/career/" title="career">career<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/management/" title="management">management<sup>2</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/others/" title="others">others<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/reading/" title="reading">reading<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/technology/" title="technology">technology<sup>9</sup></a></li>
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Agile/" title="Agile">Agile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UML/" title="UML">UML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SE/" title="SE">SE<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Win32/" title="Win32">Win32<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Design-Patterns/" title="Design Patterns">Design Patterns<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/BitTorrent/" title="BitTorrent">BitTorrent<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DirectShow/" title="DirectShow">DirectShow<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UNIX/" title="UNIX">UNIX<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OOAD/" title="OOAD">OOAD<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Boost/" title="Boost">Boost<sup>1</sup></a></li>
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">九月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/08/">八月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/01/">一月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2005/03/">三月 2005</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/09/">九月 2004</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/06/">六月 2004</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://weibo.com/drwujun/" target="_blank" title="吴军">吴军</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://cs.stanford.edu/" target="_blank" title="Stanford CS">Stanford CS</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> You&#39;ve got to find what you love. And the only way to do great work is to love what you do. If you haven&#39;t found it yet, keep looking. Don&#39;t settle. ― Steve Jobs <br/>
+			I&#39;m not a great programmer; I&#39;m just a good programmer with great habits. ― Kent Beck</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/wangwh0204" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/wangwh0204" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangwh0204@outlook.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="steven wang">steven wang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

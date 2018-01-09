@@ -1,0 +1,605 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>The Art of UNIX Programming | 知行合一，修学储能，敬天爱人，终身学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="steven wang">
+    
+
+    
+    <meta name="description" content="&amp;lt;&amp;lt;The Art of UNIX Programming&amp;gt;&amp;gt;的中文版&amp;lt;&amp;lt;UNIX编程艺术&amp;gt;&amp;gt;读书笔记。">
+<meta name="keywords" content="OS,UNIX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Art of UNIX Programming">
+<meta property="og:url" content="http://wangwh0204.github.io/2011/04/20/the-art-of-unix-programming/index.html">
+<meta property="og:site_name" content="知行合一，修学储能，敬天爱人，终身学习">
+<meta property="og:description" content="&amp;lt;&amp;lt;The Art of UNIX Programming&amp;gt;&amp;gt;的中文版&amp;lt;&amp;lt;UNIX编程艺术&amp;gt;&amp;gt;读书笔记。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2011-04-19T16:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Art of UNIX Programming">
+<meta name="twitter:description" content="&amp;lt;&amp;lt;The Art of UNIX Programming&amp;gt;&amp;gt;的中文版&amp;lt;&amp;lt;UNIX编程艺术&amp;gt;&amp;gt;读书笔记。">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.jpg" alt="知行合一，修学储能，敬天爱人，终身学习" title="知行合一，修学储能，敬天爱人，终身学习"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="知行合一，修学储能，敬天爱人，终身学习">知行合一，修学储能，敬天爱人，终身学习</a></h1>
+				<h2 class="blog-motto">Focus on Real-World Computing (Computer Graphics, Computer Vision, Robotics), applying to Smart Robots</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:wangwh0204.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2011/04/20/the-art-of-unix-programming/" title="The Art of UNIX Programming" itemprop="url">The Art of UNIX Programming</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="steven wang" target="_blank" itemprop="author">steven wang</a>
+		
+  <p class="article-time">
+    <time datetime="2011-04-19T16:00:00.000Z" itemprop="datePublished"> 发表于 2011-04-20</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01-哲学-Philosopy"><span class="toc-number">1.</span> <span class="toc-text">01 哲学 Philosopy</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04-模块性"><span class="toc-number">2.</span> <span class="toc-text">04 模块性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05-Textuality-Good-protocols-Make-Good-Practice"><span class="toc-number">3.</span> <span class="toc-text">05 Textuality: Good protocols Make Good Practice</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#06-Transparency-Let-There-Be-Light"><span class="toc-number">4.</span> <span class="toc-text">06 Transparency: Let There Be Light</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#07-Multiprogramming-Separating-Process-to-separate-Function"><span class="toc-number">5.</span> <span class="toc-text">07 Multiprogramming: Separating Process to separate Function</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-Configuration-Starting-on-the-Right-Foot"><span class="toc-number">6.</span> <span class="toc-text">10 Configuration: Starting on the Right Foot</span></a></li></ol>
+		
+		</div>
+		
+		<p>&lt;&lt;The Art of UNIX Programming&gt;&gt;的中文版&lt;&lt;UNIX编程艺术&gt;&gt;读书笔记。<a id="more"></a></p>
+<h1 id="01-哲学-Philosopy"><a href="#01-哲学-Philosopy" class="headerlink" title="01 哲学 Philosopy"></a>01 哲学 Philosopy</h1><p>Unix哲学是自下向上的，而不是自上而下的。Unix哲学注重实效，立足于丰富的经验。它鼓励那种分清轻重缓急的感觉，以及怀疑一切的态度，并鼓励你以幽默达观的态度对待这些。</p>
+<p>Unix哲学是这样的：一个程序只做一件事，并做好。</p>
+<p>Rob Pike在&lt;&lt;Notes on C Programming&gt;&gt;中从不同角度表述了Unix的哲学:</p>
+<ol>
+<li>你无法断定程序会在什么地方消耗运行时间。瓶颈经常出现在想不到的地方，所以别急于胡乱找个地方改代码，除非你已经证实那儿就是瓶颈所在。</li>
+<li>估量。在你没对代码进行估量，特别是没找到最耗时的那部分之前，别去优化速度。</li>
+<li>花哨的算法再n很小时通常很慢，而n通常很小。花哨算法的常熟复杂度很大。除非你确定n总是很大，否则不要使用花哨算法(即使n很大，也优先考虑原则2)</li>
+<li>花哨的算法比简单算法更容易出BUG，更难实现。尽量使用简单的算法配合简单的数据结构。(拿不准就穷举)</li>
+<li>数据压倒一起。如果已经选择了正确的数据结构并且把一切都组织的井井有条，正确的算法也就不言自明。编程的核心是数据结构，而不是算法。</li>
+</ol>
+<p>Unix哲学：</p>
+<ul>
+<li>模块原则：使用简洁的接口拼合简单的部件</li>
+<li>清晰原则：清晰胜于技巧</li>
+<li>组合原则：设计时考虑拼接组合<br>在输入输出方面，Unix传统极力提倡采用简单，文本化，面向流，设备无关的格式。</li>
+<li>分离原则：策略同机制分离，接口同引擎分离</li>
+<li>简洁原则：设计要简洁，复杂度能低则低</li>
+<li>吝啬原则：除非确无它法，不要编写庞大的程序。</li>
+<li><p>透明性原则： 设计要可见，以便审查和调试</p>
+</li>
+<li><p>健壮原则：健壮源于透明和简洁</p>
+</li>
+<li>表示原则：把知识叠入数据以求逻辑质朴而健壮</li>
+<li>通俗原则：接口设计避免标新立异</li>
+<li>缄默原则：如果一个程序没什么好说的，就沉默。</li>
+<li>补救原则：出现异常时，马上退出并给出足够错误信息。<br>软件要尽可能从容地应付各种错误输入和自身的运行错误。但是，如果做不到这一点，就让程序尽可能以一种容易诊断错误的方式终止。</li>
+<li>经济原则，宁花机器一分，不花程序员一秒</li>
+<li>生成原则：避免手工hack，尽量编写程序去生成程序。</li>
+<li>优化原则：雕琢前先要有原型，跑之前先学会走<br>还不知道瓶颈所在就匆忙进行优化，这可能是唯一一个比乱加功能更损害设计的错误。<br>先制作原型，再精雕细琢。优化之前先确保能用。<br>Kent Beck : Make it work, Make it right, make it fast</li>
+<li>多样原则：决不相信所谓“不二法门”的断言</li>
+<li>扩展原则：设计着眼未来，未来总比预想来的快</li>
+</ul>
+<p>所有的Unix哲学浓缩为一条铁律，那就是各地编程大师们分为圭臬的：Keep It Simple, Stupid(KISS)</p>
+<p>只要可行，一切都应该做成与来源和目标无关的过滤器<br>数据流应尽可能文本化(这样可以使用标准工具来查看和过滤)<br>数据库部署和应用协议尽可能文本化(让人可以阅读和编辑)<br>复杂的前端(用户界面)和后端应该泾渭分明。<br>如果可能，用C编写前，先用解释性语言搭建原型。<br>当且仅当只用一门语言编程会提高程序复杂度时，混用语言编程才比单一语言编程来的好。<br>宽收严发。<br>小就是美。在确保完成任务的基础上，程序功能尽可能少。</p>
+<p>要良好的运用Unix哲学，你就应该不断追求卓越。你必须相信，软件设计是一门技艺，值得你付出所有的智慧，创造力和激情。注意重用，善用工具，尽可能将一切都自动化。</p>
+<p>Unix有几个统一性的理念或象征，并塑造了它的API及由此形成的开发风格。其中最重要的一点应当是“一切皆文件”模型及在此基础上建立的管道概念。</p>
+<h1 id="04-模块性"><a href="#04-模块性" class="headerlink" title="04 模块性"></a>04 模块性</h1><p>There are two ways of constructing a software design. One is to make it so simple that there are obviously no deficiencies; the other is to make it so complicated that there are no obvious deficiencies. The first method is far more difficult.</p>
+<p>模块化代码的首要特质就是封装。封装良好的模块不会过多向外部披露自身的细节，不会直接调用其他模块的实现码，也不会胡乱共享全局数据。模块之间通过应用程序编程接口(API)–一组严密，定义良好的程序调用和数据结构来通信。这就是模块化原则的内容。</p>
+<p>紧凑性 及 正交性<br>The Magical Number Seven, Plus or Minus Two : Some Limits on Our Capacity for Processing Information 是认知心理学的基础性文章之一。这篇文章表明，人类短期记忆能够容纳的不连续信息数是七，加二或减二。这给我们一个评测API紧凑性的很好的经验法则：编程者需要记忆的条目数大于七吗？如果大于七，则这个API不太可能算是严格紧凑的。</p>
+<p>正交性是有助于使复杂设计也能紧凑的最重要特性之一。在纯粹的正交设计中，任何操作均无副作用。每一个动作只改变一件事，不会影响其它。无论你控制的是什么系统，改变每个属性的方法有且只有一个。</p>
+<p>4.2.3 SPOT原则<br>The Pragmatic Programmer针对一类特别重要的正交性明确提出了一条原则 — Don’t Repeat Yourself，意思是说：任何一个知识点在系统内部都应当有一个唯一，明确，权威的表述。Single Point of Truth</p>
+<p>重复会导致前后矛盾，产生隐微问题的代码，原因是当你修改重复点时，往往只改变了一部分而并非全部。通常，这也意味着你对代码的组织没有想清楚。</p>
+<p>完美之道，不在无可增加，而在无可删减。</p>
+<h1 id="05-Textuality-Good-protocols-Make-Good-Practice"><a href="#05-Textuality-Good-protocols-Make-Good-Practice" class="headerlink" title="05 Textuality: Good protocols Make Good Practice"></a>05 Textuality: Good protocols Make Good Practice</h1><p>互用性，透明性，可扩展性和存储/事务处理的经济性–这些都是设计文件格式和应用协议时需要考虑的重要方面。互用性和透明性要求我们在此类设计中要重点考虑数据表达的清晰问题，而不是首先考虑实现的方便性和可能达到的最高性能。既然二进制协议很难扩展和干净地抽取子集，可扩展性当然青睐文本化协议。事务处理的经济性则会提出相反的要求–但我们应看到，首先考虑这个标准就是一种过早优化，不这么做往往是明智选择。</p>
+<p>使用二进制协议的唯一正当理由是：如果要处理大批量的数据集，因而确实关注能否在介质上获得最大位密度，或是非常关心将数据转化为芯片核心结构所必须的时间或指令开销。 大图像和多媒体数据的格式有时可以算是前者的例子，对延时有严格要求的网络协议有时则可以算是后者的例子。</p>
+<p>PNG格式是二进制文件格式中一个经过周密设计的优秀例子。PNG标准精确全面，编写得非常好，可以作为如何撰写文件格式标准的范例来使用。</p>
+<p>Marshall Rose的RFC 3117 (On the Design of Application Procotol)很好概况了互联网应用协议设计中的种种问题。</p>
+<h1 id="06-Transparency-Let-There-Be-Light"><a href="#06-Transparency-Let-There-Be-Light" class="headerlink" title="06 Transparency: Let There Be Light"></a>06 Transparency: Let There Be Light</h1><p>Beauty is more important in computing than anywhere else in technology because software is so complicated. Beauty is the ultimate defense against complexity.<br>Machine Beauty : Elegance and the Heart of Technology 1998<br>  — David Gelernter</p>
+<h1 id="07-Multiprogramming-Separating-Process-to-separate-Function"><a href="#07-Multiprogramming-Separating-Process-to-separate-Function" class="headerlink" title="07 Multiprogramming: Separating Process to separate Function"></a>07 Multiprogramming: Separating Process to separate Function</h1><p>Unix最具特点的程序模块化技法就是将大型程序分解成多个协作进程。</p>
+<p>总的来说，线程不是降低而是提高了全局复杂度，因此，除非万不得已，尽量避免使用线程。</p>
+<p>另一个把程序划分成多个协作进程的重要原因是为了更强的安全性。</p>
+<p>Unix IPC方法的分类<br>廉价的进程生成使得程序间的协作变为可能，其中最简单的形式就是一个程序调用另一个程序来完成专门任务。</p>
+<p>继Ken Thompson和Dennis Ritchie之后，对早期Unix影响最重要的人大概非Doug McIIroy莫属。他发明的 <em>管道</em> 结构始终闪现在Unix设计中，促进了”做单件事并做好”哲学的萌发，并且引发了Unix设计中绝大多数后续IPC方法的诞生(尤其是用于网络的socket抽象概念)。</p>
+<p>Andrew S.Tanenbaum 和 Robbert van Renesse在&lt;&lt;A Critique of the Remote Procedure Call Paradigm&gt;&gt;中对RPC的一般问题作了详细分析，这篇文章应该是对考虑将其作为基础架构的人们的当头棒喝。</p>
+<p>Unix传统强烈赞成使用透明，可显的接口。这是UNIX文化不断坚持文本协议IPC的动力。</p>
+<h1 id="10-Configuration-Starting-on-the-Right-Foot"><a href="#10-Configuration-Starting-on-the-Right-Foot" class="headerlink" title="10 Configuration: Starting on the Right Foot"></a>10 Configuration: Starting on the Right Foot</h1>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/reading/">reading</a>►<a class="article-category-link" href="/categories/technology/">technology</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/OS/">OS</a><a href="/tags/UNIX/">UNIX</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://wangwh0204.github.io/2011/04/20/the-art-of-unix-programming/" data-title="The Art of UNIX Programming | 知行合一，修学储能，敬天爱人，终身学习" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2011/06/02/linux-kernel-development/" title="Linux Kernel Development 2nd">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Linux Kernel Development 2nd</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2011/02/13/the-java-programming-language/"  title="The Java Programming Language 3rd">
+ <strong>下一篇：</strong><br/> 
+ <span>The Java Programming Language 3rd
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01-哲学-Philosopy"><span class="toc-number">1.</span> <span class="toc-text">01 哲学 Philosopy</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04-模块性"><span class="toc-number">2.</span> <span class="toc-text">04 模块性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05-Textuality-Good-protocols-Make-Good-Practice"><span class="toc-number">3.</span> <span class="toc-text">05 Textuality: Good protocols Make Good Practice</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#06-Transparency-Let-There-Be-Light"><span class="toc-number">4.</span> <span class="toc-text">06 Transparency: Let There Be Light</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#07-Multiprogramming-Separating-Process-to-separate-Function"><span class="toc-number">5.</span> <span class="toc-text">07 Multiprogramming: Separating Process to separate Function</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-Configuration-Starting-on-the-Right-Foot"><span class="toc-number">6.</span> <span class="toc-text">10 Configuration: Starting on the Right Foot</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+		
+		  
+			<li><a href="/categories/career/" title="career">career<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/management/" title="management">management<sup>2</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/others/" title="others">others<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/reading/" title="reading">reading<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/technology/" title="technology">technology<sup>9</sup></a></li>
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Agile/" title="Agile">Agile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UML/" title="UML">UML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SE/" title="SE">SE<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Win32/" title="Win32">Win32<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Design-Patterns/" title="Design Patterns">Design Patterns<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/BitTorrent/" title="BitTorrent">BitTorrent<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DirectShow/" title="DirectShow">DirectShow<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UNIX/" title="UNIX">UNIX<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OOAD/" title="OOAD">OOAD<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Boost/" title="Boost">Boost<sup>1</sup></a></li>
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">九月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/08/">八月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/01/">一月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2005/03/">三月 2005</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/09/">九月 2004</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/06/">六月 2004</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://weibo.com/drwujun/" target="_blank" title="吴军">吴军</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://cs.stanford.edu/" target="_blank" title="Stanford CS">Stanford CS</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> You&#39;ve got to find what you love. And the only way to do great work is to love what you do. If you haven&#39;t found it yet, keep looking. Don&#39;t settle. ― Steve Jobs <br/>
+			I&#39;m not a great programmer; I&#39;m just a good programmer with great habits. ― Kent Beck</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/wangwh0204" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/wangwh0204" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangwh0204@outlook.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="steven wang">steven wang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

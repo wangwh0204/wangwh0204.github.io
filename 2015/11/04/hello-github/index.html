@@ -1,0 +1,595 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>hello github | 知行合一，修学储能，敬天爱人，终身学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="steven wang">
+    
+
+    
+    <meta name="description" content="这是我在github上的第一篇blog，本blog的内容即描述如何在github上完成本篇blog.">
+<meta name="keywords" content="git,github,markdown,hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hello github">
+<meta property="og:url" content="http://wangwh0204.github.io/2015/11/04/hello-github/index.html">
+<meta property="og:site_name" content="知行合一，修学储能，敬天爱人，终身学习">
+<meta property="og:description" content="这是我在github上的第一篇blog，本blog的内容即描述如何在github上完成本篇blog.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2015-12-07T16:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hello github">
+<meta name="twitter:description" content="这是我在github上的第一篇blog，本blog的内容即描述如何在github上完成本篇blog.">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.jpg" alt="知行合一，修学储能，敬天爱人，终身学习" title="知行合一，修学储能，敬天爱人，终身学习"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="知行合一，修学储能，敬天爱人，终身学习">知行合一，修学储能，敬天爱人，终身学习</a></h1>
+				<h2 class="blog-motto">Focus on Real-World Computing (Computer Graphics, Computer Vision, Robotics), applying to Smart Robots</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:wangwh0204.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/04/hello-github/" title="hello github" itemprop="url">hello github</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="steven wang" target="_blank" itemprop="author">steven wang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-03T16:00:00.000Z" itemprop="datePublished"> 发表于 2015-11-04</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#git"><span class="toc-number">1.</span> <span class="toc-text">git</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#github"><span class="toc-number">2.</span> <span class="toc-text">github</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#markdown"><span class="toc-number">3.</span> <span class="toc-text">markdown</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo"><span class="toc-number">4.</span> <span class="toc-text">hexo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#do-it-in-Linux"><span class="toc-number">5.</span> <span class="toc-text">do it in Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装git-nodejs-hexo"><span class="toc-number">5.1.</span> <span class="toc-text">安装git, nodejs, hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在github创建blog仓库"><span class="toc-number">5.2.</span> <span class="toc-text">在github创建blog仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用hexo"><span class="toc-number">5.3.</span> <span class="toc-text">使用hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#blog源文件管理"><span class="toc-number">5.4.</span> <span class="toc-text">blog源文件管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开启评论"><span class="toc-number">5.5.</span> <span class="toc-text">开启评论</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>这是我在github上的第一篇blog，本blog的内容即描述如何在github上完成本篇blog. <a id="more"></a>所有内容基于如下知识和工具构建:</p>
+<h1 id="git"><a href="#git" class="headerlink" title="git"></a>git</h1><p><a href="http://git-scm.com/" target="_blank" rel="noopener">git</a>是一个分布式版本控制系统(VCS)，通过完整的阅读一遍<a href="http://git-scm.com/book/zh/v2" target="_blank" rel="noopener">pro git</a>这本书可以熟悉git及github的概念和用法.</p>
+<h1 id="github"><a href="#github" class="headerlink" title="github"></a>github</h1><p><a href="https://github.com/" target="_blank" rel="noopener">github</a>是一个基于git软件开发社区.阅读<a href="http://www.worldhello.net/gotgithub/index.html" target="_blank" rel="noopener">got github</a>进一步熟悉github</p>
+<h1 id="markdown"><a href="#markdown" class="headerlink" title="markdown"></a>markdown</h1><p><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank" rel="noopener">markdown</a>是一个简单的基于文本的标记语言，我主要使用<a href="http://wowubuntu.com/markdown/index.html" target="_blank" rel="noopener">markdown</a>和<a href="https://help.github.com/articles/github-flavored-markdown/" target="_blank" rel="noopener">github flavored markdown</a>标记来写文章</p>
+<h1 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h1><p>虽然github官方推荐使用jekell来做blog内容，但我对ruby没兴趣，正好最近在了解JavaScript，所以采用基于<a href="https://nodejs.org/" target="_blank" rel="noopener">node.js</a>的<a href="https://hexo.io/" target="_blank" rel="noopener">hexo</a>来维护blog内容。</p>
+<h1 id="do-it-in-Linux"><a href="#do-it-in-Linux" class="headerlink" title="do it in Linux"></a>do it in Linux</h1><h2 id="安装git-nodejs-hexo"><a href="#安装git-nodejs-hexo" class="headerlink" title="安装git, nodejs, hexo"></a>安装git, nodejs, hexo</h2><p>参考<a href="https://hexo.io/docs/" target="_blank" rel="noopener">https://hexo.io/docs/</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install git-core</span><br><span class="line">$ curl https://raw.github.com/creationix/nvm/master/install.sh | sh</span><br><span class="line">// restart terminal</span><br><span class="line">$ nvm install 4</span><br><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure></p>
+<h2 id="在github创建blog仓库"><a href="#在github创建blog仓库" class="headerlink" title="在github创建blog仓库"></a>在github创建blog仓库</h2><p>在github创建新仓库 wangwh0204.github.io，这个仓库就可以直接作为<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html" target="_blank" rel="noopener">个人blog站点</a>的内容。通过 <a href="http://wangwh0204.github.io">http://wangwh0204.github.io</a> 即可访问，内容由hexo生成。</p>
+<h2 id="使用hexo"><a href="#使用hexo" class="headerlink" title="使用hexo"></a>使用hexo</h2><ul>
+<li><p>初始化hexo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init blog</span><br><span class="line">$ <span class="built_in">cd</span> blog</span><br><span class="line">$ npm install</span><br><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置_config.yml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">知行合一</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">just</span> <span class="string">do</span> <span class="string">IT.</span> <span class="string">keep</span> <span class="string">it</span> <span class="string">simple</span> <span class="string">&amp;</span> <span class="string">stupid.</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">steven's</span> <span class="string">thinking</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">steven</span> <span class="string">wang</span></span><br><span class="line"></span><br><span class="line"><span class="attr">url:</span> <span class="attr">http://wangwh0204.github.io</span></span><br><span class="line"></span><br><span class="line"><span class="attr">new_post_name:</span> <span class="string">:year-:month-:day-:title.md</span></span><br><span class="line"></span><br><span class="line"><span class="attr">theme:</span> <span class="string">jacman</span></span><br><span class="line"></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="string">git@github.com:wangwh0204/wangwh0204.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择 theme<br>参考 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a> 和 <a href="http://www.zhihu.com/question/24422335" target="_blank" rel="noopener">http://www.zhihu.com/question/24422335</a> 挑选适合自己口味的主题，我选的是<a href="https://github.com/wuchong/jacman" target="_blank" rel="noopener">jacman</a>，参考<a href="http://wuchong.me/jacman/2014/11/20/how-to-use-jacman/" target="_blank" rel="noopener">http://wuchong.me/jacman/2014/11/20/how-to-use-jacman/</a> 进行定制</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/wuchong/jacman.git themes/jacman</span><br></pre></td></tr></table></figure>
+<p>  修改_config.yml : theme: jacman , 并配置themes/jacman/_config.yml文件</p>
+<ul>
+<li><p>旧文章<br>旧文章需要做如下改造：</p>
+<ol>
+<li>用符合Markdown格式改写</li>
+<li>文件名使用:year-:month-:day-:title.md方式命名</li>
+<li>在文件头部加入称为<a href="https://hexo.io/docs/front-matter.html" target="_blank" rel="noopener">front-matter</a>的metadata信息，例如:<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">hello</span> <span class="string">github</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2015</span><span class="bullet">-11</span><span class="bullet">-04</span></span><br><span class="line"><span class="attr">updated:</span> <span class="number">2015</span><span class="bullet">-12</span><span class="bullet">-08</span> <span class="number">13</span><span class="string">:38</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">[others]</span></span><br><span class="line"><span class="attr">tags:</span> </span><br><span class="line"><span class="bullet">-</span> <span class="string">git</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">github</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">markdown</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">hexo</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>新文章</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &lt;title&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>或者 直接copy 写好的md文件到source/_post目录</p>
+<ul>
+<li>预览<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>打开浏览器输入 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 查看效果，根据需要做相应的调整。</p>
+<ul>
+<li>发布<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate --deploy</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>hexo会生成静态文件到public目录，并根据_config.yml的配置自动push到github。</p>
+<h2 id="blog源文件管理"><a href="#blog源文件管理" class="headerlink" title="blog源文件管理"></a>blog源文件管理</h2><p>hexo会将md文件处理成可以静态访问的web页面，并自动推送到github。但通过hexo编写的.md文件本身并没有做版本管理，为了方便在不同的机器上操作，可以再建一个仓库来管理。</p>
+<ol>
+<li>在github新建仓库 blog</li>
+<li>本地操作<br>经过上面的步骤，blog的initial 版本已经就绪，现在直接在之前hexo init的目录进行操作<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br><span class="line">$ git remote add origin git@github.com:wangwh0204/blog.git</span><br><span class="line">// 如果是在新机器上使用，需要使用 git <span class="built_in">clone</span> git@github.com:wangwh0204/blog.git，否则每次都要输入密码</span><br><span class="line">// 要确保.gitignore里面有node_modules/ public/ .deploy</span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -m <span class="string">"initial commit"</span></span><br><span class="line">$ git push -u origin master</span><br><span class="line">// 既然已经完成此次commit,发布新的内容到blog site</span><br><span class="line">// 部署的时候出现SSH相关问题参考 https://help.github.com/categories/ssh/</span><br><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="开启评论"><a href="#开启评论" class="headerlink" title="开启评论"></a>开启评论</h2><ul>
+<li>申请 多说 short name<br>申请多说<a href="http://duoshuo.com/create-site/" target="_blank" rel="noopener">二级域名</a> <a href="http://wangwh0204.duoshuo.com/，得到short" target="_blank" rel="noopener">http://wangwh0204.duoshuo.com/，得到short</a> name : wangwh0204</li>
+<li>配置_config.yml<br>在blog系统的根目录下配置short name<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">duoshuo_shortname:</span> <span class="string">wangwh0204</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/others/">others</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/git/">git</a><a href="/tags/github/">github</a><a href="/tags/markdown/">markdown</a><a href="/tags/hexo/">hexo</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://wangwh0204.github.io/2015/11/04/hello-github/" data-title="hello github | 知行合一，修学储能，敬天爱人，终身学习" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2011/09/20/think-much-but-do-little-from-2009-to-2011/"  title="Work notes 2009.03 ~ 2011.02">
+ <strong>下一篇：</strong><br/> 
+ <span>Work notes 2009.03 ~ 2011.02
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#git"><span class="toc-number">1.</span> <span class="toc-text">git</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#github"><span class="toc-number">2.</span> <span class="toc-text">github</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#markdown"><span class="toc-number">3.</span> <span class="toc-text">markdown</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo"><span class="toc-number">4.</span> <span class="toc-text">hexo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#do-it-in-Linux"><span class="toc-number">5.</span> <span class="toc-text">do it in Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装git-nodejs-hexo"><span class="toc-number">5.1.</span> <span class="toc-text">安装git, nodejs, hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在github创建blog仓库"><span class="toc-number">5.2.</span> <span class="toc-text">在github创建blog仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用hexo"><span class="toc-number">5.3.</span> <span class="toc-text">使用hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#blog源文件管理"><span class="toc-number">5.4.</span> <span class="toc-text">blog源文件管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开启评论"><span class="toc-number">5.5.</span> <span class="toc-text">开启评论</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+		
+		  
+			<li><a href="/categories/career/" title="career">career<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/management/" title="management">management<sup>2</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/others/" title="others">others<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/reading/" title="reading">reading<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/technology/" title="technology">technology<sup>9</sup></a></li>
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Agile/" title="Agile">Agile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UML/" title="UML">UML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SE/" title="SE">SE<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Win32/" title="Win32">Win32<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Design-Patterns/" title="Design Patterns">Design Patterns<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/BitTorrent/" title="BitTorrent">BitTorrent<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DirectShow/" title="DirectShow">DirectShow<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UNIX/" title="UNIX">UNIX<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OOAD/" title="OOAD">OOAD<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Boost/" title="Boost">Boost<sup>1</sup></a></li>
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">九月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/08/">八月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/01/">一月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2005/03/">三月 2005</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/09/">九月 2004</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/06/">六月 2004</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://weibo.com/drwujun/" target="_blank" title="吴军">吴军</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://cs.stanford.edu/" target="_blank" title="Stanford CS">Stanford CS</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> You&#39;ve got to find what you love. And the only way to do great work is to love what you do. If you haven&#39;t found it yet, keep looking. Don&#39;t settle. ― Steve Jobs <br/>
+			I&#39;m not a great programmer; I&#39;m just a good programmer with great habits. ― Kent Beck</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/wangwh0204" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/wangwh0204" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangwh0204@outlook.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="steven wang">steven wang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

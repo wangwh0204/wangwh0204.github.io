@@ -1,0 +1,668 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>The Java Programming Language 3rd | 知行合一，修学储能，敬天爱人，终身学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="steven wang">
+    
+
+    
+    <meta name="description" content="&amp;lt;&amp;lt;The Java Programming Language 3rd&amp;gt;&amp;gt;的中文版&amp;lt;&amp;lt;Java编程语言&amp;gt;&amp;gt;读书笔记。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Java Programming Language 3rd">
+<meta property="og:url" content="http://wangwh0204.github.io/2011/02/13/the-java-programming-language/index.html">
+<meta property="og:site_name" content="知行合一，修学储能，敬天爱人，终身学习">
+<meta property="og:description" content="&amp;lt;&amp;lt;The Java Programming Language 3rd&amp;gt;&amp;gt;的中文版&amp;lt;&amp;lt;Java编程语言&amp;gt;&amp;gt;读书笔记。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2011-04-02T16:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Java Programming Language 3rd">
+<meta name="twitter:description" content="&amp;lt;&amp;lt;The Java Programming Language 3rd&amp;gt;&amp;gt;的中文版&amp;lt;&amp;lt;Java编程语言&amp;gt;&amp;gt;读书笔记。">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.jpg" alt="知行合一，修学储能，敬天爱人，终身学习" title="知行合一，修学储能，敬天爱人，终身学习"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="知行合一，修学储能，敬天爱人，终身学习">知行合一，修学储能，敬天爱人，终身学习</a></h1>
+				<h2 class="blog-motto">Focus on Real-World Computing (Computer Graphics, Computer Vision, Robotics), applying to Smart Robots</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:wangwh0204.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2011/02/13/the-java-programming-language/" title="The Java Programming Language 3rd" itemprop="url">The Java Programming Language 3rd</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="steven wang" target="_blank" itemprop="author">steven wang</a>
+		
+  <p class="article-time">
+    <time datetime="2011-02-12T16:00:00.000Z" itemprop="datePublished"> 发表于 2011-02-13</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01-概述"><span class="toc-number">1.</span> <span class="toc-text">01 概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02-类和对象"><span class="toc-number">2.</span> <span class="toc-text">02 类和对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#03-继承类"><span class="toc-number">3.</span> <span class="toc-text">03 继承类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04-接口"><span class="toc-number">4.</span> <span class="toc-text">04 接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05-嵌套类和接口"><span class="toc-number">5.</span> <span class="toc-text">05 嵌套类和接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#06-语言符号，运算符和表达式"><span class="toc-number">6.</span> <span class="toc-text">06 语言符号，运算符和表达式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#07-控制流"><span class="toc-number">7.</span> <span class="toc-text">07 控制流</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#08-异常"><span class="toc-number">8.</span> <span class="toc-text">08 异常</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#09-字符串"><span class="toc-number">9.</span> <span class="toc-text">09 字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-线程"><span class="toc-number">10.</span> <span class="toc-text">10 线程</span></a></li></ol>
+		
+		</div>
+		
+		<p>&lt;&lt;The Java Programming Language 3rd&gt;&gt;的中文版&lt;&lt;Java编程语言&gt;&gt;读书笔记。<a id="more"></a></p>
+<h1 id="01-概述"><a href="#01-概述" class="headerlink" title="01 概述"></a>01 概述</h1><p>类包括成员，field和method<br>method名字和parameter列表一起组成method的签名(signature)。<br>parameter<br>argument</p>
+<p>Java基本类型包括布尔型, 字符型, 整型，浮点类型            初始值<br>boolearn    true/false                            false</p>
+<p>char        16b unicode 2.1字符                    ‘\u0000’</p>
+<p>byte        8b integer(signed)                    0<br>short        16b integer(signed)                    0<br>int         32b integer(signed)                    0<br>long        64b integer(signed)                    0</p>
+<p>float        32b float(IEEE 754-1985)                +0.0f<br>double    64b float(IEEE 754-1985)                +0.0</p>
+<p>对象                                        null<br>named constant是通过名字应用的常量值。</p>
+<p>static<br>final 声明为常量</p>
+<p>JAVA使用Unicode字符集</p>
+<p>控制流<br>while, for, if-else, switch, do-while</p>
+<p>数组:<br>类型[] 变量;</p>
+<p>对象通过含有new关键字的表达式创建。从类定义创建对象也叫实例化(instantiation)<br>在JAVA中，新创建的对象分配在heap中，JAVA中的所有对象都通过对象引用进行访问。</p>
+<p>String对象的值是只读的：String对象的内容永远不变。每次执行一个看上去好像修改String对象的操作，实际上是产生另一个只读的String对象，并将新对象的引用传递给被修改的对象。</p>
+<p>equals方法是比较两个String对象是否相等的最简单方法，如果用==来比较字符串对象，实际上是比较两个对象是不是同一个对象的引用，而不是比较其字符串是否具有相同的内容。</p>
+<p>subclass, superclass</p>
+<p>polymorphism</p>
+<p>super, this<br>当调用super.method()时，运行时系统从下到上检查继承层次，直到找到第一个含有method方法的superclass</p>
+<p>Object类<br>没有显式继承其他类的类隐式继承了Object类。</p>
+<p>interface<br>接口的所有成员都隐式或显式的是public的。</p>
+<p>implements<br>extends</p>
+<p>异常，Throwable &lt;— Exception<br>try-catch-finally</p>
+<p>异常是一个具有类型，数据和方法的对象。异常对象一般从Exception类中派生，这个类有一个描述错误的字符串域。所有的异常都必须是Throwable类的子类，Throwable类是Exception类的超类。</p>
+<p>异常的一般范式是try-catch-finally: 首先尝试(try)什么；如果它抛出异常，你可以捕获(catch)它；最后(finally)，不管发生了什么，由正常的代码路径或异常代码路径进行清理工作。</p>
+<p>import     package</p>
+<h1 id="02-类和对象"><a href="#02-类和对象" class="headerlink" title="02 类和对象"></a>02 类和对象</h1><p>类成员</p>
+<ul>
+<li>field : 与类及其对象相关联的数据变量，其中保存着类或对象的状态。</li>
+<li>method : 包含类的可执行代码并定义了对象的行为。</li>
+<li>nested class/interface :</li>
+</ul>
+<p>类 修饰符</p>
+<ul>
+<li>public : </li>
+<li>abstract : 不能实例化</li>
+<li>final : 不能子类化</li>
+<li>strict floating point : 要求类中定义的浮点算法都进行精确运算。</li>
+</ul>
+<p>field 修饰符</p>
+<ul>
+<li>访问修饰符</li>
+<li>static</li>
+<li>final</li>
+<li>transient</li>
+<li>volatile<br>如果域没有初始化，就根据其类型赋予默认的初始值，特别的对象被赋予null值。</li>
+</ul>
+<p>如果类中没有任何类型的构造函数，Java提供一个什么也不做的无参数no-arg构造函数(默认构造函数)。</p>
+<p>类成员具有四种可能的控制修饰符:<br>private    package    protected    public</p>
+<p>method<br>method header + method body</p>
+<ul>
+<li>access modifier</li>
+<li>abstract</li>
+<li>static </li>
+<li>final</li>
+<li>synchronized</li>
+<li>native</li>
+</ul>
+<p>Java 中，方法的所有参数都是”by value”的。当参数是对象引用时，”传值”传递的是对象引用而不是对象本身。</p>
+<p>一般来说，我们只在需要的时候使用this，这是指当要访问的域名被本地变量或参数声明隐藏的时候。</p>
+<p>在JAVA中，每个方法都有签名(signature)，就是方法名以及参数的个数和类型。如果两个方法参数的个数和类型不同，它们可以具有相同的名字，这种现象叫做重载(overloading)。签名并不包括返回类型或者抛出异常的列表，所以不能通过这些来重载方法。</p>
+<p>natvie方法不能声明为abstract或者strictfp类型。</p>
+<h1 id="03-继承类"><a href="#03-继承类" class="headerlink" title="03 继承类"></a>03 继承类</h1><p>继承类叫做它所继承的类的子类(subclass)或继承类(extended class)，被继承的类叫做超类(superclass)。</p>
+<p>Object类位于所有类层次的根部。<br>创建对象时，将会对它所有的域分配内存，包括从超类继承来的并且这些域会被设置为相应类型的默认初始值，然后调用构造函数。每个构造函数的执行有三个阶段：<br>1) 调用超类的构造函数<br>2) 利用初始器或任何初始化语句块对域进行初始化<br>3) 执行构造函数体。</p>
+<p>构造函数应该避免调用可覆盖(override)的方法—-既不是private, static也不是final的方法。</p>
+<p>overload方法提供同名的多个方法，但是它们具有不同的参数<br>override方法使用同样的签名方法替换超类的实现</p>
+<p>子类可以改变超类方法的访问权限，但只能提供更多的权限。</p>
+<p>field不能被覆盖，它们只可以被隐藏(hidden)。如果在类中声明与超类同名的域，超类中的那个域仍然存在，但是再也不能仅仅通过名字去直接访问它了，而是必须使用super或超类类型的另一个引用去访问。</p>
+<p>如果某方法要访问子类中override的对象成员，那么该方法会引用哪个成员—超类还是子类成员？问题的答案取决于成员的类型，访问权限以及引用的方式。</p>
+<p>当通过对象引用来调用method时，对象的实际类将决定使用哪种实现。当访问field时，所用的是引用的声明类型(declared type of the reference)</p>
+<p>基于用来访问field的引用类型，哪个field会被访问将在编译时进行确定。</p>
+<p>只有可访问的方法才可以被重载。如果某方法是不可访问的，那么它并未被继承，如果它并未被继承，那么它就是不可被重载的。</p>
+<p>类的所有非静态方法中都可以使用关键字 super.在field访问和method调用中，super实际是作为对超类实例当前对象的一个引用。</p>
+<p>super.method调用总是使用超类的method实现，而不是位于类层次下层的其他override实现。</p>
+<p>通过使用instanceof运算符可以检查对象的类，如果其左边的表达式与右边的类型名是赋值兼容的，那么将返回true，否则返回false.尽管null并不是任何类型的实例，对null进行instanceof检查将会返回false.使用instanceof可以安全地对引用进行向下强制转换，而不会抛出任何异常。<br>if (list instanceof SortedList)</p>
+<p>protected</p>
+<p>把method标记为final意味着继承类不能通过override该方法来改变行为；同样的标记为final的类不能由其他类继承，且该类的所有方法都是final.</p>
+<p>abstarct class 可以声明仅定义了部分实现的类，让继承类提供某些或全部方法的具体实现。</p>
+<p>所有带abstract方法的类都要被声明为abstract.不能创建abstract类的对象，因为有些可能要调用的方法还没有合法的实现。</p>
+<p>Object类是类层次的根。所有类都直接或间接地继承Object类，主要method如下：<br>public boolean equals(Object obj);<br>public int hashCode();    // 返回对象的hashcode,每个对象都有一个用于hash table的hash code<br>protected Object clone() throws CloneNotSupportedException<br>public final Class getClass(); // 返回表示该对象的Class类型的特定对象，Class类的对象是类的运行时表示<br>protected void finalize() throw Throwable<br>public String toString();</p>
+<p>IsA  VS HasA<br>继承 VS 组合</p>
+<p>JAVA使用了面向对象程序设计的多重继承模型而没有使用多重继承。通过使用 接口继承 达到多重继承的优点并且没有多重继承的问题，比如菱形问题。</p>
+<h1 id="04-接口"><a href="#04-接口" class="headerlink" title="04 接口"></a>04 接口</h1><p>interface没有任何实现，也就不可以创建接口的实例。<br>JAVA允许对接口进行多重继承，但是只支持实现的单重继承。</p>
+<p>Cloneable, Comparable, Runnable, Serializable</p>
+<p>interface </p>
+<p>接口中可以声明named constant，这些常量均被定义为field，但都为隐式的public, static和final.</p>
+<p>接口也可以利用关键字extends继承，与类不同，接口可以继承多个接口。</p>
+<h1 id="05-嵌套类和接口"><a href="#05-嵌套类和接口" class="headerlink" title="05 嵌套类和接口"></a>05 嵌套类和接口</h1><p>nested type被认为是其包装类型(enclosing type)的一部分，它们互相信任，能够访问对方的所有成员。</p>
+<p>静态嵌套类是类的成员，我们可以将它声明为任何方式访问。</p>
+<p>非静态嵌套类被称为内部类(inner class)</p>
+<p>在内部类中，所有在其包装类中声明的名字都被称为in scope—它们可以直接被使用，就像该内部类代码是在其外部类中声明的一样。inner class自己的域和方法则能够隐藏包装对象中的域和方法。 </p>
+<p>我们可以在代码块中定义内部类，这些局部内部类(local inner class)布什代码所在类的成员，但对本代码块是局部的，就像局部变量那样。这样的类在定义它们的块外是完全不能访问的。</p>
+<h1 id="06-语言符号，运算符和表达式"><a href="#06-语言符号，运算符和表达式" class="headerlink" title="06 语言符号，运算符和表达式"></a>06 语言符号，运算符和表达式</h1><p>JAVA有三种形式的注释:<br>// comment<br>/<em> comment </em>/<br>/<em>* comment </em>/</p>
+<p>JAVA语言的关键字不能用作标识符，清单如下:<br>abstract    default      if          private      this<br>boolean       do           implements  protected      throw<br>break        double     import      public     throws<br>byte         else         instanceof     return     transient<br>case         extends     int         short     try<br>catch     final     interface     static     void<br>char      finally     long         strictfp     volatile<br>class     float     native     super     while<br>const     for         new         switch<br>continue     goto         package     synchronized</p>
+<p>JAVA数组(array)提供有序的元素集合。数组元素可以是基本类型，也可以是对对象引用。<br>int[] ia = new int[3];<br>和<br>int ia[] = new int[3]<br>两种定义是相同的。</p>
+<p>数组元素的个数是new创建时而不在声明时决定的。数组对象的长度在创建时限定并且不能再改变。</p>
+<p> &lt;&lt;  向左移位，右边用零填充</p>
+<blockquote>
+<blockquote>
+<p> 向右移位，左边用最高位(符号位)填充   算术移位</p>
+<blockquote>
+<p>向右移位，左边用零填充             逻辑移位</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>移位运算符只能用在整型值上。移位运算中实际的移动的位数等于类型长度减1所得的值对所提供的移位数做掩码得到的结果。对一个int整数来说，所用的掩码是0x1f(31)，所以n &lt;&lt; 35 和 n &lt;&lt;&lt; -29 等价于 n &lt;&lt; 3</p>
+<p>当从double强制转换到float时，有三种可能：丢失精度，得到零或者在原先有穷值超过float的范围时得到无穷大。</p>
+<p>整型是通过去掉高位进行转换的。</p>
+<h1 id="07-控制流"><a href="#07-控制流" class="headerlink" title="07 控制流"></a>07 控制流</h1><p>if () { } else { }</p>
+<p>switch (expression) {<br>    case n: statements;<br>    case m: statements<br>    default: statements<br>}</p>
+<p>switch表达式必须是char, byte, short或者int。所有的case标号都必须是常量表达式。</p>
+<p>break语句用于从任意语句块中退出，而不仅仅从switch中退出。break语句有两种形式。<br>无标号的break : break;(用于终止最内层的switch ,for ,while语句)<br>和有标号的break : break label;(中止任何被标注的语句)</p>
+<p>continue语句只能在循环中使用(for, while或者do)，它把控制体转移到循环体的结尾。<br>与break语句类似，continue语句也分为两类:<br>无标号的continue : continue;(转移控制权到最内层循环体的结尾。)<br>和有标号的continue : continue label;(转移控制权到标号指定循环的结尾，它的标号必须属于某个循环语句)</p>
+<h1 id="08-异常"><a href="#08-异常" class="headerlink" title="08 异常"></a>08 异常</h1><p>Java中的异常是对象。所有的异常类型，即所有为throwable对象设计的类，必须继承JAVA中的Throwable类或其子类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    statments</span><br><span class="line">&#125; <span class="keyword">catch</span>(exception_type identifier) &#123;</span><br><span class="line">    statments</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    statements</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每个错误都有借口，但不管如何辩解，错误终究还是错误。<br>                    ——G.K.Cheserton 英国作家</p>
+<h1 id="09-字符串"><a href="#09-字符串" class="headerlink" title="09 字符串"></a>09 字符串</h1><p>字符串是具有bulit-in语言支持的标准对象。String对象是不可改变(read-only)的，因此JAVA还为可变的字符串提供了StringBuffer类。</p>
+<p>在对象上使用==运算符只是测试两个引用是否指向同一个对象，而不是测试他们是否是相同的对象。</p>
+<h1 id="10-线程"><a href="#10-线程" class="headerlink" title="10 线程"></a>10 线程</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Runnable接口只声明了一个方法: public void run();</p>
+<p>把Runnable对象传递给Thread构造函数，它就可在它本身的线程内执行。Thread.run的实现会调用Runnable继承类的run方法。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/reading/">reading</a>►<a class="article-category-link" href="/categories/technology/">technology</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java/">Java</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://wangwh0204.github.io/2011/02/13/the-java-programming-language/" data-title="The Java Programming Language 3rd | 知行合一，修学储能，敬天爱人，终身学习" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2011/04/20/the-art-of-unix-programming/" title="The Art of UNIX Programming">
+  <strong>上一篇：</strong><br/>
+  <span>
+  The Art of UNIX Programming</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2008/10/20/p2p-vod/"  title="Work notes 2007.03 ~ 2008.09">
+ <strong>下一篇：</strong><br/> 
+ <span>Work notes 2007.03 ~ 2008.09
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01-概述"><span class="toc-number">1.</span> <span class="toc-text">01 概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02-类和对象"><span class="toc-number">2.</span> <span class="toc-text">02 类和对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#03-继承类"><span class="toc-number">3.</span> <span class="toc-text">03 继承类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04-接口"><span class="toc-number">4.</span> <span class="toc-text">04 接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05-嵌套类和接口"><span class="toc-number">5.</span> <span class="toc-text">05 嵌套类和接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#06-语言符号，运算符和表达式"><span class="toc-number">6.</span> <span class="toc-text">06 语言符号，运算符和表达式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#07-控制流"><span class="toc-number">7.</span> <span class="toc-text">07 控制流</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#08-异常"><span class="toc-number">8.</span> <span class="toc-text">08 异常</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#09-字符串"><span class="toc-number">9.</span> <span class="toc-text">09 字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-线程"><span class="toc-number">10.</span> <span class="toc-text">10 线程</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+		
+		  
+			<li><a href="/categories/career/" title="career">career<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/management/" title="management">management<sup>2</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/others/" title="others">others<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/reading/" title="reading">reading<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/technology/" title="technology">technology<sup>9</sup></a></li>
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Agile/" title="Agile">Agile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UML/" title="UML">UML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SE/" title="SE">SE<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Win32/" title="Win32">Win32<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Design-Patterns/" title="Design Patterns">Design Patterns<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/BitTorrent/" title="BitTorrent">BitTorrent<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/DirectShow/" title="DirectShow">DirectShow<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UNIX/" title="UNIX">UNIX<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OOAD/" title="OOAD">OOAD<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Boost/" title="Boost">Boost<sup>1</sup></a></li>
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">九月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/08/">八月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/01/">一月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2005/03/">三月 2005</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/09/">九月 2004</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/06/">六月 2004</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://weibo.com/drwujun/" target="_blank" title="吴军">吴军</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://cs.stanford.edu/" target="_blank" title="Stanford CS">Stanford CS</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> You&#39;ve got to find what you love. And the only way to do great work is to love what you do. If you haven&#39;t found it yet, keep looking. Don&#39;t settle. ― Steve Jobs <br/>
+			I&#39;m not a great programmer; I&#39;m just a good programmer with great habits. ― Kent Beck</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/wangwh0204" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/wangwh0204" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangwh0204@outlook.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="steven wang">steven wang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
