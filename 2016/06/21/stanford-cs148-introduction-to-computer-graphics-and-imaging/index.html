@@ -1,0 +1,752 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Stanford CS148 - Introduction to Computer Graphics and Imaging | From Computer Vision to AGI Robots</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="steven wang">
+    
+
+    
+    <meta name="description" content="CS148一年有2次课程，在每年的Summer(6.21 ~ 08.12)和Autumn(09.23 ~ 12.08)开课。本文基于 Summer 2016 的 课件 所做的笔记 … TBD">
+<meta name="keywords" content="Computer Graphics,Stanford,OpenGL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stanford CS148 - Introduction to Computer Graphics and Imaging">
+<meta property="og:url" content="https://wangwh0204.github.io/2016/06/21/stanford-cs148-introduction-to-computer-graphics-and-imaging/index.html">
+<meta property="og:site_name" content="From Computer Vision to AGI Robots">
+<meta property="og:description" content="CS148一年有2次课程，在每年的Summer(6.21 ~ 08.12)和Autumn(09.23 ~ 12.08)开课。本文基于 Summer 2016 的 课件 所做的笔记 … TBD">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2016-09-18T16:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stanford CS148 - Introduction to Computer Graphics and Imaging">
+<meta name="twitter:description" content="CS148一年有2次课程，在每年的Summer(6.21 ~ 08.12)和Autumn(09.23 ~ 12.08)开课。本文基于 Summer 2016 的 课件 所做的笔记 … TBD">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.jpg" alt="From Computer Vision to AGI Robots" title="From Computer Vision to AGI Robots"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="From Computer Vision to AGI Robots">From Computer Vision to AGI Robots</a></h1>
+				<h2 class="blog-motto">在智能机器的寒武纪时代浪潮中，做点微小工作</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:wangwh0204.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/06/21/stanford-cs148-introduction-to-computer-graphics-and-imaging/" title="Stanford CS148 - Introduction to Computer Graphics and Imaging" itemprop="url">Stanford CS148 - Introduction to Computer Graphics and Imaging</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="steven wang" target="_blank" itemprop="author">steven wang</a>
+		
+  <p class="article-time">
+    <time datetime="2016-06-20T16:00:00.000Z" itemprop="datePublished"> 发表于 2016-06-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01-Introduction"><span class="toc-number">1.</span> <span class="toc-text">01 Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02-Light-and-Colors"><span class="toc-number">2.</span> <span class="toc-text">02 Light and Colors</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-Assignment-1"><span class="toc-number">2.1.</span> <span class="toc-text">Reading Assignment 1</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#03-Rasterization"><span class="toc-number">3.</span> <span class="toc-text">03 Rasterization</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-Assignment-2"><span class="toc-number">3.1.</span> <span class="toc-text">Reading Assignment 2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04-Coordinates-amp-Transformation"><span class="toc-number">4.</span> <span class="toc-text">04 Coordinates &amp; Transformation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05-OpenGL"><span class="toc-number">5.</span> <span class="toc-text">05 OpenGL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#06-Texture"><span class="toc-number">6.</span> <span class="toc-text">06 Texture</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-Assignment-3"><span class="toc-number">6.1.</span> <span class="toc-text">Reading Assignment 3</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#07-GPU-Shaders-amp-OpenGL-3-2"><span class="toc-number">7.</span> <span class="toc-text">07 GPU, Shaders &amp; OpenGL 3.2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#08-Basics-of-Rendering"><span class="toc-number">8.</span> <span class="toc-text">08 Basics of Rendering</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-Assignment-4"><span class="toc-number">8.1.</span> <span class="toc-text">Reading Assignment 4</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#09-Materials"><span class="toc-number">9.</span> <span class="toc-text">09 Materials</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-Ray-Tracing"><span class="toc-number">10.</span> <span class="toc-text">10 Ray-Tracing</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-Assignment-5"><span class="toc-number">10.1.</span> <span class="toc-text">Reading Assignment 5</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-Geometric-Modeling"><span class="toc-number">11.</span> <span class="toc-text">11 Geometric Modeling</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-Animation"><span class="toc-number">12.</span> <span class="toc-text">12 Animation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-Assignment-6"><span class="toc-number">12.1.</span> <span class="toc-text">Reading Assignment 6</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-Physically-Based-Animation"><span class="toc-number">13.</span> <span class="toc-text">13 Physically Based Animation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14-Sampling"><span class="toc-number">14.</span> <span class="toc-text">14 Sampling</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#15-Recap"><span class="toc-number">15.</span> <span class="toc-text">15 Recap</span></a></li></ol>
+		
+		</div>
+		
+		<p>CS148一年有2次课程，在每年的Summer(6.21 ~ 08.12)和Autumn(09.23 ~ 12.08)开课。本文基于 Summer 2016 的 课件 所做的笔记 … TBD <a id="more"></a><br>TBD, 有机会准备再学习一遍CS148</p>
+<blockquote>
+<p>2016.09.23 CS148 Fall 2016课程开始, 从2016.09.23 ~ 2016.12.08， 主题上有一些不同</p>
+</blockquote>
+<p>今天(2016-06-28)碰巧看到<a href="https://mdzahidh.github.io/cs148/" target="_blank" rel="noopener">Stanford CS148 Summer 2016</a>(通过<a href="http://cs148.stanford.edu/重定向到这里)的课程正在进行，同时刚好我正想系统的学习Computer" target="_blank" rel="noopener">http://cs148.stanford.edu/重定向到这里)的课程正在进行，同时刚好我正想系统的学习Computer</a> Graphics(从2016.05.23开始，正看到&lt;<computer graphics="" with="" opengl="">&gt;中文版第6章，本书将理论和OpenGL实践结合。时间紧迫，必须看中文的情况下可以阅读本书。去年看过OpenGL Programming Guide，但看不懂)， 所以决定跟着课程安排学习这门课. 也由此得到一个启发，时间容许的话，可以跟随<a href="http://cs.stanford.edu/academics/courses" target="_blank" rel="noopener">Stanford Course Timetables</a>的安排来同步学习感兴趣的课程.( <strong>感激互联网的伟大和stanford的开放</strong> ，如果课程能视频直播就更好了)</computer></p>
+<p>整个课程持续差不多2个月左右时间(2016.06.21 ~ 2016.08.12)，共计8周，每周有2节课，每节课2个小时时间，每上完一节课，会在网站公布Slides(课件), Reading Assignment(阅读任务)以及Homework（课后作业). 参考书有三本：</p>
+<p>目标： 渲染一副计算机生成的image</p>
+<p><strong>Prerequisites: MATH51, CS107</strong><br><strong>Reading: </strong></p>
+<ul>
+<li>Fundamentals of Computer Graphics, 3rd Edition</li>
+<li>OpenGL Programming Guide 8th<br><strong>Description: </strong><br>What do the following technologies have in common: robots that can navigate space and perform duties, search engines that can index billions of images and videos, algorithms that can diagnose medical images for diseases, or smart cars that can see and drive safely? Lying in the heart of these modern AI applications are computer vision technologies that can perceive, understand and reconstruct the complex visual world.  This course is designed to open the doors for students who are interested in learning about the fundamental principles and important applications of computer vision. </li>
+</ul>
+<p>因为时间的关系，课程对应的讲义只列出了大纲和关键的知识点，要深入的理解需要查阅资料，比如wiki和参考书；同时花时间编写代码实践。在课程完成后，需要进一步的实践和通读参考书，因为参考书内容更加完整和系统，通读有助于完善，巩固知识，加深理解。</p>
+<h1 id="01-Introduction"><a href="#01-Introduction" class="headerlink" title="01 Introduction"></a>01 <a href="https://mdzahidh.github.io/cs148/assets/slides/01-Introduction.pdf" target="_blank" rel="noopener">Introduction</a></h1><p>本节课程主要简述图形学的几个应用场景及对应的stanford课程；也介绍了本课程CS148 summer 2016的基本信息.</p>
+<p>为什么要学习Computer Graphics？ 学以致用。Computer Graphics技术主要应用到如下行业领域：</p>
+<ul>
+<li>Video Games<br>游戏行业市场规模已经超过电影行业，接近1000亿美金。<a href="http://www.gamelook.com.cn/2015/06/218771" target="_blank" rel="noopener">http://www.gamelook.com.cn/2015/06/218771</a><br>范例 ：<br>芯片公司 : Geforece(Nvidia), HD7970(AMD), PowerVR(Imagination), Adreno(Qualcomm)<br>主机设备 : PS4(Sony)，Switch(Nintendo), XBox(Mirosoft)<br>主机游戏 : Uncharted(Naughty Dog)，HALO(Mirosoft), Call Of Duty(ActionVision), GTA(Rockstar)<br>PC单机  : Civilization(Firaxis，立意之高，无与伦比)，Doom(id), StarCraft(Blizzard), Counter-Strike(Valve), Minecraft(Mojang)<br>网络游戏 : World of Warcraft(Blizzard), LOL(Riot)<br>手机游戏 : Angry Birds(Rovio), COC(SuperCell)</li>
+</ul>
+<p>课程 ：<br>CS148  - Introduction to Computer Graphics<br>CS248  - Interactive Computer Graphics<br>CS205a - Math for Robotics, Vision and Graphics</p>
+<ul>
+<li>Movies<br>包括影视特效(VFX),3D动画， 奥斯卡专门设立了技术<br>stanford 的 <a href="http://physbam.stanford.edu/~fedkiw/" target="_blank" rel="noopener">Ron Fedkiw </a>(主页有大量的视频和论文) awarded an Academy Award from The Academy of Motion Picture Arts and Sciences (twice: 2008 and 2015)<br><a href="http://graphics.stanford.edu/~hanrahan/" target="_blank" rel="noopener">Pat Hanrahan</a>更是获得了3次奥斯卡科技成果奖(1993, 2004, 2014)，最近是因为这本书:&lt;&lt;Physically Based Rendering&gt;&gt;, Stanford’s CS348B 课程内容就是基于这本书。</li>
+</ul>
+<p>范例 ： ILM, RenderMan(Pixar), Weta, Dreamworks, AfterEffect, Houdini,<br>课程 ：<br>CS348b - Image Synthesis Techniques<br>CME306 - Numerical Methods, Level Sets etc.</p>
+<ul>
+<li><p>CADs, Animators, Modelers<br>范例 ： AutoCAD(Autodesk), Maya(Autodesk), 3DMax(Autodesk), Blender(Blender Foundation), CINMEA4D,<br>课程 ：<br>CS268  - Geometric Algorithm<br>CS348A - Geometric Modeling<br>CS368  - Advanced Geometric Algorithm<br>CS468  - Differential Geometry<br>CS228  - Probabilistic Graphical Model<br>CS229  - Machine Learning<br>CS231N - Convolutional Neural Networks for Visual Recognition</p>
+</li>
+<li><p>2D Image Processing<br>范例 ： Photoshop(Adobe), GIMP(The GIMP Team)<br>课程 ：<br>CS178  - Digital Photography<br>CS131  - Intro. To Computer Vision<br>CS231  - Computer Vision II<br>CS478  - Computational Photography</p>
+</li>
+<li><p>Visualization<br>CS448b - Visualization<br>EE169  - Intro to Bioimaging</p>
+</li>
+<li><p>Simulators<br>范例 : da Vinci surgical robot, Boeing 737 Simulator<br>课程 :<br>CS277  - Experimental Haptics<br>CS327  - Advanced Robotic Manipulation</p>
+</li>
+<li><p>Virtual and Augmented Reality<br>范例 ： Oculus Rift(Oculus), HTC Vive(HTC, Valve), Hololens(Microsoft)<br>课程 ：<br>CS211  - Content Creation in VR<br>EE267  - Virtual Reality<br>CS377M - HCI in Mixed and AR</p>
+</li>
+<li><p>User Interfaces<br>范例 ： Windows(Microsoft), Android(Google), iOS(Apple)<br>课程 ：<br>CS247  - HCI Design Studio</p>
+</li>
+</ul>
+<h1 id="02-Light-and-Colors"><a href="#02-Light-and-Colors" class="headerlink" title="02 Light and Colors"></a>02 <a href="https://mdzahidh.github.io/cs148/assets/slides/02-Light%20and%20Colors.pdf" target="_blank" rel="noopener">Light and Colors</a></h1><p>本节课程主要简述光和颜色的基本概念和物理特性，主要阅读FCG的第20和21章，重点要理解渲染方程：BRDF</p>
+<ul>
+<li>Light</li>
+</ul>
+<p><a href="http://en.wikipedia.org/wiki/Electromagnetic_radiation" target="_blank" rel="noopener">What is light</a></p>
+<p>C = 299,799,458 m/s (In Vacuum)<br>Refraction(<a href="https://zh.wikipedia.org/wiki/%E6%8A%98%E5%B0%84" target="_blank" rel="noopener">折射</a>) &amp; total internal reflection(<a href="https://zh.wikipedia.org/wiki/%E5%8F%8D%E5%B0%84_(%E7%89%A9%E7%90%86%E5%AD%A6" target="_blank" rel="noopener">反射</a>))<br>Wave Particle Duality(<a href="https://zh.wikipedia.org/wiki/%E6%B3%A2%E7%B2%92%E4%BA%8C%E8%B1%A1%E6%80%A7" target="_blank" rel="noopener">波粒二象性</a>)</p>
+<p>Photon(<a href="https://zh.wikipedia.org/wiki/%E5%85%89%E5%AD%90" target="_blank" rel="noopener">光子</a>) : A quantum of light that has a position, a direction of propagation, and a wavelength.</p>
+<ul>
+<li>Colors<br>Color Space : RGB, XYZ, Munsell, L<em>a</em>b, HSV</li>
+</ul>
+<h2 id="Reading-Assignment-1"><a href="#Reading-Assignment-1" class="headerlink" title="Reading Assignment 1"></a>Reading Assignment 1</h2><p>阅读FCG第20章(Light)以及第21章(Color)，然后回答下面的问题：</p>
+<ol>
+<li>What is the difference between radiance and irradiance?</li>
+<li>Explain what a BRDF is and why it is important for graphics.</li>
+<li>In the mathematical definition of luminance, why are the bounds of the integral 380nm to 800nm?</li>
+<li>What is a steradian?  Draw a picture if it helps.</li>
+<li>A [FILL_THIS_BLANK] describes how much energy is available at each [FILL_THIS_BLANK] lambda.</li>
+<li>Name 3 types of cones.</li>
+<li>CIE has defined three primaries to be monochromatic light sources - what are those?</li>
+<li>How long did it take for you to (a) read the material and (b) answer these questions? </li>
+</ol>
+<h1 id="03-Rasterization"><a href="#03-Rasterization" class="headerlink" title="03 Rasterization"></a>03 <a href="https://mdzahidh.github.io/cs148/assets/slides/03-Rasterization.pdf" target="_blank" rel="noopener">Rasterization</a></h1><p>本章主要介绍Rendering(渲染)以及Rasterization(光栅化)的概念，基本的绘制直线，圆的Rasterization算法：Bresenham’s Algorithm, Midpoint Algorithm</p>
+<p>Render(渲染) : The process of generating an image from a description of a scene by means of a computer program.<br>详细的看一下: <a href="https://en.wikipedia.org/wiki/Rendering_(computer_graphics)，以下内容引用自上面的wiki" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Rendering_(computer_graphics)，以下内容引用自上面的wiki</a>:</p>
+<blockquote>
+<p>A scene file contains objects in a strictly defined language or data structure; it would contain geometry, viewpoint, texture, lighting, and shading information as a description of the virtual scene.<br>Shading – how the color and brightness of a surface varies with lighting<br>Texture-mapping – a method of applying detail to surfaces</p>
+<p>Therefore, a few loose families of more-efficient light transport modelling techniques have emerged:</p>
+<ul>
+<li>rasterization, including scanline rendering, geometrically projects objects in the scene to an image plane, without advanced optical effects;</li>
+<li>ray casting considers the scene as observed from a specific point of view, calculating the observed image based only on geometry and very basic optical laws of reflection intensity, and perhaps using Monte Carlo techniques to reduce artifacts;</li>
+<li>ray tracing is similar to ray casting, but employs more advanced optical simulation, and usually uses Monte Carlo techniques to obtain more realistic results at a speed that is often orders of magnitude slower.</li>
+</ul>
+</blockquote>
+<p>Two Way to Render an Image : </p>
+<ul>
+<li>Rasterization(光栅化)</li>
+<li>Raytracing(光线跟踪)</li>
+</ul>
+<blockquote>
+<p>Ray tracing aims to simulate the natural flow of light, interpreted as particles. Often, ray tracing methods are utilized to approximate the solution to the rendering equation by applying Monte Carlo methods to it. </p>
+</blockquote>
+<p>Rasterize : To convert vector data to raster-pixel or dot-format.</p>
+<p><a href="https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm" target="_blank" rel="noopener">Bresenham’s Algorithm (1967)</a>，将Wiki和PPT结合起来</p>
+<blockquote>
+<p>非常简单的绘制直线算法，还有一个<a href="https://en.wikipedia.org/wiki/Xiaolin_Wu%27s_line_algorithm" target="_blank" rel="noopener">Xiaolin Wu’s line algorithm</a>, a similarly fast method of drawing lines with antialiasing<br>Equation of a line : y = mx + b</p>
+</blockquote>
+<p>To derive Bresenham’s algorithm, two steps must be taken. The first step is transforming the equation of a line from the typical slope-intercept form into something different; and then using this new equation for a line to draw a line based on the idea of accumulation of error.</p>
+<p>Rasterizing Circle : Midpoint Algorithm</p>
+<p>Filling Triangles, two methods for filling:</p>
+<ul>
+<li>Check if each pixel in bounding box is inside the triangle(Parallelizable)</li>
+<li>Rasterize border; sweep from left to right(Less Computation)</li>
+</ul>
+<p>Barycentric Coordinates(重心坐标)</p>
+<h2 id="Reading-Assignment-2"><a href="#Reading-Assignment-2" class="headerlink" title="Reading Assignment 2"></a>Reading Assignment 2</h2><p>Basic Raster Graphics Algorithms for Drawing 2D Primitives</p>
+<h1 id="04-Coordinates-amp-Transformation"><a href="#04-Coordinates-amp-Transformation" class="headerlink" title="04 Coordinates &amp; Transformation"></a>04 <a href="https://mdzahidh.github.io/cs148/assets/slides/04-Transformation.pdf" target="_blank" rel="noopener">Coordinates &amp; Transformation</a></h1><p>Transformation(变换)本质是<a href="https://zh.wikipedia.org/wiki/%E7%9F%A9%E9%98%B5" target="_blank" rel="noopener">矩阵</a>运算，主要有三种变换形式：translation(平移，矩阵加法), scaling(缩放,矩阵乘法), rotation(旋转，矩阵乘法)<br><strong>旋转的矩阵怎么推导的？</strong></p>
+<ul>
+<li>What<br>Just functions acting on points</li>
+<li>Why</li>
+</ul>
+<ol>
+<li><p>Viewing:</p>
+<ul>
+<li>Convert between coorinates systems</li>
+<li>Virtual camera, e.g. perspective projections<br><a href="https://en.wikipedia.org/wiki/3D_projection" target="_blank" rel="noopener">3D投影</a>是一种映射3D点到2D平面的方法。分为Orthographic projection(正投影)和<a href="https://en.wikipedia.org/wiki/Perspective_(graphical" target="_blank" rel="noopener">Perspective projection</a>)(透视投影): When the human eye views a scene, objects in the distance appear smaller than objects close by - this is known as perspective. While orthographic projection ignores this effect to allow accurate measurements, perspective projection shows distant objects as smaller to provide additional realism.</li>
+</ul>
+</li>
+<li><p>Modeling:</p>
+<ul>
+<li>Create objects in a convenient orientation</li>
+<li>Use multiple instances of a given shape</li>
+<li>Kinematics - characters/robots<br><a href="https://en.wikipedia.org/wiki/Linear_map" target="_blank" rel="noopener">Linear Transformation</a></li>
+</ul>
+</li>
+</ol>
+<p><a href="https://en.wikipedia.org/wiki/Homogeneous_coordinates" target="_blank" rel="noopener">Homogenous Coordinates</a>(齐次坐标) ：<br>Given a point (x, y) on the Euclidean plane, for any non-zero real number Z, the triple (xZ, yZ, Z) is called a set of homogeneous coordinates for the point. </p>
+<p> Homogeneous coordinates have a range of applications, including computer graphics and 3D computer vision, where they allow <a href="https://en.wikipedia.org/wiki/Affine_transformation" target="_blank" rel="noopener">affine transformations</a> and, in general, <a href="https://en.wikipedia.org/wiki/Homography" target="_blank" rel="noopener">projective transformations</a> to be easily represented by a matrix.</p>
+<p> Homogeneous coordinates are ubiquitous in computer graphics because they allow common vector operations such as translation, rotation, scaling and perspective projection to be represented as a matrix by which the vector is multiplied</p>
+<p>By the chain rule, any sequence of such operations can be multiplied out into a single matrix, allowing simple and efficient processing. </p>
+<p>By contrast, using Cartesian coordinates, translations and perspective projection cannot be expressed as matrix multiplications, though other operations can.</p>
+<p>许多图形应用涉及到几何变换，主要包括平移、旋转、缩放。以矩阵表达式来计算这些变换时，平移是矩阵相加，旋转和缩放则是矩阵相乘，综合起来可以表示为p’ = m1<em>p+ m2（注：因为习惯的原因，实际使用时一般使用变化矩阵左乘向量）(m1旋转缩放矩阵， m2为平移矩阵， p为原向量 ，p’为变换后的向量)。引入齐次坐标的目的主要是合并矩阵运算中的乘法和加法，表示为p’ = p</em>M的形式。即它提供了用矩阵运算把二维、三维甚至高维空间中的一个点集从一个坐标系变换到另一个坐标系的有效方法。<br>其次，它可以表示无穷远的点。n+1维的齐次坐标中如果h=0，实际上就表示了n维空间的一个无穷远点。<a href="https://oncemore2020.github.io/blog/homogeneous/" target="_blank" rel="noopener">https://oncemore2020.github.io/blog/homogeneous/</a></p>
+<p>仿射变换（Affine Transformation) ，又称仿射映射，是指在几何中，一个向量空间进行一次线性变换并接上一个平移，变换为另一个向量空间。</p>
+<p>齐次变换矩阵其实就是将仿射变换矩阵推广到齐次坐标系，从而将平移，缩放，旋转等变换合成到一个矩阵中；消除矩阵运算中的加减法，只留下乘法，以实现快速运算。</p>
+<p>Hierarchical Modeling (层次建模)</p>
+<p>Camera and Projection Matrices</p>
+<ul>
+<li>The world is in 3D</li>
+<li>But our Screen is in 2D</li>
+<li>Imagine our screen is a camera looking out into the world</li>
+<li>Tasks</li>
+</ul>
+<ol>
+<li>Convert 3D world Coordinates to Camera Coordinates (虚拟camera，使用透视投影)</li>
+<li>Project the Camera Coordinate on 2D screen</li>
+</ol>
+<p>OpenGL Projection Matrix: 参见下面的推导过程：<br><a href="http://www.songho.ca/opengl/gl_projectionmatrix.html" target="_blank" rel="noopener">http://www.songho.ca/opengl/gl_projectionmatrix.html</a><br><a href="http://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/projection-matrix-introduction" target="_blank" rel="noopener">http://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/projection-matrix-introduction</a></p>
+<h1 id="05-OpenGL"><a href="#05-OpenGL" class="headerlink" title="05 OpenGL"></a>05 <a href="https://mdzahidh.github.io/cs148/assets/slides/05-OpenGL.pdf" target="_blank" rel="noopener">OpenGL</a></h1><p>SIMD : Single Instruction Multiple Data</p>
+<p>NDC = M(proj) x M(eye) x M(model) x V</p>
+<p>OpenGL 1.x Pipeline :<br>Display List(Stores subrouties) -&gt; Evaluator(Construct geometric objects) -&gt; Pre-Vertex Operations(Change geometry) / Primitive Assembly(Store primitive shapes) -&gt; Rasterization -&gt; Pre-Fragment Operations(Modify and combine per-pixel information)  -&gt; Frame Buffer(Prepare image to be displayed)</p>
+<p>Fragment : The data necessary to generate a single pixel’s worth of a primitive.</p>
+<p>Vertex Lighting<br><a href="https://en.wikipedia.org/wiki/Normal_(geometry" target="_blank" rel="noopener">Normal</a>) : A vector perpendicular to a surface; constant over a plane</p>
+<ul>
+<li>Specifying Normals</li>
+<li>Diffuse Term</li>
+<li>Specular Term</li>
+<li>Ambient light<br>Color = (DiffuseFactor x DiffuseColor) + ([DiffuseFactor &gt; 0] x SpecularFactor x SpecularColor) + AmbientColor</li>
+</ul>
+<p>Vertex Lighting types : Directional Light Source, Point Light Source, Spot Light Source, Ambient Light Source</p>
+<p>Next Generation APIs: Lower Driver/CPU Overhead, Support multi-core CPUs</p>
+<ul>
+<li>Vulkan(Nextgen OpenGL)<br>随着2016年02月16日Vulkan 1.0 规范发布，Opengl以及Opengl ES可能还有几年的生命周期，未来将主要基于Vulkan API。</li>
+<li>DirectX 12(Microsoft)</li>
+<li>Metal(Apple)</li>
+</ul>
+<p>本节课程介绍<a href="https://www.opengl.org/" target="_blank" rel="noopener">OpenGL</a>，为了方便讲解和演示代码，采用的是OpenGL 1.x API(固定管线)和GLUT API(实际使用的是<a href="http://freeglut.sourceforge.net/" target="_blank" rel="noopener">freeglut</a>)，在实际的开发过程中，目前都是基于OpenGL 3.3+(可编程管线)以及<a href="http://www.glfw.org/" target="_blank" rel="noopener">GLFW</a>；而且对OpenGL的rendering pipeline，lighting model等知识也仅仅提及而以。本节课的内容没有提供具体的OpenGL实践，因此要真正理解和应用OpenGL，需要其他学习资料，根据上节课程的推荐，学习<a href="http://learnopengl.com/，学习和实践完Learn" target="_blank" rel="noopener">http://learnopengl.com/，学习和实践完Learn</a> OpenGL的前2部分(Getting started, Lighting)就可以学习下一节，在CS148的学习结束后，可以继续学习Learn OpenGL后续的章节，我的学习笔记<a href="http://wangwh0204.github.io/2016/09/28/learnopengl/">在此</a></p>
+<h1 id="06-Texture"><a href="#06-Texture" class="headerlink" title="06 Texture"></a>06 <a href="https://mdzahidh.github.io/cs148/assets/slides/06-Textures.pdf" target="_blank" rel="noopener">Texture</a></h1><p><a href="https://en.wikipedia.org/wiki/Texture_mapping" target="_blank" rel="noopener">Texture Mapping</a> is a method for defining high frequency detail, surface texture, or color information on a computer-generated graphic or 3D model. Its application to 3D graphics was pioneered by Edwin Catmull in 1974.</p>
+<ul>
+<li>A technique for specifying variationsin surface reflectance properties of an object</li>
+<li>Store the reflectance as an image and “map” it onto the object</li>
+<li>The stored image is called a texture map</li>
+<li>A texture map is defied in its own 2D coordinate system, parameterized by (u,v)</li>
+<li>Establish a correspondence by assigning (u,v) coordinates to triangle vertices</li>
+<li>Then, for each pixel inside a triangle, calculate the pixel’s (u,v) texture coordinates using barycentric interpolation of the triangle vertices’ texture coordinates</li>
+</ul>
+<p>UV mapping is the 3D modeling process of projecting a 2D image to a 3D model’s surface for texture mapping. The UV Mapping process at its simplest requires three steps: unwrapping the mesh, creating the texture, and applying the texture.</p>
+<h2 id="Reading-Assignment-3"><a href="#Reading-Assignment-3" class="headerlink" title="Reading Assignment 3"></a>Reading Assignment 3</h2><p>阅读FCG第6章(Transformation Matrices)，第7章(Viewing)，第8章(The Graphics Pipeline)</p>
+<h1 id="07-GPU-Shaders-amp-OpenGL-3-2"><a href="#07-GPU-Shaders-amp-OpenGL-3-2" class="headerlink" title="07 GPU, Shaders &amp; OpenGL 3.2"></a>07 <a href="https://mdzahidh.github.io/cs148/assets/slides/07-GPU,%20Shaders%20&amp;%20OpenGL%203.2.pdf" target="_blank" rel="noopener">GPU, Shaders &amp; OpenGL 3.2</a></h1><p>本课程介绍支持可编程管线的OpenGL API，</p>
+<h1 id="08-Basics-of-Rendering"><a href="#08-Basics-of-Rendering" class="headerlink" title="08 Basics of Rendering"></a>08 <a href="https://mdzahidh.github.io/cs148/assets/slides/08-Rendering.pdf" target="_blank" rel="noopener">Basics of Rendering</a></h1><h2 id="Reading-Assignment-4"><a href="#Reading-Assignment-4" class="headerlink" title="Reading Assignment 4"></a>Reading Assignment 4</h2><p>OpenGL Programming Guide 8th  Chapter 15:</p>
+<ol>
+<li>What is a vertex shader and a fragment shader, and how are they related?</li>
+<li>What shader handles the functional stage of the Projection Matrix - vertex or fragment?</li>
+<li>Name at least two outputs that a vertex program must provide.</li>
+<li>How long did it take for you to (a) read the material and (b) answer these questions?</li>
+</ol>
+<h1 id="09-Materials"><a href="#09-Materials" class="headerlink" title="09 Materials"></a>09 <a href="https://mdzahidh.github.io/cs148/assets/slides/09-Material.pdf" target="_blank" rel="noopener">Materials</a></h1><h1 id="10-Ray-Tracing"><a href="#10-Ray-Tracing" class="headerlink" title="10 Ray-Tracing"></a>10 <a href="https://mdzahidh.github.io/cs148/assets/slides/10-Ray%20Tracing.pdf" target="_blank" rel="noopener">Ray-Tracing</a></h1><h2 id="Reading-Assignment-5"><a href="#Reading-Assignment-5" class="headerlink" title="Reading Assignment 5"></a>Reading Assignment 5</h2><p>阅读FCG第4章(Ray Tracing)，第13章(More Ray Tracing)<br>348B</p>
+<h1 id="11-Geometric-Modeling"><a href="#11-Geometric-Modeling" class="headerlink" title="11 Geometric Modeling"></a>11 <a href="https://mdzahidh.github.io/cs148/assets/slides/11-Geometry.pdf" target="_blank" rel="noopener">Geometric Modeling</a></h1><p>348A</p>
+<h1 id="12-Animation"><a href="#12-Animation" class="headerlink" title="12 Animation"></a>12 <a href="https://mdzahidh.github.io/cs148/assets/slides/12-Animation.pdf" target="_blank" rel="noopener">Animation</a></h1><h2 id="Reading-Assignment-6"><a href="#Reading-Assignment-6" class="headerlink" title="Reading Assignment 6"></a>Reading Assignment 6</h2><p>阅读FCG第12章(Data Structures for Graphics)<br>248</p>
+<h1 id="13-Physically-Based-Animation"><a href="#13-Physically-Based-Animation" class="headerlink" title="13 Physically Based Animation"></a>13 <a href="https://mdzahidh.github.io/cs148/assets/slides/13-Physically%20Based%20Animation.pdf" target="_blank" rel="noopener">Physically Based Animation</a></h1><p>348C</p>
+<h1 id="14-Sampling"><a href="#14-Sampling" class="headerlink" title="14 Sampling"></a>14 <a href="https://mdzahidh.github.io/cs148/assets/slides/14-Sampling.pdf" target="_blank" rel="noopener">Sampling</a></h1><h1 id="15-Recap"><a href="#15-Recap" class="headerlink" title="15 Recap"></a>15 <a href="https://mdzahidh.github.io/cs148/assets/slides/15-Recap.pdf" target="_blank" rel="noopener">Recap</a></h1><p><strong>实践：渲染一个实际的场景(基于Ray Tracing 或者 Scanline Rendering)</strong></p>
+<p>回顾整理之前的知识，也是时候实践和系统的阅读参考书来完善，巩固知识体系了：</p>
+<ul>
+<li>Learn OpenGL</li>
+<li>Fundamentals of Computer Graphics, 3rd Edition</li>
+</ul>
+<p>在夯实基础理论及简单的实践后，可以学习使用Unity这样的3D引擎来实现更复杂的游戏。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/technology/">technology</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Computer-Graphics/">Computer Graphics</a><a href="/tags/Stanford/">Stanford</a><a href="/tags/OpenGL/">OpenGL</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://wangwh0204.github.io/2016/06/21/stanford-cs148-introduction-to-computer-graphics-and-imaging/" data-title="Stanford CS148 - Introduction to Computer Graphics and Imaging | From Computer Vision to AGI Robots" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/07/28/fundamentals-of-computer-graphics-3rd/" title="Fundamentals of Computer Graphics 3rd">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Fundamentals of Computer Graphics 3rd</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/02/20/learning-csharp-programming-with-unity3d/"  title="Learning C# Programming with Unity3D">
+ <strong>下一篇：</strong><br/> 
+ <span>Learning C# Programming with Unity3D
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01-Introduction"><span class="toc-number">1.</span> <span class="toc-text">01 Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02-Light-and-Colors"><span class="toc-number">2.</span> <span class="toc-text">02 Light and Colors</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-Assignment-1"><span class="toc-number">2.1.</span> <span class="toc-text">Reading Assignment 1</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#03-Rasterization"><span class="toc-number">3.</span> <span class="toc-text">03 Rasterization</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-Assignment-2"><span class="toc-number">3.1.</span> <span class="toc-text">Reading Assignment 2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04-Coordinates-amp-Transformation"><span class="toc-number">4.</span> <span class="toc-text">04 Coordinates &amp; Transformation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05-OpenGL"><span class="toc-number">5.</span> <span class="toc-text">05 OpenGL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#06-Texture"><span class="toc-number">6.</span> <span class="toc-text">06 Texture</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-Assignment-3"><span class="toc-number">6.1.</span> <span class="toc-text">Reading Assignment 3</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#07-GPU-Shaders-amp-OpenGL-3-2"><span class="toc-number">7.</span> <span class="toc-text">07 GPU, Shaders &amp; OpenGL 3.2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#08-Basics-of-Rendering"><span class="toc-number">8.</span> <span class="toc-text">08 Basics of Rendering</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-Assignment-4"><span class="toc-number">8.1.</span> <span class="toc-text">Reading Assignment 4</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#09-Materials"><span class="toc-number">9.</span> <span class="toc-text">09 Materials</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-Ray-Tracing"><span class="toc-number">10.</span> <span class="toc-text">10 Ray-Tracing</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-Assignment-5"><span class="toc-number">10.1.</span> <span class="toc-text">Reading Assignment 5</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-Geometric-Modeling"><span class="toc-number">11.</span> <span class="toc-text">11 Geometric Modeling</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-Animation"><span class="toc-number">12.</span> <span class="toc-text">12 Animation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-Assignment-6"><span class="toc-number">12.1.</span> <span class="toc-text">Reading Assignment 6</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-Physically-Based-Animation"><span class="toc-number">13.</span> <span class="toc-text">13 Physically Based Animation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14-Sampling"><span class="toc-number">14.</span> <span class="toc-text">14 Sampling</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#15-Recap"><span class="toc-number">15.</span> <span class="toc-text">15 Recap</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/IR/" title="IR">IR<sup>3</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/management/" title="management">management<sup>5</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/technology/" title="technology">technology<sup>20</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/thinking/" title="thinking">thinking<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Stanford/" title="Stanford">Stanford<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Computer-Graphics/" title="Computer Graphics">Computer Graphics<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Unity/" title="Unity">Unity<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Computer-Vision/" title="Computer Vision">Computer Vision<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MR/" title="MR">MR<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hololens/" title="Hololens">Hololens<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Agile/" title="Agile">Agile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SE/" title="SE">SE<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OpenGL/" title="OpenGL">OpenGL<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/VR/" title="VR">VR<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UML/" title="UML">UML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robotics/" title="Robotics">Robotics<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robot-Learning/" title="Robot Learning">Robot Learning<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robot-Manipulation/" title="Robot Manipulation">Robot Manipulation<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Design-Patterns/" title="Design Patterns">Design Patterns<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">九月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/08/">八月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/01/">一月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2005/03/">三月 2005</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/09/">九月 2004</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/06/">六月 2004</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://cs.stanford.edu/" target="_blank" title="Stanford CS">Stanford CS</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://pair.stanford.edu/" target="_blank" title="Stanford PAIR">Stanford PAIR</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.ri.cmu.edu/" target="_blank" title="CMU RI">CMU RI</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.robot-learning.org/" target="_blank" title="CORL">CORL</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.paperswithcode.com/sota" target="_blank" title="SOTA">SOTA</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> You&#39;ve got to find what you love. And the only way to do great work is to love what you do. If you haven&#39;t found it yet, keep looking. Don&#39;t settle. ― Steve Jobs <br/>
+			I&#39;m not a great programmer; I&#39;m just a good programmer with great habits. ― Kent Beck</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/wangwh0204" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/wangwh0204" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangwh0204@outlook.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
+		
+		<a href="/about" target="_blank" title="steven wang">steven wang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

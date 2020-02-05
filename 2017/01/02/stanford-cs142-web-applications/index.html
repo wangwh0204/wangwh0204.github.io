@@ -1,0 +1,1194 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Stanford CS142 - Web Applications | From Computer Vision to AGI Robots</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="steven wang">
+    
+
+    
+    <meta name="description" content="Stanford CS142 学习笔记">
+<meta name="keywords" content="Stanford,Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stanford CS142 - Web Applications">
+<meta property="og:url" content="https://wangwh0204.github.io/2017/01/02/stanford-cs142-web-applications/index.html">
+<meta property="og:site_name" content="From Computer Vision to AGI Robots">
+<meta property="og:description" content="Stanford CS142 学习笔记">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-03-16T16:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stanford CS142 - Web Applications">
+<meta name="twitter:description" content="Stanford CS142 学习笔记">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.jpg" alt="From Computer Vision to AGI Robots" title="From Computer Vision to AGI Robots"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="From Computer Vision to AGI Robots">From Computer Vision to AGI Robots</a></h1>
+				<h2 class="blog-motto">在智能机器的寒武纪时代浪潮中，做点微小工作</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:wangwh0204.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/01/02/stanford-cs142-web-applications/" title="Stanford CS142 - Web Applications" itemprop="url">Stanford CS142 - Web Applications</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="steven wang" target="_blank" itemprop="author">steven wang</a>
+		
+  <p class="article-time">
+    <time datetime="2017-01-01T16:00:00.000Z" itemprop="datePublished"> 发表于 2017-01-02</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01-Introduction"><span class="toc-number">1.</span> <span class="toc-text">01 Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02-HyperText-Markup-Language-HTML"><span class="toc-number">2.</span> <span class="toc-text">02 HyperText Markup Language (HTML)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#03-Cascading-Style-Sheets-CSS"><span class="toc-number">3.</span> <span class="toc-text">03 Cascading Style Sheets (CSS)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">Today’s Specials</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04-Universal-Resource-Locator-URL"><span class="toc-number">5.</span> <span class="toc-text">04 Universal Resource Locator(URL)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05-JavaScript-Basics"><span class="toc-number">6.</span> <span class="toc-text">05 JavaScript Basics</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#06-JavaScript-Programming"><span class="toc-number">7.</span> <span class="toc-text">06 JavaScript Programming</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#07-Document-Object-Model-DOM"><span class="toc-number">8.</span> <span class="toc-text">07 Document Object Model(DOM)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#08-Events"><span class="toc-number">9.</span> <span class="toc-text">08 Events</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#09-Front-End-Programming"><span class="toc-number">10.</span> <span class="toc-text">09 Front End Programming</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-Introduction-to-AngularJS"><span class="toc-number">11.</span> <span class="toc-text">10 Introduction to AngularJS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-Single-Page-Applications"><span class="toc-number">12.</span> <span class="toc-text">11 Single Page Applications</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-Responsive-Web-Design"><span class="toc-number">13.</span> <span class="toc-text">12 Responsive Web Design</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-Building-Web-Applications"><span class="toc-number">14.</span> <span class="toc-text">13 Building Web Applications</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-Design-Goals"><span class="toc-number">14.1.</span> <span class="toc-text">Some Design Goals:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14-Browser-Server-Communication"><span class="toc-number">15.</span> <span class="toc-text">14 Browser/Server Communication</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#15-Web-Servers"><span class="toc-number">16.</span> <span class="toc-text">15 Web Servers</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-Node-js"><span class="toc-number">17.</span> <span class="toc-text">16 Node.js</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#17-ExpressJS"><span class="toc-number">18.</span> <span class="toc-text">17 ExpressJS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#18-Storage-Tier"><span class="toc-number">19.</span> <span class="toc-text">18 Storage Tier</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#19-Cookies-and-Session"><span class="toc-number">20.</span> <span class="toc-text">19 Cookies and Session</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#20-Input-and-Validation"><span class="toc-number">21.</span> <span class="toc-text">20 Input and Validation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#21-Full-stack-state-management"><span class="toc-number">22.</span> <span class="toc-text">21 Full stack state management</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#22-Web-App-Security-Browser-Isolation"><span class="toc-number">23.</span> <span class="toc-text">22 Web App Security - Browser Isolation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#23-Network-Attacks"><span class="toc-number">24.</span> <span class="toc-text">23 Network Attacks</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#24-Other-Attacks"><span class="toc-number">25.</span> <span class="toc-text">24 Other Attacks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Session-Attacks"><span class="toc-number">25.1.</span> <span class="toc-text">Session Attacks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Code-Injection-Attacks"><span class="toc-number">25.2.</span> <span class="toc-text">Code Injection Attacks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phishing-Attacks"><span class="toc-number">25.3.</span> <span class="toc-text">Phishing Attacks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Denial-of-Service-Attacks"><span class="toc-number">25.4.</span> <span class="toc-text">Denial of Service Attacks</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#25-Large-Scale-Web-Applications"><span class="toc-number">26.</span> <span class="toc-text">25 Large-Scale Web Applications</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#26-Data-Centers"><span class="toc-number">27.</span> <span class="toc-text">26 Data Centers</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#27-Future-directions"><span class="toc-number">28.</span> <span class="toc-text">27 Future directions</span></a></li></ol>
+		
+		</div>
+		
+		<p><a href="http://cs142.stanford.edu" target="_blank" rel="noopener">Stanford CS142</a> 学习笔记<a id="more"></a></p>
+<blockquote>
+<p>History :<br>2017-01-02 基于 SWinter 2017 的 课件 所做的笔记</p>
+</blockquote>
+<p>在2000年的时候，就学习过HTML，JS，但很快就放下了，因为那时认为Web/UI开发很繁琐，没什么技术含量，个人也因此错过了PC Web时代。惟技术思维使得人一叶障目，产生偏见。如果从商业和产品角度开看，WEB开发速度快，能快速出原型；响应快，能快速处理需求变更和BUG；功能升级快，无须重新下载，对用户友好；唯一的缺点是表现力，也就是UI的性能问题。但Web开发在UI上的确是Native要比方便，简单的多(HTML + CSS + JS)，随着移动应用开发的成熟，跨平台的方案是大势所趋。在Cordova, Xamarin, React-Native等跨平台的移动应用开发方案中，个人最看好<a href="http://facebook.github.io/react-native/" target="_blank" rel="noopener">React-Native</a>，Oculus甚至提供了React-VR来开发WebVR应用。</p>
+<p>在<a href="http://cs.stanford.edu/academics/courses" target="_blank" rel="noopener">Stanford CS的课程表</a>里查找了下Web开发相关的课程，发现了<a href="http://cs142.stanford.edu" target="_blank" rel="noopener">CS142: Web Applications</a>，花了3天时间学习，主要是对Web Applications开发的方方面面有了全局的认知，然后重点放在React-Native的学习和应用上。 泛泛的了解。</p>
+<blockquote>
+<p>Web-based applications offer numerous advantages, such as instant access, automatic upgrades, and opportunities for collaboration on a massive scale.  In the process you will learn about markup languages, scripting languages, network protocols, interactive graphics, event-driven programming, and databases, and see how they all work together to deliver exciting applications.</p>
+</blockquote>
+<p>One good online source for reference documentation on HTML, CSS, and the DOM is <a href="https://developer.mozilla.org/en-US/" target="_blank" rel="noopener">Mozilla Developer Network</a>. </p>
+<p>本课程采用MEAN Stack来做项目的练习，主要的好处是可以只用Javascript来Browser和Server的开发，但我个人更倾向于采用React + Go + MongoDB的技术栈。 </p>
+<p>The web application we build in the course’s projects will use what is known as the MEAN stack. The MEAN stack uses the JavaScript language in both the browser and the server-side.<br>MongoDB - An object database<br>Express.js<br>AngularJS - JavaScript-based browser framework for apps<br>Node.js - JavaScript-based server engine</p>
+<p><strong>prerequisites : CS107 and CS108</strong><br><strong>Reading:</strong></p>
+<ul>
+<li>JavaScript : The Definitive Guide</li>
+<li>HTTP : The Definitive Guide</li>
+</ul>
+<h1 id="01-Introduction"><a href="#01-Introduction" class="headerlink" title="01 Introduction"></a>01 Introduction</h1><p>课程的目标：Learn how a web application is built</p>
+<p>Web Application Architecture : WebBrowser &lt;–HTTP–&gt; Web server/Application server  &lt;–LAN-&gt;  Database System</p>
+<p>HTML/CSS/JavaScript/DOM - Markup, separation of content &amp; style, reuse<br>Document object Model(DOM) - Document structure<br>Angular.js - Model View Controller, Single Page Applications</p>
+<p>HTTP/AJAX/REST - API design<br>Cookies/Sessions</p>
+<p>DBMS - Schema, Objects, CRUD, indexes, transactions<br>End-to-End - Scale and Security</p>
+<h1 id="02-HyperText-Markup-Language-HTML"><a href="#02-HyperText-Markup-Language-HTML" class="headerlink" title="02 HyperText Markup Language (HTML)"></a>02 HyperText Markup Language (HTML)</h1><p>Web browsers display Documents described in HTML<br>Concept: Markup Language - Include directives with content<br>Directives can dictate presentation or describe content<br>Idea from the 1960s: RUNOFF </p>
+<h1 id="03-Cascading-Style-Sheets-CSS"><a href="#03-Cascading-Style-Sheets-CSS" class="headerlink" title="03 Cascading Style Sheets (CSS)"></a>03 Cascading Style Sheets (CSS)</h1><p>Key concept: Separate style from content<br>Content (what to display) is in HTML files<br>Formatting information (how to display it) is in separate style sheets (.css files).<br>Use an element attribute named class to link (e.g. <span class="”test”">)<br>Result: define style information once, use in many places</span></p>
+<table>
+<thead>
+<tr>
+<th>CSS Selector</th>
+<th>CSS</th>
+<th>HTML</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tag name</td>
+<td>h1 {color: red;}</td>
+<td><h1>Today’s Specials</h1></td>
+</tr>
+<tr>
+<td>Class attribute</td>
+<td>.large {font-size: 16pt;}</td>
+<td><p class="large">…</p></td>
+</tr>
+<tr>
+<td>Tag and Class</td>
+<td>p.large {…}</td>
+<td><p class="large">…</p></td>
+</tr>
+<tr>
+<td>Element id</td>
+<td>#p20 {font-weight: bold;}</td>
+<td><p id="p20">…</p></td>
+</tr>
+</tbody>
+</table>
+<p>Control many style properties of an element:</p>
+<ul>
+<li>Coloring</li>
+<li>Size</li>
+<li>Position</li>
+<li>Visibility</li>
+<li>Many more: (e.g. p: { text-decoration: line-through; })</li>
+<li>Also used in animation</li>
+</ul>
+<p>Total element width =<br>width +<br>left padding +<br>right padding +<br>left border +<br>right border +<br>left margin +<br>right margin</p>
+<p>Margin &amp; Padding Transparent</p>
+<h1 id="04-Universal-Resource-Locator-URL"><a href="#04-Universal-Resource-Locator-URL" class="headerlink" title="04 Universal Resource Locator(URL)"></a>04 Universal Resource Locator(URL)</h1><p>Parts of an URL : <a href="http://host.company.com:80/a/b/c.html?user=Alice&amp;year=2008#p2" target="_blank" rel="noopener">http://host.company.com:80/a/b/c.html?user=Alice&amp;year=2008#p2</a><br>Scheme (http:): identifies protocol used to fetch the content.<br>Host name (//host.company.com): name of a machine to connect to.<br>Server’s port number (80): allows multiple servers to run on the same machine.<br>Hierarchical portion (/a/b/c.html): used by server to find content.<br>Query parameters (?user=Alice&amp;year=2008): provides additional parameters<br>Fragment (#p2): Have browser scroll page to fragment (html: p2 is anchor tag)</p>
+<h1 id="05-JavaScript-Basics"><a href="#05-JavaScript-Basics" class="headerlink" title="05 JavaScript Basics"></a>05 JavaScript Basics</h1><p>From Wikipedia:<br>… high-level, dynamic, untyped, and interpreted programming language<br>… is prototype-based with first-class functions, …<br>… supporting object-oriented, imperative, and functional programming</p>
+<p>Variables have the type of the last thing assigned to it<br>Primitive types: undefined, number, string, boolean, function, object</p>
+<p>Object is an unordered collection of name-value pairs called properties</p>
+<h1 id="06-JavaScript-Programming"><a href="#06-JavaScript-Programming" class="headerlink" title="06 JavaScript Programming"></a>06 JavaScript Programming</h1><p>… supporting object-oriented, imperative, and functional programming</p>
+<p>Mostly programming conventions (i.e. patterns) rather than language features<br>更多的是一种编程约定，而不是语言层面的特性</p>
+<p>A property of an object can be a function </p>
+<p>Functions are classes in JavaScript: Name the function after the class</p>
+<p>JavaScript Object Notation (JSON) :  is the standard format for sending data to and from a browser</p>
+<h1 id="07-Document-Object-Model-DOM"><a href="#07-Document-Object-Model-DOM" class="headerlink" title="07 Document Object Model(DOM)"></a>07 Document Object Model(DOM)</h1><p>HTML document exposed as a collection of JavaScript objects and methods<br><strong>The Document Object Model (DOM)</strong></p>
+<ul>
+<li>JavaScript can query or modify the HTML document</li>
+<li>Accessible via the JavaScript global scope, aliases: window</li>
+</ul>
+<p><strong>DOM hierarchy</strong></p>
+<ul>
+<li>Rooted at window.document</li>
+<li>Follows HTML document structure<br>window.document.head<br>window.document.body</li>
+<li>DOM objects have tons (~250) of properties, most private Objects (representing elements, raw text, etc.) have a common set of properties and methods called a DOM “Node”</li>
+</ul>
+<p><strong>DOM Node properties and methods</strong></p>
+<ul>
+<li>Identification<br>nodeName property is element type (uppercase: P, DIV, etc.) or #text</li>
+<li>Encode document’s hierarchical structure<br>parentNode, nextSibling, prevSibling, firstChild, lastChild.</li>
+<li>Provide accessor and mutator methods<br>E.g. getAttribute, setAttribute methods, etc..</li>
+</ul>
+<h1 id="08-Events"><a href="#08-Events" class="headerlink" title="08 Events"></a>08 Events</h1><p><strong>DOM communicates to JavaScript with Events</strong><br>Event types:</p>
+<ul>
+<li>Mouse-related: mouse movement, button click, enter/leave element</li>
+<li>Keyboard-related: down, up, press</li>
+<li>Focus-related: focus in, focus out (blur)</li>
+<li>Input field changed, Form submitted</li>
+<li>Timer events</li>
+<li>Miscellaneous:</li>
+<li>Content of an element has changed</li>
+<li>Page loaded/unloaded</li>
+<li>Image loaded</li>
+<li>Uncaught exception</li>
+</ul>
+<p><strong>Event handling</strong><br>Creating an event handler: must specify 3 things:</p>
+<ul>
+<li>What happened: the event of interest.</li>
+<li>Where it happened: an element of interest.</li>
+<li>What to do: JavaScript to invoke when the event occurs on the element</li>
+</ul>
+<p><strong>Event Concurrency</strong></p>
+<ul>
+<li>Events are serialized and processed one-at-a-time</li>
+<li>Event handling does not interleave with other Javascript execution.</li>
+<li>Handlers run to completion</li>
+<li>No multi-threading.</li>
+<li>Make reasoning about concurrency easier</li>
+<li>Rarely need locks.</li>
+<li>Background processing is harder than with threads</li>
+</ul>
+<h1 id="09-Front-End-Programming"><a href="#09-Front-End-Programming" class="headerlink" title="09 Front End Programming"></a>09 Front End Programming</h1><p>Brief history of Web Applications : </p>
+<ul>
+<li>Initially: static HTML files only.</li>
+<li>Common Gateway Interface (CGI)</li>
+<li>Certain URLs map to executable programs that generate web page</li>
+<li>Program exits after Web page complete</li>
+<li>Introduced the notion of stateless servers: each request independent, no state<br>carried over from previous requests. (Made scale-out architectures easier)</li>
+<li>Perl typically used for writing CGI programs</li>
+</ul>
+<p>First-generation web app frameworks<br>Examples: (PHP, ASP.net, Java servlets)</p>
+<ul>
+<li>Incorporate language runtime system directly into Web server</li>
+<li>Templates: mix code and HTML</li>
+<li>Web-specific library packages:</li>
+<li>URL handling</li>
+<li>HTML generation</li>
+<li>Sessions</li>
+<li>Interfacing to databases</li>
+</ul>
+<p>Second-generation frameworks<br>Examples: (Ruby on Rails, Django):</p>
+<ul>
+<li>Model-view-controller: stylized decomposition of applications</li>
+<li>Object-relational mapping (ORM): simplify the use of databases (make<br>database tables and rows appear as classes and objects)</li>
+</ul>
+<p>Third-generation frameworks<br>Examples: (AngularJS, ReactJS, …)</p>
+<ul>
+<li>JavaScript frameworks running in browser - More app-like web apps</li>
+<li>Interactive, responsive applications</li>
+<li>Frameworks not dependent on particular server-side capabilities</li>
+<li>Node.js - Server side JavaScript</li>
+<li>No-SQL database (e.g. MongoDB)</li>
+<li>Many of the concepts of previous generations carry forward</li>
+<li>Model-view-controllers</li>
+<li>Templates</li>
+</ul>
+<p>Model-View-Controller (MVC) Pattern</p>
+<ul>
+<li>Model: manages the application’s data<br>JavaScript objects</li>
+<li>View: what the web page looks like<br>HTML/CSS</li>
+<li>Controller: fetch models and control view, handle user interactions,<br>JavaScript code<br>MVC pattern been around since the late 1970’s</li>
+<li>Originally conceived in the Smalltalk project at Xerox PARC</li>
+</ul>
+<p>View Generation</p>
+<ul>
+<li>Web App: Ultimately need to generate HTML and CSS<br>Templates are commonly used technique. Basic ideas:</li>
+<li>Write HTML document containing parts of the page that are always the same.</li>
+<li>Add bits of code that generate the parts that are computed for each page.</li>
+<li>The template is expanded by executing code snippets, substituting the results into the document.</li>
+</ul>
+<p>Benefits of templates (Compare with direct JavaScript to DOM programming)</p>
+<ul>
+<li>Easy to visualize HTML structure</li>
+<li>Easy to see how dynamic data fits in</li>
+<li>Can do either on server or browser</li>
+</ul>
+<p>Controllers</p>
+<ul>
+<li>Third-generation: JavaScript running in browser<br>Responsibilities:</li>
+<li>Connect models and views<br>Server communication: Fetch models, push updates</li>
+<li>Control view templates<br>Manage the view templates being shown</li>
+<li>Handle user interactions<br>Buttons, menus, and other interactive widgets</li>
+</ul>
+<p>Model Data</p>
+<ul>
+<li>All non-static information needed by the view templates or controllers</li>
+<li>Traditionally tied to application’s database schema<br>Object Relational Mapping (ORM) - A model is a table row</li>
+<li>Web application’s model data needs are specified by the view designers But need to be persisted by the database</li>
+<li>Conflict: Database Schemas don’t like changing frequently but web application model data might (e.g. user will like this view better if we add … and lose …)</li>
+</ul>
+<blockquote>
+<p>2016.12.15 正在看的时候，突然发现网页不可访问了，有可能正在更新，要开始新的课程，这种应用类的知识，很容易就过时了。</p>
+<h1 id="10-Introduction-to-AngularJS"><a href="#10-Introduction-to-AngularJS" class="headerlink" title="10 Introduction to AngularJS"></a>10 Introduction to AngularJS</h1><p>个人更倾向于学习React，React-Native是很重要的原因。而且Angular 2对Angular1重写，</p>
+</blockquote>
+<ul>
+<li><p>JavaScript framework for writing web applications<br>Handles: DOM manipulation, input validation, server communication, URL mangement, etc.</p>
+</li>
+<li><p>Uses Model-View-Controller pattern<br>HTML Templating approach with two-way binding</p>
+</li>
+<li><p>Minimal server-side support dictated</p>
+</li>
+<li>Focus on supporting for programming in the large and single page applications<br>Modules, reusable components, testing, etc.</li>
+</ul>
+<h1 id="11-Single-Page-Applications"><a href="#11-Single-Page-Applications" class="headerlink" title="11 Single Page Applications"></a>11 Single Page Applications</h1><p>在一个页面加载不同的URL</p>
+<p><strong>没有看懂</strong><br>Deep linking</p>
+<ul>
+<li>Concept: the URL should capture the web app’s context so that directing the<br>browser to the URL will result the app’s execution to that context</li>
+</ul>
+<ol>
+<li>Bookmarks</li>
+<li>Sharing</li>
+</ol>
+<ul>
+<li>Context is defined by the user interface designer!<br>Consider: Viewing information of entity and have an edit dialog open<br>Should the link point to the entity view or to the entity &amp; dialog?<br>Does it matter if I’m bookmarking for self or sharing with others?<br>How about navigating away and back or browser refresh?</li>
+</ul>
+<h1 id="12-Responsive-Web-Design"><a href="#12-Responsive-Web-Design" class="headerlink" title="12 Responsive Web Design"></a>12 Responsive Web Design</h1><p>Web App Challenges : Screen real estate</p>
+<blockquote>
+<p>屏幕适配和本地化是所有应用都要面对的问题</p>
+</blockquote>
+<p>Responsive Web Design : </p>
+<ul>
+<li><p>Context is like water!<br>The web app should flow into and fill whatever device you have.</p>
+</li>
+<li><p>Possible with recent CSS extensions:</p>
+</li>
+</ul>
+<ol>
+<li>Add grid layout system with relative (e.g. 50%) rather than absolute (e.g. 50pt) measures<br>Specify element packing into columns and rows</li>
+<li>Add @media rules based on screen sizes<br>Switch layout based on screen size</li>
+<li>Made images support relative sizes<br>Autoscale image and videos to fix in screen region<br>img { width: 100%; height: auto; }<br>video { width: 100%; height: auto; }</li>
+</ol>
+<p><strong>Responsive implementation</strong></p>
+<ul>
+<li>Build components to operate at different screen sizes and densities<br>Use relative rather than absolute<br>Specify sizes in device independent units</li>
+<li>Use CSS breakpoints to control layout and functionality<br>Layout alternatives<br>App functionality conditional on available screen real estate</li>
+<li>Mobile first popular<br>Expand a good mobile design to use more real estate</li>
+</ul>
+<h1 id="13-Building-Web-Applications"><a href="#13-Building-Web-Applications" class="headerlink" title="13 Building Web Applications"></a>13 Building Web Applications</h1><h2 id="Some-Design-Goals"><a href="#Some-Design-Goals" class="headerlink" title="Some Design Goals:"></a>Some Design Goals:</h2><ul>
+<li>Intuitive to use<br>Don’t need to take a course or read a user manual</li>
+<li>Accomplish task accurately and rapidly<br>Provide needed information and functionality</li>
+<li>Users like the experience<br>Joy rather than pain when using the app</li>
+</ul>
+<p>The hardest part of good web applications is the <strong>design</strong>.</p>
+<p>Some guiding design principles for Web Apps</p>
+<ul>
+<li>Be consistent<br>Cognitive load less for the user</li>
+<li>Provide context<br>User shouldn’t get lost in the app</li>
+<li>Be fast<br>Don’t make the user wait</li>
+</ul>
+<p>Consistency: Style guides &amp; design templates</p>
+<ul>
+<li><p>Web apps should have a style guide - Covers the look and feel of the app<br>Style - Color schemes, animation, icons, images, typography, writing<br>User interactions - Menu, buttons, pickers, dialog boxes, tables, lists, …<br>Layout - Structure, toolbars, content, responsiveness</p>
+</li>
+<li><p>Patterns - If you do something multiple places do it the same way<br>Aided by reusable implementation components<br>Error handling, navigation, notifications, etc.</p>
+</li>
+<li><p>Design templates - Follow a familiar structure<br>Example: Master-detail template</p>
+</li>
+</ul>
+<p><strong>Front-end web frameworks</strong><br>Popular example: Bootstrap</p>
+<ul>
+<li>CSS style sheets<br>Design templates<br>Grid layout system with responsive support (breakpoints, etc.)<br>Element styling</li>
+<li>HTML components<br>Buttons, menus, toolbars, lists, table, forms, etc.</li>
+<li>JavaScript<br>Modals, transitions, dropdowns, etc.<br>Originally jquery based</li>
+<li>Angular Material<br>CSS style sheets and Angular directives for implementing Material design spec</li>
+</ul>
+<h1 id="14-Browser-Server-Communication"><a href="#14-Browser-Server-Communication" class="headerlink" title="14 Browser/Server Communication"></a>14 Browser/Server Communication</h1><p>Controller’s role in Model, View, Controller : </p>
+<ul>
+<li>Controller’s job to fetch model for the view<br>May have other server communication needs as well (e.g. authentication services)</li>
+<li>Browser is already talking to a web server, ask it for the model</li>
+<li>Early approach: have the browser do a HTTP request for the model<br>First people at Microsoft liked XML so the DOM extension got called: XMLHttpRequest</li>
+<li>Allowed JavaScript to do a HTTP request without switching page</li>
+<li>Widely used and called AJAX - Asynchronous JavaScript and XML</li>
+<li>Since it is using an HTTP request it can carry XML or anything else<br>More often used with JSON</li>
+</ul>
+<p>Traditional AJAX uses patterns : </p>
+<ul>
+<li><p>Response is HTML<br>elem.innerHTML = xhr.responseText;</p>
+</li>
+<li><p>Response is JavaScript<br>eval(xhr.responseText);<br>Neither of the above are the AngularJS way</p>
+</li>
+<li><p>Response is model data (JSON frequently uses here)<br>JSON.parse(xhr.responseText);</p>
+</li>
+</ul>
+<p>REST APIs : </p>
+<ul>
+<li>REST - representational state transfer</li>
+<li>Guidelines for web app to server communications</li>
+<li>2000 PhD dissertation that was highly impactful<br>Trend at the time was complex RPCs system<br>Became a must have thing: Do you have a REST API?</li>
+<li>Some good ideas, some not so good<br>Doesn’t work for everything</li>
+</ul>
+<p>Some RESTful API attributes : </p>
+<ul>
+<li><p>Server should export resources to clients using unique names (URIs)<br>Example: <a href="http://www.example.com/photo/" target="_blank" rel="noopener">http://www.example.com/photo/</a> is a collection<br>Example: <a href="http://www.example.com/photo/78237489" target="_blank" rel="noopener">http://www.example.com/photo/78237489</a> is a resource</p>
+</li>
+<li><p>Keep servers “stateless”<br>Support easy load balancing across web servers</p>
+</li>
+<li><p>Allow caching of resources</p>
+</li>
+<li>Server supports a set of HTTP methods mapping to CRUD<br>GET method - Read resource (list on collection)<br>PUT method - Update resource<br>POST method - Create resource<br>DELETE method - Delete resource</li>
+</ul>
+<p>RESTapi design : </p>
+<ul>
+<li>Define the resources of the service and give them unique names (URIs)</li>
+<li>Have clients use a CRUD operations using HTTP methods</li>
+<li>Extend when needed (e.g. transaction across multiple resources)</li>
+</ul>
+<p>Going forward: HTML5 WebSockets : </p>
+<ul>
+<li>Rather than running over HTTP, HTML5 brings sockets to the browser</li>
+<li>Event-based interface like XMLHttpRequest</li>
+</ul>
+<h1 id="15-Web-Servers"><a href="#15-Web-Servers" class="headerlink" title="15 Web Servers"></a>15 Web Servers</h1><p>Web Application Architecture :<br>Web Browser(Chrome/Firefox/Safari/Internet Explorer) &lt;– http –&gt;  HTTP Server(Apache, NodeJS)  &lt;– LAN –&gt;  Storage Server(MySQL, MongoDB)</p>
+<p>Web Servers :</p>
+<ul>
+<li><p>Browsers speak HTTP and Web Servers speak HTTP<br>Browsers: send HTTP request and get HTTP responses<br>Web Server: get HTTP requests and send HTTP responses</p>
+</li>
+<li><p>HTTP is layered on TCP/IP so a web server:<br>loop forever doing:<br>accept TCP connection from browser<br>read HTTP request from TCP connection<br>process HTTP request<br>write HTTP response to TCP connection<br>shutdown TCP connection (except if Connection: keep-alive)</p>
+</li>
+</ul>
+<p>2nd Generation Web App Frameworks :<br>Web server runs a program per request - the <strong>controller</strong>:</p>
+<ol>
+<li>Parse URL and/or HTTP request body to get parameters to view</li>
+<li>Use parameters to fetch model data from DBMS (typically a SQL relational DBMS)</li>
+<li>Run HTML view template with model data to generate the HTML</li>
+<li>Send a HTTP response with the HTML back to the browser</li>
+</ol>
+<p>Web servers for JavaScript frameworks :</p>
+<ul>
+<li><p>Most of the web app is simple static files - any web server speaking HTTP<br>View templates (HTML, CSS)<br>JavaScript files</p>
+</li>
+<li><p>Remaining browser⇔ server communication around model data<br>CRUD (Create Read Update Delete) of model data<br>Session info (e.g. login, etc.) (Later…)</p>
+</li>
+<li><p>Low requirements on web request processing<br>HTTP GET static files<br>Model data operation - mostly doing DBMS operations</p>
+</li>
+</ul>
+<h1 id="16-Node-js"><a href="#16-Node-js" class="headerlink" title="16 Node.js"></a>16 Node.js</h1><p><strong>Node.js</strong></p>
+<ul>
+<li>Take a JavaScript engine from a browser (Chrome’s V8 JavaScript Engine)<br>Get same JavaScript on both browser and server<br>Don’t need the DOM on the server</li>
+<li>Add events and an event queue<br>Everything runs as a call from the event loop</li>
+<li>Make event interface to all OS operations<br>Wrap all the OS blocking calls (file and socket/network io)<br>Add some data handle support</li>
+<li>Add a proper module system<br>Each module gets its own scope (not everything in window)</li>
+</ul>
+<p><strong>Node modules</strong></p>
+<ul>
+<li>Many standard Node modules<br>File system, process access, networking, timers, devices, crypto, etc.</li>
+<li>Huge library of modules (npm)<br>Do pretty much anything you want</li>
+<li>We use:<br>Express - Fast, unopinionated, minimalist web framework (speak HTTP)<br>Mongoose - Elegant mongodb object modeling (speak to the database)</li>
+</ul>
+<h1 id="17-ExpressJS"><a href="#17-ExpressJS" class="headerlink" title="17 ExpressJS"></a>17 ExpressJS</h1><p>Express.js - A web framework for Node.js<br>Fast, unopinionated, minimalist web framework<br>Relatively thin layer on top of the base Node.js functionality<br>What does a web server implementor need?</p>
+<ul>
+<li>Speak HTTP: Accept TCP connections, process HTTP request, send HTTP replies<br>Node’s HTTP module does this</li>
+<li>Routing: Map URLs to the web server function for that URL<br>Need to support a routing table (like ngRoute in AngularJS)</li>
+<li>Middleware support: Allow request processing layers to be added in<br>Make it easy to add custom support for sessions, cookies, security, compression, etc.</li>
+</ul>
+<h1 id="18-Storage-Tier"><a href="#18-Storage-Tier" class="headerlink" title="18 Storage Tier"></a>18 Storage Tier</h1><p>Web App Storage System Properties</p>
+<ul>
+<li>Always available - Fetch correct app data, store updates<br>Even if many request come in concurrently - Scalable<br>From all over the world<br>Even if pieces fail - Reliable / fault tolerant</li>
+<li>Provide a good organization of storing an application data<br>Quickly generate the model data of a view<br>Handle app evolving over time</li>
+<li>Good software engineering: Easy to use and reason about</li>
+</ul>
+<p><strong>Relational Database System</strong></p>
+<ul>
+<li>Early on many different structures file system, objects, networks, etc.</li>
+<li>The database community decided the answer was the relational model<br>Many in the community still think it is.<br>Data is organized as a series of <strong>tables</strong> (also called called relations)<br>A table is made of up of <strong>rows</strong> (also called tuples or records)<br>A row is made of a fixed (per table) set of typed <strong>columns</strong><br>String: VARCHAR(20)<br>Integer: INTEGER<br>Floating-point: FLOAT, DOUBLE<br>Date/time: DATE, TIME, DATETIME<br>Others</li>
+</ul>
+<p><strong>NoSQL - MongoDB</strong> </p>
+<ul>
+<li>Using SQL databases provided reliable storage for early web applications</li>
+<li>Led to new databases that matched web application object model<br>Known collectively as NoSQL databases</li>
+<li>MongoDB - Most prominent NoSQL database<br>Data model: Stores collections containing documents (JSON objects)<br>Has expressive query language<br>Can use indexes for fast lookups<br>Tries to handle scalability, reliability, etc.</li>
+</ul>
+<h1 id="19-Cookies-and-Session"><a href="#19-Cookies-and-Session" class="headerlink" title="19 Cookies and Session"></a>19 Cookies and Session</h1><p>How do we know what user sent request?</p>
+<ul>
+<li>Would like to authenticate user and have that information available each time we process a request.</li>
+<li>More generally web apps would like to keep state per active browser<br>Called <strong>session state</strong></li>
+</ul>
+<p>Session state lookup problem : </p>
+<ul>
+<li>HTTP request just come into a web server<br>Not a lot information to uniquely identify “session”</li>
+<li>Solution: Include something in the request to tells us the session<br>Care must taken to avoid forgeries</li>
+<li>Early HTTP solution: Cookies<br>State set by web server that browser attaches to every request<br>Useful but with a checkered history</li>
+<li>Modern browser support local storage API</li>
+</ul>
+<p>Cookie contents : </p>
+<ul>
+<li>Cookie: name and data<br>Domain for this cookie: server, port (optional), URL prefix (optional).<br>The cookie is only included in requests matching its domain.<br>Expiration date: browser can delete old cookies</li>
+<li>Limits:<br>Data size limited by browsers (typically &lt; 4 KB).<br>Browsers limit the number of cookies per server (around 50).</li>
+</ul>
+<p>Options for storing session state : </p>
+<ul>
+<li>Web server’s memory<br>Fastest access<br>May be too large (many active users)<br>Makes load balancing across web servers hard</li>
+<li>Storage system<br>Easily shared across all the web servers<br>May be overkill: Don’t need the super reliability of storage system<br>May be too much load for the storage system</li>
+<li>Specialized storage system<br>Support fast fetching of small, short-lived data<br>Example: memcache, redis - in memory key-value stores</li>
+</ul>
+<p>Cookie replacement: Web Storage API : </p>
+<ul>
+<li>sessionStorage - Per origin storage available when page is open</li>
+<li>localStorage - Per origin storage with longer lifetime</li>
+<li>Standard key-value interface:<br>localStorage.appSetting = ‘Anything’;<br>localStorage.setItem(‘appSetting’, ‘Anything’);<br>sessionStorage[‘app2Setting’] = 2;</li>
+<li>Limited space (~10MB) and similar reliability issues to cookies</li>
+</ul>
+<h1 id="20-Input-and-Validation"><a href="#20-Input-and-Validation" class="headerlink" title="20 Input and Validation"></a>20 Input and Validation</h1><p>Early web app input: HTTP form tag<br>Server-side validation: </p>
+<ul>
+<li>Regardless of validation in browser server needs to check everything<br>Easy to directly access server API bypassing all browser validation checks</li>
+</ul>
+<h1 id="21-Full-stack-state-management"><a href="#21-Full-stack-state-management" class="headerlink" title="21 Full stack state management"></a>21 Full stack state management</h1><p>Session state ：</p>
+<ul>
+<li>Must be kept in sync between the browser app and the server<br>Who, if anyone, is logged in?</li>
+<li>Server will need to reject any requests from users not logged in<br>Model fetching done only at view/controller startup might not work</li>
+<li>Consider transitions of your photo app<br>Login - Not logged in to logged in<br>At app startup most models are not available (e.g. sidenav user list) but become available after login is completed.<br>Logout - Logged in to not logged in<br>Requests to web server that worked before will now fail</li>
+</ul>
+<p>Dealing with other model changes<br>What happens if another user adds a photo or comment? Options:</p>
+<ul>
+<li>Do nothing: Easy!<br>User won’t see new material until they do something that caused the model to be refreshed<br>Very disconcerting if they don’t see their own changes</li>
+<li>Poll: Periodically check for changes or just refetch the model<br>Can provide a UI widget to trigger model refresh</li>
+<li>Server push: Have the server push model changes as soon as they occur<br>User sees updates as soon as possible<br>Might conflict with user changes or be disconcerting for the user<br>Implementation is easier with Web Sockets</li>
+</ul>
+<h1 id="22-Web-App-Security-Browser-Isolation"><a href="#22-Web-App-Security-Browser-Isolation" class="headerlink" title="22 Web App Security - Browser Isolation"></a>22 Web App Security - Browser Isolation</h1><p>Security is an hard problem :</p>
+<ul>
+<li>Many opportunities for attackers<br>Full stack means there are many interface that an attacker can use</li>
+<li>Hard to identify all the vulnerabilities<br>Complexity of system make it impossible guarantee no vulnerabilities</li>
+<li>Even a small mistake can compromise entire application<br>Only as strongest as the weakest link</li>
+</ul>
+<p>Modes of attacks on web applications :</p>
+<ul>
+<li>Attack the connection between browser and web server<br>Steal password<br>Hijack existing connection</li>
+<li>Attack the server<br>Inject code that does bad things</li>
+<li>Attack the browser<br>Inject code that does bad things</li>
+<li>Breach the browser, attack the client machine</li>
+<li>Fool the user (phishing)</li>
+</ul>
+<p>Security Defences :</p>
+<ul>
+<li>Isolation in browsers<br>Web app run in isolated sandbox</li>
+<li>Cryptography<br>Protect information from unauthorized viewing<br>Detect changes<br>Determine origin of information</li>
+<li>Web development frameworks<br>Use patterns that help, avoid dangerous ones</li>
+</ul>
+<h1 id="23-Network-Attacks"><a href="#23-Network-Attacks" class="headerlink" title="23 Network Attacks"></a>23 Network Attacks</h1><p>Network Attacks :</p>
+<ul>
+<li>“man in the middle” attacks</li>
+<li>Attacker has access to network communication between browser and server.</li>
+<li>Passive attacks:<br>Eavesdrop on network traffic</li>
+<li>Active attacks:<br>Inject network packets<br>Modify packets<br>Reorder, replay packets<br>Block packets</li>
+</ul>
+<p>Secure Sockets Layer (SSL) &amp; Transport Layer Security (TLS) - HTTPS</p>
+<ul>
+<li>Protocol used for secure communication between browsers and servers</li>
+<li>Browser uses certificate to verify server’s identity.</li>
+<li>Only one way: SSL/TLS does not allow the server to verify browser identity.</li>
+<li>Uses certificates and public-key encryption to pass a secret session-specific key from browser to server</li>
+</ul>
+<h1 id="24-Other-Attacks"><a href="#24-Other-Attacks" class="headerlink" title="24 Other Attacks"></a>24 Other Attacks</h1><h2 id="Session-Attacks"><a href="#Session-Attacks" class="headerlink" title="Session Attacks"></a>Session Attacks</h2><p>Cross-Site Request Forgery (CSRF)</p>
+<ul>
+<li>Attackers can potentially hijack sessions without even knowing session ids:</li>
+<li>Scenario:<br>Visit your bank’s site, start up web app, log in.<br>Then visit the attacker’s site (e.g. discussion forum with links, forms, etc.)<br>Attacker’s page includes JavaScript that submits form to your bank.<br>When form gets submitted, browser includes bank’s web app cookies, including thesession id.<br>Bank transfers money to attacker’s account.<br>The form can be in an iframe that is invisible, so you never know the attack occurred.<br>This is called Cross-Site Request Forgery (CSRF) : Untrusted site uses trust that was given to user’s browser(Sea-surf)</li>
+</ul>
+<h2 id="Code-Injection-Attacks"><a href="#Code-Injection-Attacks" class="headerlink" title="Code Injection Attacks"></a>Code Injection Attacks</h2><p>Stored Cross Site Scripting Attack(XSS) :</p>
+<ul>
+<li>Attacker stores attacking code in a victim Web server, where it gets accessed by victim clients. Call a Stored Cross Site Scripting Attack</li>
+<li>On previous generations of web frameworks was a major attack loophole<br>Lots of stuffing things into innerHTML, bad escape processing</li>
+<li>Less so on JavaScript frameworks<br>Care is taken before stuffing things into the DOM</li>
+</ul>
+<p>SQL Injection :<br>Injection can also be used to extract sensitive information</p>
+<ul>
+<li>Modify existing query to retrieve different information</li>
+<li>Stolen information appears in “normal” Web output</li>
+</ul>
+<p>Solutions : </p>
+<ul>
+<li>Don’t write SQL</li>
+<li>Use a framework that knows how to safely build sql commands:</li>
+</ul>
+<h2 id="Phishing-Attacks"><a href="#Phishing-Attacks" class="headerlink" title="Phishing Attacks"></a>Phishing Attacks</h2><p>Phishing(钓鱼网站)</p>
+<ul>
+<li>Basic idea:<br>Get unsuspecting users to visit an evil Web site<br>Convince them that the evil Web site is actually a legitimate site (such as a bank or PayPal)<br>Trick the user into disclosing personal information (password, credit card number, etc.)<br>Use the personal information for evil purposes such as identity theft.</li>
+</ul>
+<h2 id="Denial-of-Service-Attacks"><a href="#Denial-of-Service-Attacks" class="headerlink" title="Denial of Service Attacks"></a>Denial of Service Attacks</h2><p><strong>Denial of Service Attacks (DOS Attacks)</strong></p>
+<ul>
+<li>An attack that causes a service to fail by using up resources<br>Could be an accident (e.g. upload too big of a file) or on purpose</li>
+<li>Example from our Photo App:<br>User uploads photos, comments, user registration until our storage fills.<br>Establish so many connections our web server falls over</li>
+<li>Resource could be at networking layer<br>Use all the bandwidth of the network coming into our website<br>Use all the network sockets</li>
+</ul>
+<p><strong>Distributed Denial of Service (DDoS) Attacks</strong></p>
+<ul>
+<li>DOS attack that uses many attacking machines<br>Example: Get control of a million machines and point them at someone’s web server</li>
+<li>Botnets - Collection of compromised machines under control</li>
+<li>Has become an extortion business</li>
+</ul>
+<p><strong>Web App DOS mitigation</strong></p>
+<ul>
+<li>None perfect - really hard problem<br>Do want to take steps to avoid accidental DOS and make purpose-driven DOS harder</li>
+<li>Resource quotas<br>Track resource consumption per user and provide way of cutting off users<br>Good for catching accidents, less so for malicious attacks</li>
+<li>Make resources cost money<br>Raises the cost or hassle for an attacker<br>Not always possible under business model</li>
+<li>Network layer: Need to push back on attack stream<br>Do things like cut off traffic coming from some part of the internet</li>
+</ul>
+<h1 id="25-Large-Scale-Web-Applications"><a href="#25-Large-Scale-Web-Applications" class="headerlink" title="25 Large-Scale Web Applications"></a>25 Large-Scale Web Applications</h1><p><strong>Scale-out architecture</strong></p>
+<ul>
+<li>Expand capacity by adding more instances</li>
+<li>Contrast: Scale-up architecture - Switch to a bigger instance<br>Quickly hit limits on how big of single instances you can build</li>
+<li>Benefits of scale-out<br>Can scale to fit needs: Just add or remove instances<br>Natural redundancy make tolerating failures easier: One instance dies others keep working</li>
+<li>Challenge: Need to manage multiple instances and distribute work to them</li>
+</ul>
+<p><strong>Scale out web servers: Which server do you use?</strong></p>
+<ul>
+<li>Browsers want to speak HTTP to a web server</li>
+<li>Use load balancing to distribute incoming HTTP requests across many front-end web servers</li>
+<li>HTTP redirection (HotMail, now LiveMail):<br>Front-end machine accepts initial connections<br>Redirects them among an array of back-end machines</li>
+<li>DNS (Domain Name System) load balancing:<br>Specify multiple targets for a given name<br>Handles geographically distributed system<br>DNS servers rotate among those targets</li>
+</ul>
+<p><strong>Load-balancing switch (“Layer 4-7 Switch”)</strong></p>
+<ul>
+<li>Special load balancer network switch<br>Incoming packets pass through load balancer switch between Internet and web servers<br>Load balancer directs TCP connection request to one of the many web servers<br>Load balancer will send all packets for that connection to the same server.</li>
+<li>In some cases the switches are smart enough to inspect session cookies, so that the same session always goes to the same server.</li>
+<li>Stateless servers make load balancing easier (different requests from the same user can be handled by different servers).</li>
+<li>Can select web server based on random or on load estimates</li>
+</ul>
+<p><strong>nginx (“Engine X”)</strong></p>
+<ul>
+<li>Super efficient web server (i.e. speaks HTTP)<br>Handles 10s of thousands of HTTP connections</li>
+<li>Uses:<br>Load balancing - Forward requests to collection of front-end web servers<br>Handles front-end web servers coming and going (dynamic pools of server)<br>Fault tolerant - web server dies the load balance just quits using it<br>Handles some simple request - static files, etc.<br>DOS mitigation - request rate limits</li>
+<li>Popular approach to shielding Node.js web servers</li>
+</ul>
+<p><strong>Scale-out assumption: any web server will do</strong></p>
+<ul>
+<li>Stateless servers make load balancing easier<br>Different requests from the same user can be handled by different servers<br>Requires database to be shared across web servers</li>
+<li>What about session state?<br>Accessed on every request so needs to be fast (memcache?)</li>
+<li>WebSockets bind browsers and web server<br>Can not load balance each request</li>
+</ul>
+<p><strong>Scale-out storage system</strong></p>
+<ul>
+<li>Traditionally Web applications have started off using relational databases</li>
+<li>A single database instance doesn’t scale very far.</li>
+<li>Data sharding - Spread database over scale-out instances<br>Each piece is called data shard<br>Can tolerate failures by replication - place more than one copy of data (3 is common)</li>
+<li>Applications must partition data among multiple independent databases, which adds complexity.<br>Facebook initial model: One database instance per university<br>In 2009: Facebook had 4000 MySQL servers - Use hash function to select data shard</li>
+</ul>
+<p><strong>Memcache: main-memory caching system</strong></p>
+<ul>
+<li>Key-value store (both keys and values are arbitrary blobs)</li>
+<li>Used to cache results of recent database queries</li>
+<li>Much faster than databases:<br>500-microsecond access time, vs. 10’s of milliseconds Example: Facebook had 2000 memcache servers by 2009<br>Writes must still go to the DBMS, so no performance improvement for them<br>Cache misses still hurt performance<br>Must manage consistency in software (e.g., flush relevant memcache data when database gets modified)</li>
+</ul>
+<p>Scale-out web architecture :<br>Internet -&gt; Load Balancer -&gt; Web Server(….) -&gt; Database Server(…)<br>                                              -&gt; Memcache(…)</p>
+<p><strong>Scaling issues were hard for early web app</strong></p>
+<ul>
+<li>Startup: Initially, can’t afford expensive systems for managing large scale.</li>
+<li>But, application can suddenly become very popular (“flash crowd”); can be disastrous if application can not scale quickly.</li>
+<li>Many of the early web apps either lived or died by the ability to scale<br>Friendster vs. Facebook</li>
+</ul>
+<p><strong>Cloud Computing</strong></p>
+<ul>
+<li>Idea: Use servers housed and managed by someone else<br>Use Internet to access them</li>
+<li>Virtualization is a key enabler<br>Specify your compute, storage, communication needs: Load balancer : 1, Web Server : 100, Database : 50, Memcache : 20<br>Cloud provider does the rest</li>
+<li>Examples:<br>Amazon EC2<br>Microsoft Azure<br>Google Cloud<br>Many others</li>
+</ul>
+<p><strong>Cloud Computing Advantages</strong></p>
+<ul>
+<li>Key: Pay for the resources you use<br>No up front capital cost<br>Need 1000s machines right now? Possible<br>Perfect fit for startups:<br>1998 software startup: First purchase: server machines<br>2012 software startup: No server machines</li>
+<li>Typically billing is on resources:<br>CPU core time, memory bytes, storage bytes, network bytes</li>
+<li>Runs extremely efficiently<br>Buy equipment in large quantities, get volume discounts<br>Hirer a few experts to manage large numbers of machines<br>Place servers where space, electricity, and labor is cheap</li>
+</ul>
+<p><strong>Content Distribution Network (CDN)</strong></p>
+<ul>
+<li>Consider a read-only part of our web app (e.g. image, html template, etc.)<br>Browser needs to fetch but doesn’t care where it comes from</li>
+<li>Content distribution network<br>Has many servers positions all over the world<br>You give them some content (e.g. image) and they give you an URL<br>You put that URL in your app (e.g. &lt;img src=”…)<br>When user’s browsers access that URL they are sent to the closest server (DNS trick)</li>
+<li>Benefits:<br>Faster serving of app contents<br>Reduce load on web app backend</li>
+<li>Only works on content that doesn’t need to change often</li>
+</ul>
+<h1 id="26-Data-Centers"><a href="#26-Data-Centers" class="headerlink" title="26 Data Centers"></a>26 Data Centers</h1><p><strong>Evolution of data centers</strong></p>
+<ul>
+<li>1960’s, 1970’s: a few very large time-shared computers</li>
+<li>1980’s, 1990’s: heterogeneous collection of lots of smaller machines.</li>
+<li>Today and into the future:<br>Data centers contain large numbers of nearly identical machines<br>Individual applications can use thousands of machines simultaneously</li>
+<li>Companies consider data center technology a trade-secret<br>Limited public discussion of the state of the art from industry leaders</li>
+</ul>
+<p><strong>Typical specs for a data center today</strong></p>
+<ul>
+<li>15-40 megawatts power (Limiting factor)</li>
+<li>50,000-200,000 servers</li>
+<li>$1B construction cost</li>
+<li>Onsite staff (security, administration): 15</li>
+</ul>
+<h1 id="27-Future-directions"><a href="#27-Future-directions" class="headerlink" title="27 Future directions"></a>27 Future directions</h1><p><strong>MEAN software stack</strong></p>
+<ul>
+<li>Stack works but not the final say in web app technologies</li>
+<li>Angular.js<br>Browser-side JavaScript framework<br>HTML Templates with two-way binding<br>Directives and services for modular design<br>Much single page application support - routing, model fetching, etc.</li>
+<li>Node.js / Express.js web server code<br>Server side JavaScript<br>High “concurrency” with event-based programming</li>
+<li>MongoDB “document” storage<br>Storage system support scale out (sharing and replication), queries, indexes</li>
+</ul>
+<p><strong>Front-end alternative - ReactJS from Facebook</strong></p>
+<ul>
+<li>JavaScript framework - Does view component only</li>
+<li>View declared in JavaScript (more accurately a lang translated to JavaScript)<br>Angular: HTML with JavaScript embedded<br>React: JavaScript with HTML embedded</li>
+<li>Basic building block: Components<br>Have a function render() that returns HTML-like structure<br>Accepts inputs (this.props)<br>Have an internal state (this.state)</li>
+<li>Components are reusable pieces composed to form view</li>
+</ul>
+<p><strong>React benefits</strong></p>
+<ul>
+<li>High performance for rapidly changing views<br>Less time calling into Browser’s DOM</li>
+<li>Server-side rendering<br>Can run React either on server or browser<br>Faster startup by pushing HTML from server</li>
+<li>React Native<br>Have native mobile apps for iOS and Android that speak React</li>
+</ul>
+<p><strong>Go Language</strong></p>
+<ul>
+<li>System programming language released in 2007 by Google<br>Done by original Unix authors (Reacting to complexity of C++ and Java)<br>From Wikipedia:<br>A compiled, statically typed language …, with garbage collection,<br>memory safety features and CSP-style concurrent programming …</li>
+<li>Cross C &amp; scripting languages<br>Productive and readable programs<br>C-like but got rid of unnecessary punctuations</li>
+</ul>
+<p><strong>Full stack engineering</strong></p>
+<ul>
+<li>Tall order to fill<br>Make pretty web pages by mastering HTML and CSS<br>Architecture scalable web service<br>Layout storage system system sharding, schema, and indexes</li>
+<li>Typically people specialize<br>The expert in CSS is different than expert in database schema is different from the ops team</li>
+</ul>
+<p><strong>Looking to the future</strong></p>
+<ul>
+<li>Systems likely one of the cloud providers will offer a platform that most web applications can just build off<br>LIke people don’t write their own operating system anymore.<br>Technologies and app demands have been changing so much we still in the roll your ownphase.</li>
+<li>Pieces are coming together<br>World-wide scalable, reliability, available storage systems (e.g. Google’s spanner)</li>
+</ul>
+<p><strong>Web Apps versus Native Apps</strong></p>
+<ul>
+<li>Web Apps advantages:<br>Available on all platforms - Smaller, faster development<br>Easy “update” of application<br>Customize application per user</li>
+<li>Native apps<br>Native look and feel user interface<br>Integrate with host platform</li>
+<li>Hybrid approach: Embed browser in native app</li>
+<li>Backend can be largely the same for both - (e.g. REST APIs)</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/technology/">technology</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Stanford/">Stanford</a><a href="/tags/Web/">Web</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://wangwh0204.github.io/2017/01/02/stanford-cs142-web-applications/" data-title="Stanford CS142 - Web Applications | From Computer Vision to AGI Robots" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/04/03/stanford-ee267-virtual-reality/" title="Stanford EE267 - Virtual Reality">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Stanford EE267 - Virtual Reality</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/10/19/learn-opengl/"  title="Learn OpenGL">
+ <strong>下一篇：</strong><br/> 
+ <span>Learn OpenGL
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01-Introduction"><span class="toc-number">1.</span> <span class="toc-text">01 Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02-HyperText-Markup-Language-HTML"><span class="toc-number">2.</span> <span class="toc-text">02 HyperText Markup Language (HTML)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#03-Cascading-Style-Sheets-CSS"><span class="toc-number">3.</span> <span class="toc-text">03 Cascading Style Sheets (CSS)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">Today’s Specials</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04-Universal-Resource-Locator-URL"><span class="toc-number">5.</span> <span class="toc-text">04 Universal Resource Locator(URL)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05-JavaScript-Basics"><span class="toc-number">6.</span> <span class="toc-text">05 JavaScript Basics</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#06-JavaScript-Programming"><span class="toc-number">7.</span> <span class="toc-text">06 JavaScript Programming</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#07-Document-Object-Model-DOM"><span class="toc-number">8.</span> <span class="toc-text">07 Document Object Model(DOM)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#08-Events"><span class="toc-number">9.</span> <span class="toc-text">08 Events</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#09-Front-End-Programming"><span class="toc-number">10.</span> <span class="toc-text">09 Front End Programming</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-Introduction-to-AngularJS"><span class="toc-number">11.</span> <span class="toc-text">10 Introduction to AngularJS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-Single-Page-Applications"><span class="toc-number">12.</span> <span class="toc-text">11 Single Page Applications</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-Responsive-Web-Design"><span class="toc-number">13.</span> <span class="toc-text">12 Responsive Web Design</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-Building-Web-Applications"><span class="toc-number">14.</span> <span class="toc-text">13 Building Web Applications</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-Design-Goals"><span class="toc-number">14.1.</span> <span class="toc-text">Some Design Goals:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14-Browser-Server-Communication"><span class="toc-number">15.</span> <span class="toc-text">14 Browser/Server Communication</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#15-Web-Servers"><span class="toc-number">16.</span> <span class="toc-text">15 Web Servers</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-Node-js"><span class="toc-number">17.</span> <span class="toc-text">16 Node.js</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#17-ExpressJS"><span class="toc-number">18.</span> <span class="toc-text">17 ExpressJS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#18-Storage-Tier"><span class="toc-number">19.</span> <span class="toc-text">18 Storage Tier</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#19-Cookies-and-Session"><span class="toc-number">20.</span> <span class="toc-text">19 Cookies and Session</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#20-Input-and-Validation"><span class="toc-number">21.</span> <span class="toc-text">20 Input and Validation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#21-Full-stack-state-management"><span class="toc-number">22.</span> <span class="toc-text">21 Full stack state management</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#22-Web-App-Security-Browser-Isolation"><span class="toc-number">23.</span> <span class="toc-text">22 Web App Security - Browser Isolation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#23-Network-Attacks"><span class="toc-number">24.</span> <span class="toc-text">23 Network Attacks</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#24-Other-Attacks"><span class="toc-number">25.</span> <span class="toc-text">24 Other Attacks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Session-Attacks"><span class="toc-number">25.1.</span> <span class="toc-text">Session Attacks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Code-Injection-Attacks"><span class="toc-number">25.2.</span> <span class="toc-text">Code Injection Attacks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phishing-Attacks"><span class="toc-number">25.3.</span> <span class="toc-text">Phishing Attacks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Denial-of-Service-Attacks"><span class="toc-number">25.4.</span> <span class="toc-text">Denial of Service Attacks</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#25-Large-Scale-Web-Applications"><span class="toc-number">26.</span> <span class="toc-text">25 Large-Scale Web Applications</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#26-Data-Centers"><span class="toc-number">27.</span> <span class="toc-text">26 Data Centers</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#27-Future-directions"><span class="toc-number">28.</span> <span class="toc-text">27 Future directions</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/IR/" title="IR">IR<sup>3</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/management/" title="management">management<sup>5</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/technology/" title="technology">technology<sup>20</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/thinking/" title="thinking">thinking<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Stanford/" title="Stanford">Stanford<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Computer-Graphics/" title="Computer Graphics">Computer Graphics<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Unity/" title="Unity">Unity<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Computer-Vision/" title="Computer Vision">Computer Vision<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MR/" title="MR">MR<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hololens/" title="Hololens">Hololens<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Agile/" title="Agile">Agile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SE/" title="SE">SE<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OpenGL/" title="OpenGL">OpenGL<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/VR/" title="VR">VR<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UML/" title="UML">UML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robotics/" title="Robotics">Robotics<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robot-Learning/" title="Robot Learning">Robot Learning<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robot-Manipulation/" title="Robot Manipulation">Robot Manipulation<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Design-Patterns/" title="Design Patterns">Design Patterns<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">九月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/08/">八月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/01/">一月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2005/03/">三月 2005</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/09/">九月 2004</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/06/">六月 2004</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://cs.stanford.edu/" target="_blank" title="Stanford CS">Stanford CS</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://pair.stanford.edu/" target="_blank" title="Stanford PAIR">Stanford PAIR</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.ri.cmu.edu/" target="_blank" title="CMU RI">CMU RI</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.robot-learning.org/" target="_blank" title="CORL">CORL</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.paperswithcode.com/sota" target="_blank" title="SOTA">SOTA</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> You&#39;ve got to find what you love. And the only way to do great work is to love what you do. If you haven&#39;t found it yet, keep looking. Don&#39;t settle. ― Steve Jobs <br/>
+			I&#39;m not a great programmer; I&#39;m just a good programmer with great habits. ― Kent Beck</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/wangwh0204" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/wangwh0204" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangwh0204@outlook.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
+		
+		<a href="/about" target="_blank" title="steven wang">steven wang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

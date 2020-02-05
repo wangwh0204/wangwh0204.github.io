@@ -1,0 +1,826 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Stanford EE267 - Virtual Reality | From Computer Vision to AGI Robots</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="steven wang">
+    
+
+    
+    <meta name="description" content="Stanford EE267 学习笔记">
+<meta name="keywords" content="Stanford,VR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stanford EE267 - Virtual Reality">
+<meta property="og:url" content="https://wangwh0204.github.io/2017/04/03/stanford-ee267-virtual-reality/index.html">
+<meta property="og:site_name" content="From Computer Vision to AGI Robots">
+<meta property="og:description" content="Stanford EE267 学习笔记">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-06-08T16:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stanford EE267 - Virtual Reality">
+<meta name="twitter:description" content="Stanford EE267 学习笔记">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.jpg" alt="From Computer Vision to AGI Robots" title="From Computer Vision to AGI Robots"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="From Computer Vision to AGI Robots">From Computer Vision to AGI Robots</a></h1>
+				<h2 class="blog-motto">在智能机器的寒武纪时代浪潮中，做点微小工作</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:wangwh0204.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/03/stanford-ee267-virtual-reality/" title="Stanford EE267 - Virtual Reality" itemprop="url">Stanford EE267 - Virtual Reality</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="steven wang" target="_blank" itemprop="author">steven wang</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-02T16:00:00.000Z" itemprop="datePublished"> 发表于 2017-04-03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01-Introduction-and-Overview"><span class="toc-number">1.</span> <span class="toc-text">01 Introduction and Overview</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02-The-Graphics-Pipeline-and-WebGL-I-Overview-and-Transformations"><span class="toc-number">2.</span> <span class="toc-text">02 The Graphics Pipeline and WebGL I: Overview and Transformations</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#what-is-computer-graphics"><span class="toc-number">2.1.</span> <span class="toc-text">what is computer graphics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-graphics-pipeline"><span class="toc-number">2.2.</span> <span class="toc-text">the graphics pipeline</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#03-The-Graphics-Pipeline-and-WebGL-II-Lighting-and-Shading-Fragment-Processing"><span class="toc-number">3.</span> <span class="toc-text">03 The Graphics Pipeline and WebGL II: Lighting and Shading, Fragment Processing</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04-The-Graphics-Pipeline-and-WebGL-III-OpenGL-Shading-Language-GLSL-1-10"><span class="toc-number">4.</span> <span class="toc-text">04 The Graphics Pipeline and WebGL III: OpenGL Shading Language(GLSL 1.10)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05-The-Human-Visual-System"><span class="toc-number">5.</span> <span class="toc-text">05 The Human Visual System</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#06-The-Graphics-Pipeline-and-OpenGL-IV-Stereo-Rendering-Depth-of-Field-Rendering-Multi-pass-Rendering"><span class="toc-number">6.</span> <span class="toc-text">06 The Graphics Pipeline and OpenGL IV: Stereo Rendering, Depth of Field Rendering, Multi-pass Rendering</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#07-HMD-Display-Optics-I"><span class="toc-number">7.</span> <span class="toc-text">07 HMD Display Optics I</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#08-Head-Mounted-Display-Optics-II"><span class="toc-number">8.</span> <span class="toc-text">08 Head Mounted Display Optics II</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#09-Inertial-Measurement-Units-I"><span class="toc-number">9.</span> <span class="toc-text">09 Inertial Measurement Units I</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-Inertial-Measurement-Units-II"><span class="toc-number">10.</span> <span class="toc-text">10 Inertial Measurement Units II</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-Positional-Tracking-I"><span class="toc-number">11.</span> <span class="toc-text">11 Positional Tracking I</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-Positional-Tracking-II"><span class="toc-number">12.</span> <span class="toc-text">12 Positional Tracking II</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-Spatial-Sound"><span class="toc-number">13.</span> <span class="toc-text">13 Spatial Sound</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14-Haptics"><span class="toc-number">14.</span> <span class="toc-text">14 Haptics</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#15-Panoramic-Imaging-and-Cinematic-VR"><span class="toc-number">15.</span> <span class="toc-text">15 Panoramic Imaging and Cinematic VR</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-VR-Engines-and-Unity"><span class="toc-number">16.</span> <span class="toc-text">16 VR Engines and Unity</span></a></li></ol>
+		
+		</div>
+		
+		<p><a href="http://stanford.edu/class/ee267/" target="_blank" rel="noopener">Stanford EE267</a> 学习笔记<a id="more"></a></p>
+<blockquote>
+<p>History :<br>2017-04-03 基于 Spring 2017 的课件记录的笔记。</p>
+</blockquote>
+<p>EE267是Stanford在2016年3月28第一次开设的关于Virtual Reality(VR)的课程，整个课程持续差不多2个月左右时间，每节课1个半小时，每周2节课，一共10周的课程，总计30小时 ….</p>
+<p><strong>Prerequisites: C++, MATH51, CS148, CS248</strong><br><strong>Reading: </strong></p>
+<ul>
+<li><a href="http://learnopengl.com/" target="_blank" rel="noopener">http://learnopengl.com/</a></li>
+<li>Fundamentals of Computer Graphics 3rd</li>
+</ul>
+<p><strong>Description: </strong><br>OpenGL and WebGL, real-time rendering, 3D display systems, display optics &amp; electronics, IMUs and sensors, tracking, haptics, rendering pipeline, multimodal human perception and depth perception, stereo rendering, presence. Emphasis on VR technology.</p>
+<h1 id="01-Introduction-and-Overview"><a href="#01-Introduction-and-Overview" class="headerlink" title="01 Introduction and Overview"></a>01 Introduction and Overview</h1><p>Oculus VR, Microsoft Hololens<br>simulation &amp; training<br>visualization &amp; entertainment<br>gaming</p>
+<p>1968 Ivan Sutherland<br>I.Sutherland “A head-mounted three-dimensional display”, Fall Joint Computer Conference 1968<br>1995 Nintendo Virtual Boy<br>2012 Oculus Rift, Sony PS VR, Valve HTC Vive, </p>
+<p>About EE267 - Goals</p>
+<ul>
+<li>understand fundamental concepts of VR and Computer Graphics</li>
+<li>Implement software + hardware of a head mounted display</li>
+<li>learn basic WebGL/JavaScript and Arduino programming</li>
+<li>build your own HMD</li>
+</ul>
+<h1 id="02-The-Graphics-Pipeline-and-WebGL-I-Overview-and-Transformations"><a href="#02-The-Graphics-Pipeline-and-WebGL-I-Overview-and-Transformations" class="headerlink" title="02 The Graphics Pipeline and WebGL I: Overview and Transformations"></a>02 The Graphics Pipeline and WebGL I: Overview and Transformations</h1><h2 id="what-is-computer-graphics"><a href="#what-is-computer-graphics" class="headerlink" title="what is computer graphics"></a>what is computer graphics</h2><p>at the most basic level : conversion from 3D scene description to 2D image</p>
+<p>what do you need to describe a static scene</p>
+<ul>
+<li>3D geometry and transformations</li>
+<li>lights</li>
+<li>material properties</li>
+</ul>
+<p>most common geometry primitives in graphics</p>
+<ul>
+<li>vertices(3D points) and normals(unit-length vector associated with vertex)</li>
+<li>triangles(set of 3 vertices, high-resolution 3D models have M or B of triangles)</li>
+</ul>
+<h2 id="the-graphics-pipeline"><a href="#the-graphics-pipeline" class="headerlink" title="the graphics pipeline"></a>the graphics pipeline</h2><ul>
+<li>geometry + transformations</li>
+<li>cameras and viewing</li>
+<li>lighting and shading</li>
+<li>rasterization</li>
+<li>texturing</li>
+</ul>
+<p>SiliconGraphics history</p>
+<ul>
+<li>Stanford startup in 1981</li>
+<li>computer graphics goes hardware</li>
+<li>based on Jim Clark’s geometry engine</li>
+</ul>
+<p>monolithic graphics workstations of the 80s have been replaced by modular GPUs(Graphics Processing Units),major companies: Nvidia, AMD, Intel<br>在手机时代，这些公司没有什么贡献，主要的手机GPU是Imagination的PowerVR，Qualcomm的Adreno，ARM的Maili，随着GPU在AI/VR/MR应用的重要度，未来会有更多公司自行开发GPU</p>
+<p>early versions of these GPUs implemented fixed-function rendering pipeline in hardware<br>GPUs have become programmable starting in the late 90s, in 2001 Nvidia Geforce 3 is first programmable shaders</p>
+<p>OpenGL is our interface to the GPU</p>
+<p>WebGL</p>
+<ul>
+<li>JavaScript application programmer interface(API) for 2D and 3D graphics</li>
+<li>OpenGL ES 2.0 running in the browser, implemented by all modern browsers</li>
+<li>overview, tutorials, documentation:!<br><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API</a></li>
+</ul>
+<p>three.js</p>
+<ul>
+<li>cross-browser JavaScript library/API</li>
+<li>higher-level library that provides a lot of useful helper functions, tools, and abstractions around WebGL – easy and convenient to use</li>
+<li><a href="https://threejs.org/" target="_blank" rel="noopener">https://threejs.org/</a></li>
+<li>great introduction (in WebGL):<br><a href="http://davidscottlyons.com/threejs/presentations/frontporch14/" target="_blank" rel="noopener">http://davidscottlyons.com/threejs/presentations/frontporch14/</a></li>
+</ul>
+<p>The Graphics Pipeline :<br><a href="https://www.ntu.edu.sg/home/ehchua/programming/opengl/CG_BasicsTheory.html" target="_blank" rel="noopener">https://www.ntu.edu.sg/home/ehchua/programming/opengl/CG_BasicsTheory.html</a><br>需要反复阅读同时结合OpenGL实例去彻底理解，对于3D 图形学的开发至关重要。</p>
+<p>Raw Vertices  –Vertex Shader–&gt; Transformed Vertices –Rasterizer–&gt; Fragments –Fragment Shader –&gt; Processed Fragments –Output Merging–&gt; Pixels –&gt; Display</p>
+<p>Coordinate System</p>
+<ul>
+<li>Right hand coordinate system</li>
+<li>Object coordinates</li>
+<li>World coordinates<br>确定一个world center，其他物体相对坐标</li>
+<li>Viewing coordinates</li>
+<li>clip, normalized device, and window coordinates</li>
+</ul>
+<p>Primitives</p>
+<ul>
+<li>vertex = 3D pint(x,y,z)</li>
+<li>triangle = 3 vertices</li>
+<li>normal = 3D vecctor per vertex describing surface orientation</li>
+</ul>
+<p>Vertex Transforms<br>3D Object经过MVP变换，最终以2D形式呈现在Display上<br>Model spaces – Model Transform –&gt; World Space – View Transform –&gt; Camera Space – Projection Transform –&gt; Clipping-Volume Space –&gt; NDC – Viewport Transform –&gt; Screen Space –&gt; Display</p>
+<ul>
+<li>Arrange the objects(or modles, or avatar) in the world(Model Transformation or World transformation)</li>
+<li>Position and orientation the camera(View transformation)</li>
+<li>Select a camrea lens(wide angle, normal or telescopic), adjust the focus length and zoom factor to set the camera’s field of view(Projection transformation)</li>
+<li>Print the photo on a selected area of the paper(Viewport transformation) - in rasterization stage</li>
+</ul>
+<p>View Transform</p>
+<ul>
+<li>one simple 4x4 transfom matrix is sufficient to go from world space to view space</li>
+</ul>
+<p>specify camera by eye position, reference position, up vector<br>怎么得到view transform matrix，还需要再查看更多的资料</p>
+<p>Projection Transform - Perspective Projection<br>Perspective Projection : The camera’s view frustum is specified via 4 view parameters: fovy, aspect, zNear and zFar</p>
+<ul>
+<li>fovy: vertical angle in degress</li>
+<li>aspect: ratio of width/height</li>
+<li>zNear: near clipping plane</li>
+<li>zFar: far clipping plane</li>
+</ul>
+<p>对于Screen Space，注意它的中心(原点)是在左上角，依然可以用(x,y,z)表示，只是所有的z为0.</p>
+<p>Summary</p>
+<ul>
+<li>graphics pipeline is a series of operations that takes 3D vertices/normals/triangles as input and generates fragments and pixels</li>
+<li>transforms include: rotation, scale, translaton, perspective projection, perspective division, and viewport transform</li>
+<li>most transforms are represented as 4x4 matrices in homogeneous coordinates</li>
+</ul>
+<h1 id="03-The-Graphics-Pipeline-and-WebGL-II-Lighting-and-Shading-Fragment-Processing"><a href="#03-The-Graphics-Pipeline-and-WebGL-II-Lighting-and-Shading-Fragment-Processing" class="headerlink" title="03 The Graphics Pipeline and WebGL II: Lighting and Shading, Fragment Processing"></a>03 The Graphics Pipeline and WebGL II: Lighting and Shading, Fragment Processing</h1><p>这一章的内容结合LearnOpenGL的代码和实作效果来学习，理解会更深刻<br>The Rendering Equation(BRDFs)<br>Kajija “The Rendering Equation”, SIGGRAPH 1986</p>
+<p>drop time, wavelength, emission &amp; global illumination, we get a simple function</p>
+<p>Bidirectional Reflectance Distribution Function(BRDF)</p>
+<ul>
+<li>many different BRDF modles exist: analytic, data driven<br>Acquired data, Ashikhmin, Blinn-Phong, Cook-Torrance, Lafortune, Ward</li>
+<li>can approximate BRDF with a few simple components</li>
+</ul>
+<p>Phong Lighting</p>
+<ul>
+<li>simple model for direct lighting</li>
+<li>ambient, diffuse, and specular </li>
+<li>requires:<br>material color for each of ambient, diffuse, specular<br>light color for each of ambient, diffuse, specular</li>
+</ul>
+<p>this is a simple, but efficient lighting model, has been used by OpenGL for ~25 years</p>
+<p>Phong Lighting: Ambient</p>
+<ul>
+<li>independent of light/surface position, viewer, normal</li>
+<li>basically adds some background color</li>
+</ul>
+<p>Phong Lighting: Diffuse<br>漫反射的光强度根据距离会衰减</p>
+<ul>
+<li>needs normal and light source direction</li>
+<li>adds intensity cos-falloff with incident angle</li>
+</ul>
+<p>Phong Lighting: Specular</p>
+<ul>
+<li>needs normal, light &amp; viewer direction</li>
+<li>models reflections = specular highlights</li>
+<li>shininess - exponent, larger for smaller highlights(more mirror-like surfaces)</li>
+</ul>
+<p>Lighting vs Shading<br>Lighting : interaction between light and surface(e.g. using Phong lighting model)<br>shading: how to compute color of each fragment’</p>
+<ul>
+<li><p>Flat shading<br>compute color only once per triangle<br>pro:usually fast to compute; con: fast creates a flat, unrealistic appearance</p>
+</li>
+<li><p>Gourand shading(per-vertex shading)<br>compute color once per vertex<br>interpolate per-vertex colors to all fragments within the triangles<br>pro: usually fast-ish to compute; con: flat, unrealistic specular highlights</p>
+</li>
+<li><p>Phong shading(per-fragment shading - different from Phong lighting)<br>compute color once per fragment<br>need to interpolate per-vertex normals to all fragments to do the lighting calculation<br>pro:better appearance of specular highlights; con: usually slower to compute</p>
+</li>
+</ul>
+<p>Vertex and Fragment shaders</p>
+<ul>
+<li>shaders are small programs that are executed in parallel on the GPU for each vertex(vertex shader) or each fragment(fragment shader)</li>
+<li>vertex shader<br>modelview projection transform of vertex &amp; normal</li>
+<li>fragment shader<br>assign final color to each fragment</li>
+</ul>
+<p>Fragment Processing</p>
+<ul>
+<li>lighting and shading(per-fragment)</li>
+<li>texture mapping</li>
+<li>fog calculations</li>
+<li>alpha blending</li>
+<li>hidden surface removal(using depth buffer)</li>
+<li>scissor test, stencil test, dithering, bitmasking, …</li>
+</ul>
+<p>Texture Mapping</p>
+<ul>
+<li>texture = 2D image(e.g. RGBA)</li>
+<li>we want to use it as a “sticker” on our 3D surfaces</li>
+<li>mapping from vertex to position on texture(texture coordinates u,v)</li>
+</ul>
+<h1 id="04-The-Graphics-Pipeline-and-WebGL-III-OpenGL-Shading-Language-GLSL-1-10"><a href="#04-The-Graphics-Pipeline-and-WebGL-III-OpenGL-Shading-Language-GLSL-1-10" class="headerlink" title="04 The Graphics Pipeline and WebGL III: OpenGL Shading Language(GLSL 1.10)"></a>04 The Graphics Pipeline and WebGL III: OpenGL Shading Language(GLSL 1.10)</h1><p>The Rasterizer, two goals:</p>
+<ul>
+<li>determine which fragments are inside the primitives(triangles) and which ones aren’t</li>
+<li>interpolate per-vertex attributes(color, texture coordinates, normals, …) to each fragment in the primitive</li>
+</ul>
+<p>vertex shader(executed for each vertex)</p>
+<ul>
+<li>transforms</li>
+<li>(per-vertex) lighting</li>
+</ul>
+<p>input : vertex position, normal, color, material, texture coordinates; modelview matrix, projection matrix, normal matrix<br>output : transformed vertex position(in clip coords), texture coordinates</p>
+<p>fragment shader(executed for each fragment)</p>
+<ul>
+<li>texturing</li>
+<li>(per-fragment) lighting</li>
+</ul>
+<p>input: vertex position in window coords, texture coordinates<br>output: fragment color, fragment depth</p>
+<p>Why Do We Need Shaders?</p>
+<ul>
+<li>massively parallel computing</li>
+<li>single instruction multiple data(SIMD) paradigm -&gt; GPUs are designed to be parallel processors</li>
+<li>vertex shaders are independently executed for each vertex on GPU(in parallel)</li>
+<li>fragment shaders are independently executed for each fragment on GPU(in parallel)</li>
+<li>most important: vertex transforms and lighting &amp; shading calculations</li>
+<li>shading: how to compute color of each fragment(e.g. interpolate colors)</li>
+</ul>
+<p>OpenGL Shading Language(GLSL)</p>
+<ul>
+<li>high-level programming language for shaders</li>
+<li>syntax similar to C</li>
+<li>usually very short programs that are executed in parallel on GPU</li>
+</ul>
+<h1 id="05-The-Human-Visual-System"><a href="#05-The-Human-Visual-System" class="headerlink" title="05 The Human Visual System"></a>05 The Human Visual System</h1><p>这一章主要说明人眼的生物特性，包括Retina, FOV, Fovea，要深入的理解，需要进一步阅读相关书籍。</p>
+<p>Retina VR Display - What does it take<br>need per eye : 150° x 135° with pixels covering 1 arc min = 9000 x 8100 pixels(probably 2-3x in practice)  150 x 60 = 9000</p>
+<p>biggest challenge: bandwidth (9000 x 8100 x 4 x 90 = 24GB/s)<br>capture or render stereo panoramas or images at that resolution<br>compress and transmit huge amount of data<br>drive and operate display pixels</p>
+<p>Foveated Rendering</p>
+<ul>
+<li>Guenter et al. 2016: split image into n layers, e.g. inner(foveal, 1), middle(2), outer(3)</li>
+<li>render image in each zone with progressively lower resolution</li>
+<li>goal: save computation</li>
+</ul>
+<p>Depth Perception</p>
+<ul>
+<li>monocular cues : perspective, relative object size, absolute size, occlusion, accommodation, retinal blur, motion parallax, texture gradients, shading</li>
+<li>binocular cues : (con)vergence, disparity/parallax</li>
+</ul>
+<p>binocular disparity, convergence, motion parallax, accommodation/blur</p>
+<p>current :  glasses-based (stereoscopic) displays<br>near-term : light field displays<br>longer-term : holographic displays</p>
+<p>Stereoscopic Displays</p>
+<p>Oculumotor Processes</p>
+<p>Accommodation and Retinal Blur</p>
+<p>Summary</p>
+<ul>
+<li>Visual Acuity: each photorecepter is ~1 arc min(1/60 of a degree) 也就是60 pixels/degree才能满足视网膜程度的视觉效果。<br>visual acuity varies over retina: can exploit via foveated rendering</li>
+<li>field of view: ~190° monocular, ~120° binocular, ~135° vertical</li>
+<li>temporal resolution: ~60 Hz (depends on contrast, luminance)</li>
+<li>dynamic range: instantaneous 6.5 f-stops, adapt to 46.5 f-stops</li>
+<li>color: everything in the CIE xy diagram; distances are linear in CIE Lab</li>
+<li>depth cues in 3D displays: vergence, focus, conflicts, (dis)comfort</li>
+<li>accommodation range: ~8cm to ∞, degrades with age</li>
+</ul>
+<p>References and Further Reading!<br>interesting textbooks on perception:<br>• Wandell, “Foundations of Vision”, Sinauer Associates,1995<br>• Howard, “Perceiving in Depth”, Oxford University Press, 2012</p>
+<p>foveated rendering:<br>• Guenter, Finch, Drucker, Tan, Snyder “Foveated 3D Graphics”, ACM SIGGRAPH Asia 2012<br>• Patney, Salvi, Kim, Kaplanyan, Wyman, Benty, Luebke, Lefohn “Towards Foveated Rendering for Gaze-Tracked Virtual Reality”, ACM SIGGRAPH Asia 2016</p>
+<p>depth cues and more:<br>• Cutting &amp; Vishton,” Perceiving layout and knowing distances: The interaction, relative potency, and contextual use of different information about depth”, Epstein and Rogers<br>(Eds.), Perception of space and motion, 1995<br>• Held, Cooper, O’Brien, Banks, “Using Blur to Affect Perceived Distance and Size”, ACM Transactions on Graphics, 2010<br>• Hoffman and Banks, “Focus information is used to interpret binocular images”. Journal of Vision 10, 2010<br>• Hoffman, Girshick, Akeley, and Banks, “Vergence-accommodation conflicts hinder visual performance and cause visual fatigue”. Journal of Vision 8, 2008<br>• Huang, Chen, Wetzstein, “The Light Field Stereoscope”, ACM SIGGRAPH 2015</p>
+<p>the retina, visual acuity, visual field<br>• Roorda, Williams, “The arrangement of the three cone classes in the living human eye”, Nature, Vol 397, 1999<br>• Snellen chart: <a href="https://en.wikipedia.org/wiki/Snellen_chart" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Snellen_chart</a><br>• Ruch and Fulton, Medical physiology and biophysics, 1960</p>
+<p>contrast sensitivity function &amp; hybrid images:<br>• Oliva, Torralba, Schyns, “Hybrid Images”, ACM Transactions on Graphics (SIGGRAPH), 2006<br>• Spatio-temporal CSF: Kelly, Motion and Vision. II. Stabilized spatio-temporal threshold surface, Journal of the Optical Society of America,1979</p>
+<h1 id="06-The-Graphics-Pipeline-and-OpenGL-IV-Stereo-Rendering-Depth-of-Field-Rendering-Multi-pass-Rendering"><a href="#06-The-Graphics-Pipeline-and-OpenGL-IV-Stereo-Rendering-Depth-of-Field-Rendering-Multi-pass-Rendering" class="headerlink" title="06 The Graphics Pipeline and OpenGL IV: Stereo Rendering, Depth of Field Rendering, Multi-pass Rendering"></a>06 The Graphics Pipeline and OpenGL IV: Stereo Rendering, Depth of Field Rendering, Multi-pass Rendering</h1><p>演讲人是<a href="https://en.wikipedia.org/wiki/Steve_Mann" target="_blank" rel="noopener">steve Mann</a>，被称为The Father of The Wearable Computer可穿戴之父，也是Chief Scietist of Meta </p>
+<p>Nvidia提出了Multi-Res Rendering的技术，在硬件层面提升效率</p>
+<ul>
+<li>stereo rendering with OpenGL</li>
+<li>offscreen frame buffers and multi-render passes</li>
+<li>anaglyph stereo rendering with GLSL</li>
+<li>depth of field rendering</li>
+</ul>
+<p>Stereo Rendering with OpenGL/WebGL: View Matrix!<br>• need to modify view matrix and projection matrix!<br>• rendering pipeline does not change – only those two matrices!<br>• however: need to render two images in sequence (more details later)!<br>• look at view matrix first: THREE.Matrix4().lookAt(eye,center,up) !<br>• function is as useful as it has been, just need to adjust parameters!</p>
+<p>IPD : interpupillary distance</p>
+<p>Anaglyph with OpenGL!<br>• most efficient way: !</p>
+<ol>
+<li>clear color and depth buffer!</li>
+<li>set left modelview and project matrix, render scene only into red channel !</li>
+<li>clear depth buffer!</li>
+<li>set right modelview and project matrix, render scene only into green &amp; blue<br>channels !<br>•</li>
+</ol>
+<p>OpenGL Frame Buffers!<br>• usually (frame) buffers are provided by the window manager (i.e., your browser)!<br>• for most mono applications, two (double) buffers: back buffer and front buffer!<br>• render into back buffer; swap buffers when done rendering!<br>• advantage: rendering takes time, you don’t want the user to see how triangles<br>get drawn!<br>• in many stereo applications, 4 (quad) buffers: front/back left and right buffer !<br>• render left and right images into back buffers, then swap both together!</p>
+<h1 id="07-HMD-Display-Optics-I"><a href="#07-HMD-Display-Optics-I" class="headerlink" title="07 HMD Display Optics I"></a>07 HMD Display Optics I</h1><ol>
+<li><p>Stereo rendering for HMDs<br>使用makePerspective(left, right, top, bottom, near, far)和lookAt(eye, center, up)</p>
+</li>
+<li><p>Lens distortion correcting using GLSL</p>
+</li>
+</ol>
+<h1 id="08-Head-Mounted-Display-Optics-II"><a href="#08-Head-Mounted-Display-Optics-II" class="headerlink" title="08 Head Mounted Display Optics II"></a>08 Head Mounted Display Optics II</h1><h1 id="09-Inertial-Measurement-Units-I"><a href="#09-Inertial-Measurement-Units-I" class="headerlink" title="09 Inertial Measurement Units I"></a>09 Inertial Measurement Units I</h1><p>gyros, accelerometers, magnetometers</p>
+<h1 id="10-Inertial-Measurement-Units-II"><a href="#10-Inertial-Measurement-Units-II" class="headerlink" title="10 Inertial Measurement Units II"></a>10 Inertial Measurement Units II</h1><p>sensor fusion, complementary filter, arduino</p>
+<h1 id="11-Positional-Tracking-I"><a href="#11-Positional-Tracking-I" class="headerlink" title="11 Positional Tracking I"></a>11 Positional Tracking I</h1><h1 id="12-Positional-Tracking-II"><a href="#12-Positional-Tracking-II" class="headerlink" title="12 Positional Tracking II"></a>12 Positional Tracking II</h1><h1 id="13-Spatial-Sound"><a href="#13-Spatial-Sound" class="headerlink" title="13 Spatial Sound"></a>13 Spatial Sound</h1><h1 id="14-Haptics"><a href="#14-Haptics" class="headerlink" title="14 Haptics"></a>14 Haptics</h1><h1 id="15-Panoramic-Imaging-and-Cinematic-VR"><a href="#15-Panoramic-Imaging-and-Cinematic-VR" class="headerlink" title="15 Panoramic Imaging and Cinematic VR"></a>15 Panoramic Imaging and Cinematic VR</h1><h1 id="16-VR-Engines-and-Unity"><a href="#16-VR-Engines-and-Unity" class="headerlink" title="16 VR Engines and Unity"></a>16 VR Engines and Unity</h1>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/technology/">technology</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Stanford/">Stanford</a><a href="/tags/VR/">VR</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://wangwh0204.github.io/2017/04/03/stanford-ee267-virtual-reality/" data-title="Stanford EE267 - Virtual Reality | From Computer Vision to AGI Robots" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/05/25/windows-mixed-reality/" title="Windows Mixed Reality">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Windows Mixed Reality</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/01/02/stanford-cs142-web-applications/"  title="Stanford CS142 - Web Applications">
+ <strong>下一篇：</strong><br/> 
+ <span>Stanford CS142 - Web Applications
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01-Introduction-and-Overview"><span class="toc-number">1.</span> <span class="toc-text">01 Introduction and Overview</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02-The-Graphics-Pipeline-and-WebGL-I-Overview-and-Transformations"><span class="toc-number">2.</span> <span class="toc-text">02 The Graphics Pipeline and WebGL I: Overview and Transformations</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#what-is-computer-graphics"><span class="toc-number">2.1.</span> <span class="toc-text">what is computer graphics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-graphics-pipeline"><span class="toc-number">2.2.</span> <span class="toc-text">the graphics pipeline</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#03-The-Graphics-Pipeline-and-WebGL-II-Lighting-and-Shading-Fragment-Processing"><span class="toc-number">3.</span> <span class="toc-text">03 The Graphics Pipeline and WebGL II: Lighting and Shading, Fragment Processing</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04-The-Graphics-Pipeline-and-WebGL-III-OpenGL-Shading-Language-GLSL-1-10"><span class="toc-number">4.</span> <span class="toc-text">04 The Graphics Pipeline and WebGL III: OpenGL Shading Language(GLSL 1.10)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05-The-Human-Visual-System"><span class="toc-number">5.</span> <span class="toc-text">05 The Human Visual System</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#06-The-Graphics-Pipeline-and-OpenGL-IV-Stereo-Rendering-Depth-of-Field-Rendering-Multi-pass-Rendering"><span class="toc-number">6.</span> <span class="toc-text">06 The Graphics Pipeline and OpenGL IV: Stereo Rendering, Depth of Field Rendering, Multi-pass Rendering</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#07-HMD-Display-Optics-I"><span class="toc-number">7.</span> <span class="toc-text">07 HMD Display Optics I</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#08-Head-Mounted-Display-Optics-II"><span class="toc-number">8.</span> <span class="toc-text">08 Head Mounted Display Optics II</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#09-Inertial-Measurement-Units-I"><span class="toc-number">9.</span> <span class="toc-text">09 Inertial Measurement Units I</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-Inertial-Measurement-Units-II"><span class="toc-number">10.</span> <span class="toc-text">10 Inertial Measurement Units II</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-Positional-Tracking-I"><span class="toc-number">11.</span> <span class="toc-text">11 Positional Tracking I</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-Positional-Tracking-II"><span class="toc-number">12.</span> <span class="toc-text">12 Positional Tracking II</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13-Spatial-Sound"><span class="toc-number">13.</span> <span class="toc-text">13 Spatial Sound</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14-Haptics"><span class="toc-number">14.</span> <span class="toc-text">14 Haptics</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#15-Panoramic-Imaging-and-Cinematic-VR"><span class="toc-number">15.</span> <span class="toc-text">15 Panoramic Imaging and Cinematic VR</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-VR-Engines-and-Unity"><span class="toc-number">16.</span> <span class="toc-text">16 VR Engines and Unity</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/IR/" title="IR">IR<sup>3</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/management/" title="management">management<sup>5</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/technology/" title="technology">technology<sup>20</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/thinking/" title="thinking">thinking<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Stanford/" title="Stanford">Stanford<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Computer-Graphics/" title="Computer Graphics">Computer Graphics<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Unity/" title="Unity">Unity<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Computer-Vision/" title="Computer Vision">Computer Vision<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MR/" title="MR">MR<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hololens/" title="Hololens">Hololens<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Agile/" title="Agile">Agile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SE/" title="SE">SE<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OpenGL/" title="OpenGL">OpenGL<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/VR/" title="VR">VR<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UML/" title="UML">UML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robotics/" title="Robotics">Robotics<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robot-Learning/" title="Robot Learning">Robot Learning<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robot-Manipulation/" title="Robot Manipulation">Robot Manipulation<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Design-Patterns/" title="Design Patterns">Design Patterns<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">九月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/08/">八月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/01/">一月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2005/03/">三月 2005</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/09/">九月 2004</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/06/">六月 2004</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://cs.stanford.edu/" target="_blank" title="Stanford CS">Stanford CS</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://pair.stanford.edu/" target="_blank" title="Stanford PAIR">Stanford PAIR</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.ri.cmu.edu/" target="_blank" title="CMU RI">CMU RI</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.robot-learning.org/" target="_blank" title="CORL">CORL</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.paperswithcode.com/sota" target="_blank" title="SOTA">SOTA</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> You&#39;ve got to find what you love. And the only way to do great work is to love what you do. If you haven&#39;t found it yet, keep looking. Don&#39;t settle. ― Steve Jobs <br/>
+			I&#39;m not a great programmer; I&#39;m just a good programmer with great habits. ― Kent Beck</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/wangwh0204" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/wangwh0204" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangwh0204@outlook.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
+		
+		<a href="/about" target="_blank" title="steven wang">steven wang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

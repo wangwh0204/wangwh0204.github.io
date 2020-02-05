@@ -1,0 +1,1530 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Windows Mixed Reality | From Computer Vision to AGI Robots</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="steven wang">
+    
+
+    
+    <meta name="description" content="有机会使用Hololens真机做一些调研工作，也为后续的项目做好技术和设计知识储备。这里是一些学习中的笔记。">
+<meta name="keywords" content="Hololens,MR,Unity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows Mixed Reality">
+<meta property="og:url" content="https://wangwh0204.github.io/2017/05/25/windows-mixed-reality/index.html">
+<meta property="og:site_name" content="From Computer Vision to AGI Robots">
+<meta property="og:description" content="有机会使用Hololens真机做一些调研工作，也为后续的项目做好技术和设计知识储备。这里是一些学习中的笔记。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-09-03T16:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Windows Mixed Reality">
+<meta name="twitter:description" content="有机会使用Hololens真机做一些调研工作，也为后续的项目做好技术和设计知识储备。这里是一些学习中的笔记。">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.jpg" alt="From Computer Vision to AGI Robots" title="From Computer Vision to AGI Robots"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="From Computer Vision to AGI Robots">From Computer Vision to AGI Robots</a></h1>
+				<h2 class="blog-motto">在智能机器的寒武纪时代浪潮中，做点微小工作</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:wangwh0204.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/05/25/windows-mixed-reality/" title="Windows Mixed Reality" itemprop="url">Windows Mixed Reality</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="steven wang" target="_blank" itemprop="author">steven wang</a>
+		
+  <p class="article-time">
+    <time datetime="2017-05-24T16:00:00.000Z" itemprop="datePublished"> 发表于 2017-05-25</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hololens"><span class="toc-number">1.</span> <span class="toc-text">Hololens</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-Hololens"><span class="toc-number">1.1.</span> <span class="toc-text">Why Hololens</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hololens-Hardware"><span class="toc-number">1.2.</span> <span class="toc-text">Hololens Hardware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apps"><span class="toc-number">1.3.</span> <span class="toc-text">Apps</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commercial"><span class="toc-number">1.4.</span> <span class="toc-text">Commercial</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Windows-Mixed-Reality"><span class="toc-number">2.</span> <span class="toc-text">Windows Mixed Reality</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Development-Overview"><span class="toc-number">2.1.</span> <span class="toc-text">Development Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MR-Application-Types"><span class="toc-number">2.1.1.</span> <span class="toc-text">MR Application Types</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#App-Model"><span class="toc-number">2.1.2.</span> <span class="toc-text">App Model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Win10-Holographic-API"><span class="toc-number">2.1.3.</span> <span class="toc-text">Win10 Holographic API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DirectX-development-overview"><span class="toc-number">2.1.4.</span> <span class="toc-text">DirectX development overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unity-Development-Overview"><span class="toc-number">2.1.5.</span> <span class="toc-text">Unity Development Overview</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Design"><span class="toc-number">2.2.</span> <span class="toc-text">Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Get-started-with-design"><span class="toc-number">2.2.1.</span> <span class="toc-text">Get started with design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interaction-design"><span class="toc-number">2.2.2.</span> <span class="toc-text">Interaction design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Style"><span class="toc-number">2.2.3.</span> <span class="toc-text">Style</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#App-patterns"><span class="toc-number">2.2.4.</span> <span class="toc-text">App patterns</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Controls"><span class="toc-number">2.2.5.</span> <span class="toc-text">Controls</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Resource"><span class="toc-number">2.2.6.</span> <span class="toc-text">Resource</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rendering"><span class="toc-number">2.3.</span> <span class="toc-text">Rendering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gaze"><span class="toc-number">2.4.</span> <span class="toc-text">Gaze</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cursors"><span class="toc-number">2.4.1.</span> <span class="toc-text">Cursors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gaze-targeting"><span class="toc-number">2.4.2.</span> <span class="toc-text">Gaze targeting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gaze-in-Unity"><span class="toc-number">2.4.3.</span> <span class="toc-text">Gaze in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Holograms-210-Gaze"><span class="toc-number">2.4.4.</span> <span class="toc-text">Holograms 210: Gaze</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gesture"><span class="toc-number">2.5.</span> <span class="toc-text">Gesture</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gesture-design"><span class="toc-number">2.5.1.</span> <span class="toc-text">Gesture design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gaze-gestures-and-motion-controllers-in-DirectX"><span class="toc-number">2.5.2.</span> <span class="toc-text">Gaze, gestures, and motion controllers in DirectX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gestures-and-motion-controllers-in-Unity"><span class="toc-number">2.5.3.</span> <span class="toc-text">Gestures and motion controllers in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Holograms-211-Gesture"><span class="toc-number">2.5.4.</span> <span class="toc-text">Holograms 211: Gesture</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Voice-input"><span class="toc-number">2.6.</span> <span class="toc-text">Voice input</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Voice-design"><span class="toc-number">2.6.1.</span> <span class="toc-text">Voice design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Voice-input-in-DirectX"><span class="toc-number">2.6.2.</span> <span class="toc-text">Voice input in DirectX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Voice-input-in-Unity"><span class="toc-number">2.6.3.</span> <span class="toc-text">Voice input in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Holograms-212-Voice-Input"><span class="toc-number">2.6.4.</span> <span class="toc-text">Holograms 212: Voice Input</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spatial-sound"><span class="toc-number">2.7.</span> <span class="toc-text">Spatial sound</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-Sound-design"><span class="toc-number">2.7.1.</span> <span class="toc-text">Spatial Sound design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-Sound-in-DirectX"><span class="toc-number">2.7.2.</span> <span class="toc-text">Spatial Sound in DirectX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-sound-in-Unity"><span class="toc-number">2.7.3.</span> <span class="toc-text">Spatial sound in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Holograms-220-Spatial-sound"><span class="toc-number">2.7.4.</span> <span class="toc-text">Holograms 220: Spatial sound</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spatial-mapping"><span class="toc-number">2.8.</span> <span class="toc-text">Spatial mapping</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-mapping-design"><span class="toc-number">2.8.1.</span> <span class="toc-text">Spatial mapping design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Room-scan-visualization"><span class="toc-number">2.8.2.</span> <span class="toc-text">Room scan visualization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-mapping-in-DirectX"><span class="toc-number">2.8.3.</span> <span class="toc-text">Spatial mapping in DirectX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-mapping-in-Unity"><span class="toc-number">2.8.4.</span> <span class="toc-text">Spatial mapping in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Holograms-230-Spatial-mapping"><span class="toc-number">2.8.5.</span> <span class="toc-text">Holograms 230: Spatial mapping</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shared-experiences-in-mixed-reality"><span class="toc-number">2.9.</span> <span class="toc-text">Shared experiences in mixed reality</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Coordinate-Systems"><span class="toc-number">2.9.1.</span> <span class="toc-text">Coordinate Systems</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-anchors"><span class="toc-number">2.9.2.</span> <span class="toc-text">Spatial anchors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shared-spatial-anchors-in-DirectX"><span class="toc-number">2.9.3.</span> <span class="toc-text">Shared spatial anchors in DirectX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shared-experiences-in-Unity"><span class="toc-number">2.9.4.</span> <span class="toc-text">Shared experiences in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Holograms-240-Sharing-holograms"><span class="toc-number">2.9.5.</span> <span class="toc-text">Holograms 240: Sharing holograms</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spectator-view"><span class="toc-number">2.9.6.</span> <span class="toc-text">Spectator view</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Locatable-Camera"><span class="toc-number">2.10.</span> <span class="toc-text">Locatable Camera</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Locatable-camera-in-DirectX"><span class="toc-number">2.10.1.</span> <span class="toc-text">Locatable camera in DirectX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Locatable-camera-in-Unity"><span class="toc-number">2.10.2.</span> <span class="toc-text">Locatable camera in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mixed-reality-capture"><span class="toc-number">2.10.3.</span> <span class="toc-text">Mixed reality capture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mixed-reality-capture-for-developers"><span class="toc-number">2.10.4.</span> <span class="toc-text">Mixed reality capture for developers</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Open-Source-Projects"><span class="toc-number">3.</span> <span class="toc-text">Open Source Projects:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HoloToolkit"><span class="toc-number">3.1.</span> <span class="toc-text">HoloToolkit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HoloToolkit-Unity"><span class="toc-number">3.2.</span> <span class="toc-text">HoloToolkit-Unity</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MRDesignLabs"><span class="toc-number">3.3.</span> <span class="toc-text">MRDesignLabs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Periodic-Table-of-the-Elements"><span class="toc-number">3.3.1.</span> <span class="toc-text">Periodic Table of the Elements</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Galaxy-Explorer"><span class="toc-number">3.4.</span> <span class="toc-text">Galaxy Explorer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HoloLens-Companion-Kit"><span class="toc-number">3.5.</span> <span class="toc-text">HoloLens Companion Kit</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Case-Study"><span class="toc-number">4.</span> <span class="toc-text">Case Study</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Others"><span class="toc-number">5.</span> <span class="toc-text">Others</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#My-Practices"><span class="toc-number">6.</span> <span class="toc-text">My Practices</span></a></li></ol>
+		
+		</div>
+		
+		<p>有机会使用Hololens真机做一些调研工作，也为后续的项目做好技术和设计知识储备。这里是一些学习中的笔记。<a id="more"></a></p>
+<p>从学习Hololens开发的结果看，技术上与3D游戏的开发类似(特别是渲染，动画)，在设计上则需要重新探索，那么Hololens的核心价值在于立体显示上，商业价值在于提升效率，能更加高效的设计，沟通，理解。<br>Hololens中使用了很多AI技术，包括手势识别，语音/命令识别，Spatial Mapping()，Spatial Understanding(墙壁识别)，可以看做是Computer Vision里的SLAM和3D Recognition的应用。</p>
+<h1 id="Hololens"><a href="#Hololens" class="headerlink" title="Hololens"></a><a href="https://www.microsoft.com/en-us/hololens" target="_blank" rel="noopener">Hololens</a></h1><p>Mixed reality: Your world is the canvas<br>Microsoft HoloLens is the first self-contained, holographic computer, enabling you to engage with your digital content and interact with holograms in the world around you.</p>
+<p>相对PC，平板，手机这样的2D空间设备，Hololens有如下几点完全不一样的地方：</p>
+<ul>
+<li><p>3D(三维空间)<br>从2D空间的正方形一个面，到3D空间的立方体6个面</p>
+</li>
+<li><p>Stereo Display(立体视角)<br>立体相对平面，有了深度信息，更接近现实世界的感受</p>
+</li>
+<li><p>Interaction(人机交互)<br>从鼠标，键盘，触摸屏这样的2D交互到Gaze，Gesture，Voice这样的自然交互方式</p>
+</li>
+<li><p>Spatial(空间感知)<br>一种全新的方式，基于SLAM技术的空间感知，以及基于Computer Vision的空间理解；除此外Spatial Sound让人更有身临其境的感觉，达到Vitual与Real融为一体</p>
+</li>
+</ul>
+<p>但从Hololens(Development Edition)的使用上，还有提高的地方：</p>
+<ul>
+<li>价格要降低<br>3000美金，23000人民币，对于普通消费者来说难以承受，而且还没有通话功能；和一台PC或者高端手机一样，1000美金应该是可以大规模普及的价格</li>
+<li>舒适度要提高<br>重量579g，而且是勒住头部，长时间使用会不舒服；而且FOV比较小(40度?)，眼睛经常要上下运动，会比较累</li>
+<li>交互方式需要丰富<br>目前的文字输入还是能够接受的，只是长时间使用胳膊会酸胀；而且手势太少，只有air tap和bloom，有些交互不自然，比如上下滚动内容比较困难；移动，拉伸3D物体还是传统的2D的方式，不自然</li>
+<li>杀手级应用<br>在PC平台上，办公软件和游戏是杀手应用；在手机平台的通信，社交，游戏是杀手应用；那么在Hololens上，还没有杀手应用场景，我个人觉得<a href="https://www.microsoft.com/en-us/research/project/holoportation-3/" target="_blank" rel="noopener">Holoportation</a>最有希望(因为这就是科幻里梦寐以求的全息投影，用来社交，直播，会议交流)；相对而言VR的杀手应用应该会在游戏，视频，直播领域产生。</li>
+<li>场景理解<br>包括环境光照的感知，物体的材质，物理特性等<br>目前只有基本的plane和wall的识别，对于真实世界场景的识别(CV)，理解(AI)还需要提升</li>
+</ul>
+<p>对于新一代的Hololens，具体时间和规格并没有详细的信息，根据网上透露的消息，微软将在2019年直接出适用于消费者的第3代，可持续关注。</p>
+<p>从技术的角度来说，融合了Computer Graphics(Stereo Rendering)，Computer Vision(SLAM, 3D Scene Recognition)，Speech Recognition，NLP</p>
+<h2 id="Why-Hololens"><a href="#Why-Hololens" class="headerlink" title="Why Hololens"></a><a href="https://www.microsoft.com/en-us/hololens/why-hololens" target="_blank" rel="noopener">Why Hololens</a></h2><p>Mixed reality brings people, places, and objects from your physical and digital worlds together. This blended environment becomes your canvas, where you can create and enjoy a wide range of experiences.</p>
+<ul>
+<li><p>Holograms enhance the real world<br>Interacting with holograms in mixed reality enables you to visualize and work with your digital content as part of your real world. </p>
+</li>
+<li><p>A more natural way to interact<br>Holograms are responsive to you and the world around you. Microsoft HoloLens enables you to interact with content and information in the most natural ways possible: Gaze, Gesture, Voice<br>Gaze : Bulit-in sensors let you use your gaze to move the cursor so you can select holograms. Turn your head and the cursor will follow.<br>Gesture: Use simple gesture to open apps, select and size items, and drag and drop holograms in your world.<br>Voice: Use voice commands to navigate, select, open, command, and control your apps. Speak directly to Cortana, who can help you complete tasks.</p>
+</li>
+<li><p>Connect, create, and explore<br>Transform the ways you communicate, create, collaborate, and explore. Your ideas are closer to becoming real when you can create and work with holograms in relation to the world around you.</p>
+</li>
+<li><p>collaborate and communicate<br>When you collaborate, it’s easier to show than to tell. Your Skype contacts can overlay sketches and holograms on physical objects in your view.</p>
+</li>
+<li><p>Create what you imagine<br>Shape holograms to fine‑tune a design, share ideas, and understand your creations in relation to the real world.</p>
+</li>
+<li><p>Visualize your work<br>Go beyond what a 2D render can do by working in 3D. Make smarter decisions and prototype faster when you can inspect every vantage point.</p>
+</li>
+<li><p>Explore places and ideas<br>See holograms from your colleague’s perspective even if she’s on the other side of the world. Explore ideas in the real world, inside and out.</p>
+</li>
+</ul>
+<h2 id="Hololens-Hardware"><a href="#Hololens-Hardware" class="headerlink" title="Hololens Hardware"></a><a href="https://www.microsoft.com/en-us/hololens/hardware" target="_blank" rel="noopener">Hololens Hardware</a></h2><p>更具体的参数在<a href="https://developer.microsoft.com/en-us/windows/mixed-reality/hololens_hardware_details" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/hololens_hardware_details</a></p>
+<ul>
+<li><p>Optics<br>see-through holographic<br>Holographic resolution: 2.3M total light points</p>
+</li>
+<li><p>Sensors<br>1 IMU, 4 environment understanding cameras, 1 depth camera, 1 2MP photo/HD video camera, 1 ambient light sensor</p>
+</li>
+<li><p>Human understanding<br>Spatial sound, Gaze tracking, Gesture input, Voice support</p>
+</li>
+<li><p>Input/Output/Connectivity<br>volume up/down, brightness up/down, wifi 802.11ac, bluetooth 4.1 LE</p>
+</li>
+<li><p>Power<br>Battery life(2-3 hours of active use, up to 2 weeks of standby time)<br>Passively cooled(no fans)</p>
+</li>
+<li><p>Processors<br>Intel 32bit, Holographic Processing Unit</p>
+</li>
+<li><p>Weight<br>579g</p>
+</li>
+<li><p>Memory<br>64GB flash, 2GB RAM</p>
+</li>
+</ul>
+<h2 id="Apps"><a href="#Apps" class="headerlink" title="Apps"></a><a href="https://www.microsoft.com/en-us/hololens/apps" target="_blank" rel="noopener">Apps</a></h2><p>第一波应用，有游戏(RoboRaid，Fragments，Yong Conker，MinaCraft)，IM(Skype, 试验中的Holoportation), 辅助设计工具(HoloStudio, Actiongram)，教育(HoloAnatomy)，缺社交类应用。</p>
+<p>Cortana作为Win10内置的 “虚拟AI助理”，现在是没有可视化的形象的</p>
+<ul>
+<li><p><a href="https://www.microsoft.com/en-us/hololens/apps/skype" target="_blank" rel="noopener">Skype</a><br>语音视频通话工具，语音效果非常良好，也可以远程视频通话，PC上的Skype可以看到Hololens上的MR场景，也可以对MR场景做涂鸦，放置3D物体等…</p>
+</li>
+<li><p><a href="https://www.microsoft.com/en-us/hololens/apps/holostudio" target="_blank" rel="noopener">HoloStudio</a><br>Build 3D in 3D with natural gestures and movement, creating holograms with holographic tools modeled from tools in the real world.<br>在Hololens中创作Hologram的工具，导入3D Model(FBX)，导出Hologram<br>可以使用OneDrive来保存到云端，也可以导出到3D Builder用3D Printer打印出来，还可以分享Sketchfab.com</p>
+</li>
+<li><p><a href="https://www.microsoft.com/en-us/hololens/apps/actiongram" target="_blank" rel="noopener">Actiongram</a><br>Actiongram enables new forms of storytelling. Move, resize, rotate, and record holograms in your home, creating videos you can share with friends.<br>可以将Hologram放置在现实世界中，用来制作一种混合现实的视频，还可以展示一些动画，粒子，特效，做一些酷炫的视频效果。</p>
+</li>
+</ul>
+<p><a href="https://blogs.windows.com/devices/2016/03/14/introducing-actiongram-a-completely-new-holographic-storytelling-medium" target="_blank" rel="noopener">https://blogs.windows.com/devices/2016/03/14/introducing-actiongram-a-completely-new-holographic-storytelling-medium</a></p>
+<ul>
+<li><a href="https://www.microsoft.com/en-us/hololens/apps/HoloTour" target="_blank" rel="noopener">HoloTour</a><br>Feel like you’re really there<br>A combination of panoramic video, holographic scenery, and spatial sound creates a virtual travel experience with a real sense of presence and depth.</li>
+</ul>
+<p>一个Rome全景视频的例子，Experience an immersive combination of 360-degree video, spatial sound, and holographic scenery with HoloTour</p>
+<ul>
+<li><p><a href="https://www.microsoft.com/en-us/hololens/apps/RoboRaid" target="_blank" rel="noopener">RoboRaid</a><br>交互，效果良好的MR FPS游戏</p>
+</li>
+<li><p><a href="https://www.microsoft.com/en-us/hololens/apps/young-conker" target="_blank" rel="noopener">Yong Conker</a><br>利用现实世界空间，设计游戏玩法和交互方式，MR平台才有的特殊游戏类型。<br>Young Conker transforms your furniture, floors, and walls into the stage for a mixed reality platforming adventure.<br>Every level you finish becomes fresh again when you play it in a different room, or rearrange your furniture.<br>Use spatial mapping and custom AI to dynamically generate game levels and character placement.</p>
+</li>
+<li><p><a href="https://www.microsoft.com/en-us/hololens/apps/fragments" target="_blank" rel="noopener">Fragments</a><br>You become the detective in a high-tech crime thriller. Experience compelling new possibilities for storytelling and gameplay.<br>Life-sized holographic characters are aware of your presence and interact with you and your space as if they’re really in the room.</p>
+</li>
+</ul>
+<p>室内解谜游戏，与虚拟角色，在半真半虚的场景中互动，很有代入感，容易让人沉浸其中，是游戏和电影叙事方式的融合。Room solver AI</p>
+<h2 id="Commercial"><a href="#Commercial" class="headerlink" title="Commercial"></a>Commercial</h2><p>按照 <a href="http://www.businessinsider.com/nadella-hints-hololens-is-5-years-away-2015-9" target="_blank" rel="noopener">Satya Nadella hints that Microsoft’s mind-blowing new product HoloLens is really 5 years away</a>，所以3~5年内，Hololens以2B应用为主。</p>
+<p>Microsoft Hololens transforms how you work with 3D data. Unlock new possibilities for business and productivity.</p>
+<ul>
+<li><p>AEC&amp;Design<br>Preview designs at scale and reconstruct 3D models quickly. Work more safely with eyes up and hands free. Clients, designers, remote teams, and on-site engineers can collaborate, visualize, and create in 3D, bringing complex designs to life.</p>
+</li>
+<li><p>Education<br>Approach curriculum from a new point of view when students can investigate, walk around, and delve inside their subjects. HoloLens blends physical objects and environments with 3D data, helping to increase students’ engagement and understanding of abstract concepts. Around the world, educators are exploring how holographic visualization can help increase students’ engagement and joy of learning. With Microsoft HoloLens and Windows Mixed Reality, students can discover new dimensions to their subjects and reach deeper understanding when they learn in 3D. Learning comes alive when flat illustrations become 3D images students explore, alter, and examine from every angle. </p>
+</li>
+<li><p>Gov’t &amp; Utilities<br>Visualize complex data with holograms to collaborate in 3D project environments while optimizing flexibility, safety, and cost-efficiency. Enable remote, cross-functional teams to connect and share.</p>
+</li>
+<li><p>Retail<br>Lower the barrier to purchase when customers can go beyond physical inventory, sampling different product features from virtual catalogs. Retail planners and merchandisers can visualize designs, share plans with others, and walk through their floorplans before they build.</p>
+</li>
+<li><p>Healthcare<br>Envision a surgery before it starts, or a hospital before it’s built. Learn and direct medical training in real-world environments. Plan and research the right healthcare solutions for your patients when you can visualize the human condition as it truly is—in 3D.</p>
+</li>
+<li><p>Manufacturing<br>Create flexible, safe holographic training scenarios in the real world. Give clients 3D prototypes they can visualize and inspect. See and identify problems before work starts. Teams can deliver results faster when they understand and iterate in mixed reality.</p>
+</li>
+</ul>
+<p>除了Development Edition，微软还提供了Commercial Suite，Key features:</p>
+<ul>
+<li>Kiosk mode<br>With HoloLens kiosk mode, you can limit which apps to run to enable demo or showcase experiences.</li>
+<li>Mobile Device Management<br>Your IT department can manage multiple HoloLens devices simultaneously using solutions like Microsoft Intune.</li>
+<li>Windows Update for Business<br>Controlled operating system updates to devices and support for long term servicing branch.</li>
+<li>Data security<br>BitLocker data encryption is enabled on HoloLens to provide the same level of security protection as any other Windows device.</li>
+<li>Work access<br>Anyone in your organization can remotely connect to the corporate network through virtual private network on a HoloLens.</li>
+<li>Windows Store for Business<br>Your IT department can also set up an enterprise private store, containing only your company’s apps for your specific HoloLens usage. </li>
+</ul>
+<h1 id="Windows-Mixed-Reality"><a href="#Windows-Mixed-Reality" class="headerlink" title="Windows Mixed Reality"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality" target="_blank" rel="noopener">Windows Mixed Reality</a></h1><p>最开始微软将Hololens所使用的技术称为Holographic，后又改为<a href="https://developer.microsoft.com/en-us/windows/mixed-reality" target="_blank" rel="noopener">Windows Mixed Reality</a>,这些技术也应用到了VR设备上( inside-out tracking, six-degrees of freedom. )，微软通过与传统的PC厂商(Acer, ASUS, Dell, HP, Lenovo)合作，拓展<a href="https://blogs.windows.com/windowsexperience/2016/10/26/empowering-a-new-wave-of-creativity-with-the-windows-10-creators-update-and-surface-studio" target="_blank" rel="noopener">Win10平台/SDK到VR领域</a>。 可以看出微软对3D的决心，将操作系统3D化，将UI 3D化，支持3D内容的创作，分享，体验</p>
+<p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality提供了构建MR体验所需的开发(Development)，设计(Design)，教程(Academy)文档：" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality提供了构建MR体验所需的开发(Development)，设计(Design)，教程(Academy)文档：</a></p>
+<ul>
+<li><p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/development" target="_blank" rel="noopener">Development</a><br>介绍MR应用场景，技术细节，包括Coordinate Systems，Rendering，GGV实现原理，Spatial Perception，以及具体在Unity中的编程实践</p>
+</li>
+<li><p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/design" target="_blank" rel="noopener">Design</a><br>关于MR设计的原则，MR Interaction Design，MR App Patterns，MR fundamental UI elements</p>
+</li>
+<li><p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/academy" target="_blank" rel="noopener">Tutorials</a><br>使用例子代码，详细介绍core Windows Holographic features including: Gaze, Gesture, Voice, Spatial Sound, Spatial Mapping以及Sharing Holograms，所有代码都可以在<a href="https://github.com/Microsoft/HolographicAcademy/找到" target="_blank" rel="noopener">https://github.com/Microsoft/HolographicAcademy/找到</a></p>
+</li>
+<li><p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/Community.html#open_source_projects" target="_blank" rel="noopener">Toolkit</a><br>微软提供大量的开源的工具库和例子应用，帮助更好的理解和加速构建过程：HoloToolkit, HoloToolkit-Unity, MRDesignLabs, Galaxy Explorer, HoloLens Companion Kit</p>
+</li>
+<li><p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/category/case_studies" target="_blank" rel="noopener">Case study</a><br>对于微软制作的第一类应用，微软也提供相关信息如何制作这些App, 这些经验教训有助于我们设计，开发自己的MR应用。</p>
+</li>
+</ul>
+<p>开发，设计，教程文档彼此之间交叉引用，我倾向于使用Learning by doing的方式针对一个主要的特性集中的学习理论，设计，编程等知识，所以按照我的学习，理解和实践过程将文档内容重新做了编排，整理。</p>
+<h2 id="Development-Overview"><a href="#Development-Overview" class="headerlink" title="Development Overview"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/development_overview" target="_blank" rel="noopener">Development Overview</a></h2><p>开发MR应用需要<a href="https://developer.microsoft.com/en-us/windows/mixed-reality/install_the_tools" target="_blank" rel="noopener">设备和工具</a>，目前的最佳工具组合: Hololens + Win10 + <a href="https://developer.microsoft.com/en-us/windows/downloads" target="_blank" rel="noopener">VS2017</a> + Unity + Vuforia<br>Hololens : 开发者版本23488, 企业版39188<br>Win10 : 家庭版888，专业版1817<br>VS2017 : 专业版4850, 企业版58260<br>Unity Pro ：$125 x 12 x 7 = 10500<br>Vuforia : $99 x 12 x 7 = 8316</p>
+<p>这样算下来，光开发环境的成本就要10万RMB，还未算上开发PC的配置(i7 + GTX1080 + 16G RAM)</p>
+<p>微软将MR应用开发所需的API整合进<a href="https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk" target="_blank" rel="noopener">Win10 SDK</a>，并以<a href="https://docs.microsoft.com/en-us/windows/uwp/get-started/universal-application-platform-guide" target="_blank" rel="noopener">Universal Windows Platform</a>形态构建。All mixed reality apps are Universal Windows apps, and all Universal Windows apps can be made to run on Windows Mixed Reality devices.  一般的为PC和Phone开发的UWP 2D应用也可以在Holoens上运行，但是为Hololens开发的3D应用无法在一般的PC设备上运行。</p>
+<p>Mixed reality experiences are enabled by new Windows features for environmental understanding. These enable developers to places a hologram in the real world, and allow users to move through digital worlds by literally walking about.These are the fundamental building blocks for mixed reality development:<br>Input : Gaze, Gesture, Voice<br>Perception : World coordinates, Spatial Sound, Spatial mapping<br>除了Stereo Rendering外，这里提及的几个概念就是MR的核心内容，主要是空间的感知和交互，在后续的文档里会详细的说明。</p>
+<p>The environmental understanding features like coordinates, spatial sound and spatial mapping provide the necessary capabilities for mixing reality. Spatial mapping enables holograms to interact with both the user and the world around them. Coordinate systems allow the user’s movement to affect movement in the digital world.</p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/mixed_reality" target="_blank" rel="noopener">Mixed Reality</a><br>Mixed reality is the result of blending the physical world with the digital world. Mixed reality is the next evolution in human, computer, and environment interaction and unlocks possibilities that before now were restricted to our imaginations. It is made possible by advancements in computer vision, graphical processing power, display technology, and input systems. The term mixed reality was originally introduced in a 1994 paper by Paul Milgram and Fumio Kishino, <a href="http://etclab.mie.utoronto.ca/people/paul_dir/IEICE94/ieice.html" target="_blank" rel="noopener">“A Taxonomy of Mixed Reality Visual Displays.”</a></li>
+</ul>
+<p>Real World vs Virtual World<br>Physical World vs Digital World</p>
+<p>Environmental input captures things like a person’s position in the world (e.g. head tracking), surfaces and boundaries (e.g. spatial mapping and spatial understanding), ambient lighting, environmental sound, object recognition, and location.</p>
+<p>The experiences that overlay graphics on video streams of the physical world are <em>augmented reality</em>, and the experiences that occlude your view to present a digital experience are <em>virtual reality</em>. As you can see, the experiences enabled between these two extremes is mixed reality.</p>
+<p>Skype for HoloLens, Fragments and RoboRaid are best experienced with HoloLens. Likewise, 360° video is best experienced on immersive devices. HoloTour showcases the best of what both types of devices can do today when trying to push towards the center experience of mixed reality.</p>
+<p>6DOF的移动，指的是可以在X,Y,Z三个轴上平移和旋转 </p>
+<p>个人认为未来的VR/MR设备将融合，通过一个开关即可切换，而AR这种Video-through方式依然是平面而非立体视角，只是手机的自然延伸，是一种过渡形态。VR/MR是两种不同的应用场景，可以满足不同的需求，因此会共存。</p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/hologram" target="_blank" rel="noopener">Hologram</a><br>HoloLens lets you create holograms, objects made of light and sound that appear in the world around you, just as if they are real objects. Holograms respond to your gaze, gestures and voice commands, and can interact with real-world surfaces around you. With holograms, you can create digital objects that are part of your world.<br>A hologram is made of light and sound.  HoloLens doesn’t remove light from your eyes, so holograms can’t be rendered with the color black. Instead, black content appears as transparent.<br>A hologram can be placed in the world or tag along with you. A hologram interacts with you and your world</li>
+</ul>
+<p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/hologram_stability" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/hologram_stability</a></p>
+<h3 id="MR-Application-Types"><a href="#MR-Application-Types" class="headerlink" title="MR Application Types"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/types_of_mixed_reality_apps" target="_blank" rel="noopener">MR Application Types</a></h3><p>MR的应用类型，主要分为下面三种：</p>
+<ul>
+<li>Enhanced environment apps(Hololens only)<br>One of the most powerful ways that mixed reality can bring value to users is by facilitating the placement of digital information or content in a user’s current environment. This is an enhanced environment app. 这可以理解为一般的MR，真实和数字世界融合在一起。</li>
+<li>Blended environment apps<br>Given Windows Mixed Reality’s ability to recognize and map the user’s environment, it is capable of creating a digital layer that can be completely overlaid on the user’s space. Thin layer respects the shape and boundaries of the user’s environment, but the app may choose to transform certain elements best suited to immerse the user in the app. This is called a blended environment app. 这可以认为是传统的AR应用，需要对场景，物体做识别</li>
+<li>Immersive environment app<br>Immersive environment apps are centered around an environment that completely changes the user’s world and can place them in a different time and space. These environments can feel very real, creating immersive and thrilling experiences that are only limited by the app creator’s imagination. 这个就是VR。</li>
+</ul>
+<p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/types_of_mixed_reality_apps详细列出了不同应用形态下的可参考的例子，可以作为启发新idea，获得产品灵感的起点。比如" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/types_of_mixed_reality_apps详细列出了不同应用形态下的可参考的例子，可以作为启发新idea，获得产品灵感的起点。比如</a><br>“Mixed reality wayfinding in an office space”这个就可以用在商场/停车场的导览上。</p>
+<p>It is important for an app maker to understand early in their development process as to where along this spectrum their experience lies. This decision will ultimately impact both the app design makeup and the technological path for development.</p>
+<p>在Holoens中运行的是Win10，为了兼容一般的UWP 2D应用，所以MR提供两种<a href="https://developer.microsoft.com/en-us/windows/mixed-reality/app_views" target="_blank" rel="noopener">App views</a>: </p>
+<ul>
+<li><p>immersive views<br>When an app is drawing in the immersive view, no other app is drawing at the same time – holograms from multiple apps are not composited together. By continually adjusting the perspective from which your app renders its scene to match the user’s head movements, your app can render world-locked holograms that remain at a fixed point in the real world.While in an immersive view, your app is also responsible for handling all input. Input in Windows Mixed Reality is made up of gaze, gesture, voice and motion controllers.</p>
+</li>
+<li><p>2D views<br>A 2D view appears in the shell as a virtual slate, rendered alongside the app launchers and other holograms the user has placed in their world. The user can adjust this slate to move and scale it, though it remains at a fixed resolution regardless of its size. </p>
+</li>
+</ul>
+<h3 id="App-Model"><a href="#App-Model" class="headerlink" title="App Model"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/app_model" target="_blank" rel="noopener">App Model</a></h3><p>Windows Mixed Reality uses the app model provided by the Universal Windows Platform (UWP), a model and environment for modern Windows apps. The UWP app model defines how apps are installed, updated, versioned and removed safely and completely. It governs the application life cycle - how apps execute, sleep and terminate - and how they can preserve state. It also covers integration and interaction with the operating system, files and other apps.</p>
+<p>The lifecycle of a mixed reality app involves standard app concepts such as placement. launch, termination and removal.</p>
+<ul>
+<li>App lifecycle<br>Placement is launch.<br>Every app starts in mixed reality by placing an app tile in the Hololens shell. These app tiles, on placement, will start running the app. Thess app tiles persist and stay at the location where they are placed, acting like launchers for anytime you want to get back to the app.</li>
+</ul>
+<p>As soon as placement completes (unless the placement was started by an App 2 App launch), the app starts launching. Windows Mixed Reality can run a limited number of apps at one time. As soon as you place and launch an app, other active apps may suspend, leaving a screenshot of the app’s last state on its app tile wherever you placed it.</p>
+<p>Remove is close/terminate process<br>When you remove a placed app tile from the world, this closes the underlying processes. This can be useful for ensuring your app is terminated or restarting a problematic app.</p>
+<ul>
+<li><p>App Views<br>Your app can create an additional 2D app view using technology like XAML, to use Shell features such as in-app purchase. </p>
+<p>Mixed reality apps are those that create an immersive view, which is done by the HolographicSpace type.</p>
+</li>
+<li><p>App size<br>2D app views always appear in a fixed virtual slate. This makes all 2D views show the exact same amount of content. Here are some further details about the size of your app’s 2D view:<br>Aspect ratio of the app is preserved while resizing.<br>App resolution and scale factor are not changed by resizing.<br>Apps are not able to query their actual size in the world.</p>
+</li>
+<li><p>App to app interactions<br>有很多Win10 功能在Holoens上还没有得到支持，比如Camera Settings, Alarm, Share contract</p>
+</li>
+<li><p>App File Storage<br>All storage is through the Windows.Storage namespace, see the following for more details. HoloLens does not support App Storage sync/roaming.</p>
+</li>
+</ul>
+<h3 id="Win10-Holographic-API"><a href="#Win10-Holographic-API" class="headerlink" title="Win10 Holographic API"></a>Win10 Holographic API</h3><p>Hololens是一种MR设备，Windows 10 SDK提供了完整的API来支持MR应用的开发，主要包括立体渲染，空间理解及交互</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/uwp/api/Windows.Graphics.Holographic" target="_blank" rel="noopener">Windows.Graphics.Holographic</a><br>包含如何创建，显示Hologram的类: HolographicSpace, HolographicCamera, HolographicFrame</li>
+</ul>
+<p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/getting_a_holographicspace" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/getting_a_holographicspace</a></p>
+<ul>
+<li><p><a href="https://docs.microsoft.com/en-us/uwp/api/Windows.Perception.Spatial" target="_blank" rel="noopener">Windows.Perception.Spatial</a><br>处理spatial relationships的类：SpatialAnchor, SpatialCoordinateSystem, SpatialLocation</p>
+</li>
+<li><p><a href="https://docs.microsoft.com/en-us/uwp/api/Windows.Perception.Spatial.Surfaces" target="_blank" rel="noopener">Windows.Perception.Spatial.Surfaces</a><br>Contains classes that describe the surfaces observed in the user’s surroundings and their triangle meshes.<br>通过SLAM获取的3D表面网格信息: SpatialSurfaceMesh, SpatialSurfaceObserver</p>
+</li>
+<li><p><a href="https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.input.spatial.aspx" target="_blank" rel="noopener">Windows.UI.Input.Spatial</a><br>提供空间交互处理(GGV)的类: SpatialInteractionManager, SpatialGestureRecognizer, SpatialPointerPose</p>
+</li>
+</ul>
+<h3 id="DirectX-development-overview"><a href="#DirectX-development-overview" class="headerlink" title="DirectX development overview"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/directx_development_overview" target="_blank" rel="noopener">DirectX development overview</a></h3><ul>
+<li><p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/creating_a_holographic_directx_project" target="_blank" rel="noopener">Creating a holographic DirectX project</a></p>
+</li>
+<li><p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/getting_a_holographicspace" target="_blank" rel="noopener">Getting a HolographicSpace</a></p>
+</li>
+</ul>
+<h3 id="Unity-Development-Overview"><a href="#Unity-Development-Overview" class="headerlink" title="Unity Development Overview"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/unity_development_overview" target="_blank" rel="noopener">Unity Development Overview</a></h3><p><a href="https://docs.unity3d.com/Manual/windowsholographic.html" target="_blank" rel="noopener">https://docs.unity3d.com/Manual/windowsholographic.html</a>  Unity上开发Holographic应用 相对于一般的3D应用开发，只需要做一些针对性的配置即可。</p>
+<ul>
+<li><p>Porting<br>The Windows platform APIs for mixed reality only work in the Universal Windows Platform (UWP) app model. So if your app is not already built for UWP, porting to UWP will be part of the porting experience.</p>
+</li>
+<li><p>Congiguring for Windows Mixed Reality<br>对于一个新的MR应用，需要对Unity做一些配置，包括：</p>
+</li>
+</ul>
+<ol>
+<li><p>Per-project 配置(File-&gt;Build Settings):<br>platform -&gt; Windows Store<br>sdk -&gt; Universal 10<br>Target device -&gt; Hololens</p>
+</li>
+<li><p>Per-Scene Settings(Edit-&gt;Project Settings-&gt;Player):<br>Settings for Windows Store -&gt; Other Settings -&gt; Rendering -&gt; Virtual Reality Supported -&gt; Windows Mixed Reality<br>Once you enable the “Virtual Reality Supported” checkbox, the Unity Camera component handles head tracking and stereoscopic rendering. There is no need to replace it with a custom camera to do this.</p>
+</li>
+</ol>
+<p>For an app to take advantage of certain functionality, it must declare the appropriate capabilities in its manifest. The manifest declarations can be made in Unity so they are included in every subsequent project export. </p>
+<ol>
+<li>如果目标设备是Hololens，则需要对MainCamera做一些配置(Hierarchy -&gt; Main Camera)：<br>Position -&gt; 0,0,0<br>Clear Flags -&gt; Solid Color<br>Background -&gt; RBGA(0,0,0,0)<br>在Holoens上，黑色是透明色，将背景设为透明，这样用户可以See-through物理世界<br>Clipping Planes. Near -&gt; 0.85</li>
+</ol>
+<p>除了 head tracking and stereoscopic rendering已经由Unity内置的Camera对象支持外，其他MR的主要特性:<br>Coordinate systems, Gaze, Gestures and motion controllers, Voice input, Persistence, Spatial sound, Spatial mapping<br>Shared experiences, 以及Locatable camera, Focus point, Tracking loss, Keyboard，都有对应的Unity API/Component提供支持，后续的章节即按照上述features进一步的深入学习和实践。 </p>
+<p>最快和方便的开发MR应用的方式，除了用DirectX来手工编写渲染过程，还可以基于Untiy的编辑器，游戏引擎(渲染，物理，动画，网络等…)快速开发</p>
+<p>基于Unity，微软提供了<a href="https://developer.microsoft.com/en-us/windows/mixed-reality/academy" target="_blank" rel="noopener">Holographic Academy tutorials</a>导入AR相关知识及开发实践，源代码在<a href="https://github.com/Microsoft/HolographicAcademy" target="_blank" rel="noopener">https://github.com/Microsoft/HolographicAcademy</a></p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/holograms_100" target="_blank" rel="noopener">Holograms 100: Getting started with Unity</a><br>使用Unity开发MR应用的最基本的例子，主要是对per-Projct，per-Scene，MainCamera进行配置，具体参考上一节的内容。为简化开发，最好使用HoloTookit-Unity<br>The Unity Main Camera handles head tracking and stereoscopic rendering. There are a few changes to make to the Main Camera to use it with mixed reality.<br>Since maintaining high framerate on HoloLens is so important, we want the quality settings tuned for fastest performance.<br>Creating a cube in your Unity project is just like creating any other object in Unity. Placing a cube in front of the user is easy because Unity’s coordinate system is mapped to the real world - where one meter in Unity is approximately one meter in the real world.<br>可以使用<a href="https://developer.microsoft.com/en-us/windows/mixed-reality/holographic_remoting_player" target="_blank" rel="noopener">Holographic Remoting</a>方式在Hololens看到PC上的实时视频流，也就是在Unity上Play，然后在Hololens上看到效果，这个功能需要Windows build 14318，此种场景适用于直播应用。</li>
+</ul>
+<p>使用Unity搭建3D场景和脚本后，最后还需要使用<a href="https://developer.microsoft.com/en-us/windows/mixed-reality/using_visual_studio" target="_blank" rel="noopener">VS build和deploy</a>到Hololens上。<br>既可以使用WIFI方式deploy到Remote Machine，也可以使用USB deploy到Device</p>
+<p>在build的过程中，遇到“error MSB3774: Could not find SDK”的问题，主要是References的component(WindowsDesktop, WindowsIoT, WindowsMobile, WindowsTeam)不存在，通过查找Win10 SDK\Extension SDKs\WindowsTeam\10.0.15063.0\<br>没找到好的解决方法，只能先remove对应的Component先，麻烦的是每次Unity build的时候又会重新生成。<br>最后还是重装 VS2017/Win10 SDK到默认的C:\Program Files (x86)解决了。</p>
+<p>目前VS和Unity的整合还在完善中，还没有稳定，导致总有些问题或者BUG，遇到问题，最好去<a href="https://forums.hololens.com/" target="_blank" rel="noopener">https://forums.hololens.com/</a> 查询或者提问</p>
+<p>默认VS安装的是本地语言包，要使用英文，先使用Visual Studio Installer安装英语语言包，然后在工具-&gt;选项-&gt;环境-&gt;区域设置-&gt;语言 选择 英语</p>
+<p>每次在Unity中更新资产后，需要Build(修改脚本不需要)，然后再在VS中deploy到Hololens，参考这里的<a href="https://developer.microsoft.com/en-us/windows/mixed-reality/best_practices_for_working_with_unity_and_visual_studio" target="_blank" rel="noopener">最佳实践</a></p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/holograms_101" target="_blank" rel="noopener">Holograms 101: Introduction with Device</a><br>通过一个完整的例子介绍MR的主要特性：Gaze, Gesture, Voice, Spatial Sound and Spatial Mapping.</li>
+</ul>
+<p>注意在Voice的例子里，除了添加脚本外，还需要将Edit -&gt; Project Settings -&gt; Player -&gt; Windows Store -&gt; Publishing Settings -&gt; Capabilities -&gt; Microphone勾选上，否则Voice input没有作用。<br>在Spatial Mapping的例子里，要将Edit -&gt; Project Settings -&gt; Player -&gt; Windows Store -&gt; Publishing Settings -&gt; Capabilities -&gt; SpatialPerception勾选上，否则看不到网格</p>
+<p>让场景跟随头部移动，只需要根据Gaze碰撞到的位置来调整场景的Position即可。<br>最后的Underworld效果很好，可以看到纸鹤在飞，sphere掉下去后的滚动效果也符合物理规律。</p>
+<h2 id="Design"><a href="#Design" class="headerlink" title="Design"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/design" target="_blank" rel="noopener">Design</a></h2><p>Learn the fundamentals of designing mixed reality experiences. 相应的资产，例子存放在<a href="https://github.com/Microsoft/MRDesignLabs_Unity" target="_blank" rel="noopener">https://github.com/Microsoft/MRDesignLabs_Unity</a></p>
+<h3 id="Get-started-with-design"><a href="#Get-started-with-design" class="headerlink" title="Get started with design"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/category/get_started_with_design" target="_blank" rel="noopener">Get started with design</a></h3><p>Read our high-level thoughts and understand the principles we follow.</p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/about_this_design_guidance" target="_blank" rel="noopener">About this design guidance</a><br>这是一个全新的计算领域。所有人都在探索，那些事是好的经验，那些是错的教训。<br>We aim to deliver a comprehensive set of design guidance that covers mixed reality interaction, commanding, navigation, input, and style – all grounded in human behavior and scenarios.</li>
+</ul>
+<p>One of the challenges of offering design guidance in this new 3D medium is that we don’t always have definitive guidance to offer. Just like you, we are learning, experimenting, prototyping, problem-solving, and adjusting as we hit obstacles.our end goal is to be definitive wherever we can, providing clear, flexible design guidance tied to open-source code, and actionable in Microsoft dev and design tools. But getting to that point takes many rounds of iteration and learning. We want to engage with you, and learn with you, along the way, so we will be doing the best we can to share as we go, even our stuff that is experimental.</p>
+<p>We’ll offer two levels of design guidance: global and local：</p>
+<ul>
+<li>Fluent Design System<br>Fluent details how we think about fundamentals like light, depth, motion, material, and scale across all Microsoft design – our devices, products, tools, and services. </li>
+<li>Local design guidance<br>covers topics unique to HMDs, for example 3D environments and objects; shared environments; the use of sensors, eye tracking and spatial mapping; and the opportunities of spatial audio.</li>
+</ul>
+<ul>
+<li>Case study - AfterNow’s process - envisioning, prototyping, building</li>
+<li>Case study - My first year on the HoloLens design team</li>
+<li>Case study - The pursuit of More Personal Computing</li>
+</ul>
+<h3 id="Interaction-design"><a href="#Interaction-design" class="headerlink" title="Interaction design"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/category/interaction_design" target="_blank" rel="noopener">Interaction design</a></h3><p>Learn about input, commanding, navigation, and other interaction basics for designing your apps.<br>关于Interaction Design的部分分散到具体的各个Feature的章节里: Gaze targeting, Gesture Design, Voice Design, Spatial Mapping Design</p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/interaction_fundamentals" target="_blank" rel="noopener">Interaction fundamentals</a><br>The user is the camera</li>
+</ul>
+<p><strong>Best practices</strong></p>
+<ol>
+<li>The user is the camera and they control the movement. Let them drive.</li>
+<li>If you need to virtually transport the user, be sensitive to issues around vestibular discomfort.</li>
+</ol>
+<p>Users will react to large menus coming at them.</p>
+<ol>
+<li>Use shorter animations</li>
+<li>Animate from down/left/right or fade in instead of Z</li>
+<li>Slow down timing</li>
+<li>Allow user to see the world in the background</li>
+</ol>
+<p><strong>What to avoid</strong></p>
+<ol>
+<li>Don’t shake the camera or purposely lock it to 3DOF (only orientation, no translation), it can make users feel uncomfortable.</li>
+<li>No abrupt movement. If you need to bring content to or from the user, move it slowly and smoothly toward them for maximum comfort.</li>
+<li>Users are sensitive to acceleration (both angular and translational). Do not accelerate or turn the user’s camera.</li>
+</ol>
+<p>In 2D development, frequently accessed content and settings may be placed in the corners of a screen to make them easily accessible. However, in holographic apps, the corners of the user’s field of view may be uncomfortable to access. In this case, the center of the field of view is the prime location for content.</p>
+<p>The user may need to be guided to help locate important events or objects outside their field of view. You can use arrows, light trails, character head movement, thought bubbles, pointers, spatial sound, and voice prompts to help guide the user to important content in your app.</p>
+<p>On HoloLens, it’s important to simplify your UI to fit within the user’s field of view and keep your focus on the main action. </p>
+<p>To ensure maximum comfort on head-mounted displays, it’s important for designers and developers to create and present content in a way that mimics how humans interpret 3D shapes and the relative position of objects in the natural world. From a physical perspective, it is also important to design content that does not require fatiguing motions of the neck or arms.</p>
+<p>Using <a href="https://developer.microsoft.com/en-us/windows/mixed-reality/mixed_reality_capture" target="_blank" rel="noopener">mixed reality capture</a>, users can capture a photo or video of their experience at any time. Consider experiences in your app where you may want to encourage snapshots or videos.</p>
+<ul>
+<li>Comfort<br>用户体验的舒适性，涉及到很多人体生物特性。想设计优秀的体验，必须要花时间理解这些特性。</li>
+</ul>
+<p>During natural viewing, the human visual system relies on multiple sources of information, or “cues,” to interpret 3D shapes and the relative position of objects. Some cues are monocular(单目), including linear perspective(线性透视), familiar size, occlusion(遮挡), depth-of-field blur(景深模糊), and accommodation(. Other cues are binocular, such as vergence(辐辏) (essentially the relative rotations of the eyes required to look at an object) and binocular disparity(双眼视差) (the pattern of differences between the projections of the scene on the back of the two eyes). To ensure maximum comfort on head-mounted displays, it’s important for designers and developers to create and present content in a way that mimics how these cues operate in the natural world. </p>
+<ol>
+<li>Vergence-accommodation conflict 视觉辐辏调节冲突<br>To view objects clearly, humans must accommodate, or adjust their eyes’ focus, to the distance of the object. At the same time, the two eyes must converge to the object’s distance to avoid seeing double images. In natural viewing, vergence and accommodation are linked. </li>
+</ol>
+<p>HoloLens displays are fixed at an optical distance approximately 2.0m away from the user. Thus, users must always accommodate near 2.0m to maintain a clear image in the device. App developers can guide where users’ eyes converge by placing content and holograms at various depths. Discomfort from the vergence-accommodation conflict can be avoided or minimized by keeping content to which users converge to as close to 2.0m as possible </p>
+<p>For maximum comfort, <strong>the optimal zone for hologram placement is between 1.25m and 5m.</strong> In every case, designers should attempt to structure content scenes to encourage users to interact 1m or farther away from the content. When possible, we recommend starting to fade out content at 1m and placing a rendering clipping plane at 85cm to avoid any nearer objects.</p>
+<ol>
+<li>Rendering rates(60FPS+)<br>与Oculus Rift采用的ATW一样，Hololens也是提前预测头部要移动的位置，并渲染<br>Since image rendering takes time, HoloLens and other Windows Mixed Reality devices predict where a user’s head will be when the images are shown in the displays. This prediction algorithm is an approximation. Windows Mixed Reality algorithms and hardware adjust the rendered image to account for the discrepancy between the predicted head position and the actual head position. This process makes the image seen by the user appear as if it were rendered from the correct location, and holograms feel stable. </li>
+</ol>
+<p>By rendering at a minimum framerate of 60 FPS, you are doing two things to help make stable holograms:<br>Reducing the appearance of judder, which is characterized by uneven motion and double images. Faster hologram motion and lower render rates are associated with more pronounced judder. Therefore, striving to always maintain 60 FPS (or your device’s maximum render rate) will help avoid judder for moving holograms.<br>Minimizing the overall latency. In an engine with a game thread and a render thread running in lockstep, running at 30FPS can add 33.3ms of extra latency. By reducing latency, this decreases prediction error, and increases hologram stability.</p>
+<p>There are a variety of tools that can be used to benchmark your application frame rate such as: GPUView, Visual Studio Graphics Debugger, Profilers built into 3D engines such as Unity</p>
+<ol>
+<li><p>Self-motion and user locomotion<br>The only limitation is the size of your physical space; if you want to allow users to move farther in the virtual environment than they can in their real rooms, then a form of purely virtual motion must be implemented. </p>
+</li>
+<li><p>Heads-up displays<br>In first-person-shooter videogames, heads-up displays (HUDs) persistently present information such as player health, mini-maps, and inventories directly on the screen. HUDs work well to keep the player informed without intruding on the gameplay experience. In mixed reality experiences, HUDs have the potential to cause significant discomfort and must be adapted to the more immersive context. Specifically, HUDs that are rigidly locked to the user’s head orientation are likely to produce discomfort. If an app requires a HUD, we recommend body locking rather than head locking. </p>
+</li>
+<li><p>Gaze direction<br>To avoid eye and neck strain content should be designed so that excessive eye and neck movements are avoided.<br>Avoid gaze angles more than 10 degrees above the horizon (vertical movement)<br>Avoid gaze angles more than 60 degrees below the horizon (vertical movement)<br>Avoid neck rotations more than 45 degrees off-center (horizontal movement)</p>
+</li>
+</ol>
+<h3 id="Style"><a href="#Style" class="headerlink" title="Style"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/category/style" target="_blank" rel="noopener">Style</a></h3><p>Style helps digital elements coexist within a physical environment, creating delight for users while enhancing the usability of interactions. From the legibility of type, to the placement of sounds, to the scale and lighting of objects, attention to style can both refine and enrich an experience.</p>
+<ul>
+<li><p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/color_design" target="_blank" rel="noopener">Color design</a></p>
+</li>
+<li><p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/typography" target="_blank" rel="noopener">Typography</a></p>
+</li>
+</ul>
+<h3 id="App-patterns"><a href="#App-patterns" class="headerlink" title="App patterns"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/category/app_patterns" target="_blank" rel="noopener">App patterns</a></h3><p>Create app experiences that span across the spectrum of mixed reality. From immersive apps that fully encompass the user’s environment, to enhanced environment apps that add a digital layer onto the physical world. Learn how the Universal Windows Platform (UWP) provides the framework for all mixed reality experiences.</p>
+<ul>
+<li><p>Room scan visualization</p>
+</li>
+<li><p>Gaze indicator</p>
+</li>
+</ul>
+<h3 id="Controls"><a href="#Controls" class="headerlink" title="Controls"></a>Controls</h3><p>Learn how to leverage these fundamental UI elements, including cursors, loading indicators, and text to create powerful mixed reality experiences.</p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/text_in_unity" target="_blank" rel="noopener">Text in Unity</a></li>
+</ul>
+<p>Text is one of the most important components in holographic apps. To display text in Unity, there are two types of text components you can use — UI Text and 3D Text Mesh.<br>Unity assumes all new elements added to a scene are 1 Unity Unit in size, or 100% transform scale, which translates to about 1 meter on HoloLens.<br>Most visual designers use points to define font sizes in the real world. There are about 2835 (2,834.645666399962) points in 1 meter. Based on the point system conversion to 1 meter and Unity’s default Text Mesh font size of 13, the simple math of 13 divided by 2835 equals 0.0046 (0.004586111116 to be exact) provides a good standard scale to start with (some may wish to round to 0.005).</p>
+<p>如果是默认以13号Arial字体为基准，则需要将3D TextMesh Scale 到 0.005，也就是说在Unity的World Scene是以1米为基准单位，那么13号字，大概是0.005米<br>如果是基于Canvas的UI Text，则只有3D Text字体的1/10，也就是缩放比例为0.0005<br>为减少重复的设置，HoloTookit-Unity提供了对应的UI Text 和 3D Text Mesh的Perfab，同时因为Unity’s default font material does not support occlusion. 所以提供了一个Shader支持Occlusion<br>对于字体的大小，根据与人眼的距离来调整，一般推荐使用Segoe UI字型，30Pt大小</p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/interactable_object" target="_blank" rel="noopener">Interactable Object</a><br>A ‘button’ has long been a metaphor used for triggering an event in the 2D abstract world. In the three-dimensional mixed reality world, we don’t have to be confined to this world of abstraction anymore. Anything can be an Interactable object that triggers an event. An interactable object can be represented as anything from a coffee cup on the table to a balloon floating in the air.<br>using these standard interaction states: observation, observation targeted, ready and pressed. </li>
+</ul>
+<p>在交互元素上大量使用动画效果，Using 3D models imported from modeling software, we can create an Interactable object that resembles real life object. Since it’s a digital object, we can add magical interactions to it.</p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/object_collection" target="_blank" rel="noopener">Object Collection</a><br>Object collection is a script which helps you lay out an array of objects in a predefined three-dimensional shape. It supports four different surface styles - plane, cylinder, sphere and scatter. You can adjust the radius and size of the objects and the space between them. Object collection supports any object from Unity - both 2D and 3D.</li>
+</ul>
+<p><a href="https://github.com/Microsoft/MRDesignLabs_Unity_PeriodicTable这个例子展现了Interactable" target="_blank" rel="noopener">https://github.com/Microsoft/MRDesignLabs_Unity_PeriodicTable这个例子展现了Interactable</a> Object和Object Collection两个设计理念。</p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/progress" target="_blank" rel="noopener">Progress</a><br>A progress control provides feedback to the user that a long-running operation is underway. It can mean that the user cannot interact with the app when the progress indicator is visible, and can also indicate how long the wait time might be, depending on the indicator used.</li>
+</ul>
+<p>There are two options to show the user that an operation is underway – a Progress bar or a Progress ring.</p>
+<p>Best practices : </p>
+<ol>
+<li>Tightly couple billboarding or tag-along to the display of Progress since the user can easily move their head into empty space and lose context. Your app might look like it has crashed if the user is unable to see anything. Billboarding and tag-along is built into the Progress prefab.</li>
+<li>If it takes more than few seconds to load your app data, it’s always good to provide status information about what is happening to the user. The Progress prefab provides various visual styles including the Windows standard ring-type progress for providing status. You can also use a custom mesh with an animation if you want the style of your progress to align to your app’s brand.</li>
+</ol>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/app_bar_and_bounding_box" target="_blank" rel="noopener">App bar and bounding box</a><br>The App bar is a object-level menu containing a series of buttons that displays on the bottom edge of a hologram’s bounds. This pattern is commonly used to give users the ability to remove and adjust holograms.<br>Since this pattern is used with objects that are world locked, as a user moves around the object the App bar will always display on the objects’ side closest to the user. 也就是物体能感知到用户的焦点发生改变，自动调整App bar的位置。<br>The App bar was designed primarily as a way to manage placed objects in a user’s environment. Coupled with the bounding box, a user has full control over where and how objects are oriented in mixed reality. 当要对物体做transform操作时，使用Bounding Box来做平移，缩放，旋转操作。</li>
+</ul>
+<h3 id="Resource"><a href="#Resource" class="headerlink" title="Resource"></a>Resource</h3><ul>
+<li><p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/case_study_-_building_holosketch,_a_spatial_layout_and_ux_sketching_app_for_hololens" target="_blank" rel="noopener">HoloSketch</a><br>HoloSketch is an on-device spatial layout and UX sketching tool for HoloLens to help build holographic experiences.<br>可以在Holoens里设计MR应用原型，可以快速原型设计，优化交互体验</p>
+</li>
+<li><p><a href="http://fluent.microsoft.com/" target="_blank" rel="noopener">Fluent Design System</a><br>适用于所有微软产品的基础设计理念，是微软下一代Natual UI的设计，交互尝试：Light(高亮，阴影)，Depth(3D)，Motion(Animation, Physcial), Material, Scale<br>可以看到UI设计上增加了很多3D游戏相关的视觉感受，UI游戏化的趋势。</p>
+</li>
+<li><p><a href="https://developer.microsoft.com/en-us/windows/apps/design/" target="_blank" rel="noopener">UWP app design and UI</a></p>
+</li>
+</ul>
+<h2 id="Rendering"><a href="#Rendering" class="headerlink" title="Rendering"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/rendering" target="_blank" rel="noopener">Rendering</a></h2><p>Holographic rendering enables your app to draw a hologram in a precise location in the world around the user, whether it’s precisely placed in the physical world or within a virtual realm you’ve created.</p>
+<p>Mixed reality headsets (both HoloLens and immersive headsets) continually track the position and orientation of the user’s head relative to their surroundings. As your app begins preparing its next frame, the system predicts where the user’s head will be in the future at the exact moment that the frame will show up on the displays. Based on this prediction, the system calculates the view and projection transforms to use for that frame. </p>
+<p>Regardless of the viewport size, once the frame has been rendered by the application, the system will upscale the image to fill the entirety of the displays.</p>
+<p>For any given frame, your app must render using the view transform, projection transform, and viewport resolution provided by the system. Additionally, your application must never assume that any rendering/view parameter remains fixed from frame-to-frame. Engines like Unity handle all these transforms for you in their own Camera objects, so that the physical movement of your users and the state of the system is always respected. </p>
+<p>Windows Mixed Reality introduces the concept of a holographic camera. Holographic cameras are similar to the traditional camera found in 3D graphics texts: they define both the extrinsic (position and orientation) and intrinsic camera properties (ex: field-of-view) used to view a virtual 3D scene. Unlike traditional 3D cameras, the application is not in control of the position, orientation, and intrinsic properties of the camera. Rather, the position and orientation of the holographic camera is implicitly controlled by the user’s movement. The user’s movement is relayed to the application on a frame-by-frame basis via a view transform. Likewise, the camera’s intrinsic properties are defined by the device’s calibrated optics and relayed frame-by-frame via the projection transform.</p>
+<p>In general your app will be rendering for a single stereo camera. </p>
+<p>When rendering medical MRI or engineering volumes in 3D, <a href="https://developer.microsoft.com/en-us/windows/mixed-reality/volume_rendering" target="_blank" rel="noopener">volume rendering</a> techniques are often used. These techniques can be particularly interesting in mixed reality, where users can naturally view such a volume from key angles, simply by moving their head.</p>
+<ul>
+<li><a href="https://channel9.msdn.com/events/GDC/GDC-2017/GDC2017-008" target="_blank" rel="noopener">Windows Holographic Rendering: One SDK to Target VR and AR Ecosystems</a><br>本视频讨论了如下几个主题:<br>Positional tracking and rendering: latency, forward-prediction<br>Holographic rendering with DirectX: stereo rendering, frame timing, debugging tools, and best practices<br>Remote rendering from a PC to your HoloLens using remoting to increase scene complexity<br>Developing shared holographic experiences on HoloLens.</li>
+</ul>
+<ul>
+<li><p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/rendering_in_directx" target="_blank" rel="noopener">Rendering in DirectX</a></p>
+</li>
+<li><p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/camera_in_unity" target="_blank" rel="noopener">Camera in Unity</a><br>在Unity中，Camera组件负责立体渲染(stereo rendering)和头部跟踪(head tracking)的处理</p>
+</li>
+</ul>
+<p>When you wear a mixed reality headset, it becomes the center of your holographic world. The Unity Camera component will automatically handle stereoscopic rendering and will follow your head movement and rotation when your project has “Virtual Reality Supported” selected with “Windows Mixed Reality” as the device (in the Other Settings section of the Windows Store Player Settings). </p>
+<p>有些配置需要根据不同情况手工配置，包括Mixed Reality Rendering(根据设备是VR，还是MR，选择Skybox或者透明背景色)，Positioning the Camera(对Hololens来说，用户就是Main Camera，用户的起点就是Camera的原点)，Clip planes(Holoens的near clip planes建议经验值是0.3 ~ 0.85，这样的距离会让看东西舒服一些)</p>
+<h2 id="Gaze"><a href="#Gaze" class="headerlink" title="Gaze"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/gaze" target="_blank" rel="noopener">Gaze</a></h2><p>Gaze is the first form of input and is a primary form of targeting within mixed reality. Gaze tells you where the user is looking in the world and lets you determine their intent. In the real world, you’ll typically look at an object that you intend to interact with. This is the same with gaze.<br>Mixed reality headsets use the position and orientation of your user’s head, not their eyes, to determine their gaze vector. You can think of this vector as a laser pointer straight ahead from directly between the user’s eyes. As the user looks around the room, your application can intersect this ray, both with its own holograms and with the spatial mapping mesh to determine what virtual or real-world object your user may be looking at.</p>
+<p>As a mixed reality developer, you can do a lot with gaze:</p>
+<ol>
+<li>Your app can intersect gaze with the holograms in your scene to determine where the user’s attention is.</li>
+<li>Your app can target gestures and controller presses based on the user’s gaze, letting the user select, activate, grab, scroll, or otherwise interact with their holograms.</li>
+<li>Your app can let the user place holograms on real-world surfaces, by intersecting their gaze ray with the spatial mapping mesh.</li>
+<li>Your app can know when the user is not looking in the direction of an important object, which can lead your app to give visual and audio cues to turn towards that object.</li>
+</ol>
+<p>Most apps should use a <a href="https://developer.microsoft.com/en-us/windows/mixed-reality/cursors" target="_blank" rel="noopener">cursor</a> (or other auditory/visual indication) to give the user confidence in what they’re about to interact with. You typically position this cursor in the world where their gaze ray first interacts an object, which may be a hologram or a real-world surface.<br>Once the user has targeted a hologram or real-world object using their gaze, their next step is to take action on that object. The primary ways for a user to take action are through gestures, motion controllers and voice.</p>
+<h3 id="Cursors"><a href="#Cursors" class="headerlink" title="Cursors"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/cursors" target="_blank" rel="noopener">Cursors</a></h3><p>A gaze indicator, basically a cursor, provides continuous feedback for the user to understand what the HoloLens understands about their intentions.</p>
+<p>Cursor Design Principles ：</p>
+<ol>
+<li>The cursor is always present</li>
+<li>The cursor should be no larger than the available targets, allowing users to easily interact with and view the content.</li>
+<li>Avoid obstructing content</li>
+<li>Although there is no one right cursor shape, we recommend that you use a directionless shape like a torus or something else. 一个例外是需要指示用户调整注意力到系统指定的位置</li>
+<li>A donut or torus shaped cursor works for a lot of applications.</li>
+</ol>
+<p>We could use the cursor to display the user’s input state.We could also use the cursor to make the user aware that there is a voice command available. These different cursor states can be implemented in different ways. You might implement these different states by modeling the cursor like a state machine.</p>
+<h3 id="Gaze-targeting"><a href="#Gaze-targeting" class="headerlink" title="Gaze targeting"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/gaze_targeting" target="_blank" rel="noopener">Gaze targeting</a></h3><p><strong>Optimal target size at 2 meter distance : 1.5-3 degree, 5-10cm height</strong></p>
+<p>Users will often fail to find UI elements that are positioned very high or very low in their field of view, focusing most of their attention on areas around their main focus (usually roughly eye level). Placing most targets in some reasonable band around eye level can help. Given the tendency for users to focus on a relatively small visual area at any time (the attentional cone of vision is roughly 10 degrees), grouping UI elements together to the degree that they’re related conceptually can leverage attention-chaining behaviors from item to item as a user moves their gaze through an area. </p>
+<h3 id="Gaze-in-Unity"><a href="#Gaze-in-Unity" class="headerlink" title="Gaze in Unity"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/gaze_in_unity" target="_blank" rel="noopener">Gaze in Unity</a></h3><p>Conceptually, gaze is implemented by projecting a ray from the user’s head where the headset is, in the forward direction they are facing and determining what that ray collides with. In Unity, the user’s head position and direction are exposed through the Unity Main Camera.<br>Calling Physics.RayCast results in a RaycastHit structure which contains information about the collision including the 3D point where collision occurred and the other GameObject the gaze ray collided with.</p>
+<p>Cursor的管理，根据不同的状态，修改Cursor的位置，大小，形状。Cursor可以看做是一个一直存在的Mesh Object。那么在架构设计上是用一个CursorManager来管理场景中所有的Cursor的状态变化，还是每个Hologram自行处理各自的Cursor的状态变更？ 从文档上看，倾向于前者，原因没看懂？？？<br>While the example above demonstrates how to do a single raycast in an update loop to find the Gaze target, it is recommended to do this in a single object managing gaze instead of doing this in any object that is potentially interested in the object being gazed at. This lets your app save processing by doing just one gaze raycast each frame.</p>
+<h3 id="Holograms-210-Gaze"><a href="#Holograms-210-Gaze" class="headerlink" title="Holograms 210: Gaze"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/holograms_210" target="_blank" rel="noopener">Holograms 210: Gaze</a></h3><p>从设计/用户体验的角度，使用好Gaze，包括Cursor的不同形态的变换来通知用户注意(一般形态，检测到手势时形态，通知用户要留意其他方向时形态)</p>
+<p>这个例子主要实现Gaze相关的特性：</p>
+<ul>
+<li><p>making the cursor and our holograms gaze-aware: both will change based on where the user is looking - or where the user is not looking. This makes them context-aware.<br>凝视感知，让用户感知到系统变化。头部也就是Main Camera即是Gaze的起点，Gaze到某个对象，主要是通过Physics.Raycast()函数来处理</p>
+</li>
+<li><p>add feedback to our cursor and holograms to give the user more context on what is being targeted. This feedback can be audio and visual.<br>给Holograms增加Interactible能力，也就是在对象知道用户正在No-Gaze，Gaze，Select(GestureRecognizer)它，同时可以据此改变Cursor的形态，实现原理也是依靠Raycast()</p>
+</li>
+<li><p>targeting techniques to help users hit smaller targets.<br>GazeStabilizer</p>
+</li>
+<li><p>how to draw the user’s attention to holograms with a directional indicator.<br>这个应用在RoboRaid里面感受很明显，当敌人随机出现在某个位置时，通过Cursor的方向提示通知用户。实现方式是计算当前Camera与目标对象的Direction </p>
+</li>
+</ul>
+<p>看不懂DirectionIndicator.cs的计算方法，需要看 空间 算法相关的书了</p>
+<ul>
+<li>take your holograms with the user as she moves around in your world.<br>A tag-along object never fully leaves the user’s view. You can think of the a tag-along as being an object attached to the user’s head by rubber bands. As the user moves, the content will stay within an easy glance by sliding towards the edge of the view without completely leaving. When the user gazes towards the tag-along object, it comes more fully into view.<br>与Home类似，这个Tagalong Hologram会跟随用户的头部运动，一直保持在用户的视场内。 注意那个ChestButton_Center就是AstroMan胸口的倒三角标志。实现的原理是通过计算F</li>
+</ul>
+<p>总结来说，就是如下几个功能：GazeManager，CursorManager，GestureManager，Interactible Object初探, directional indicator cursor(目标对象的方向指示)，billboarding(位置不变，总是面向用户而旋转), Tag-Along(总是显示在用户的视场范围内)</p>
+<p>从ModelExplorer的目录结构，对我们项目Assets目录结构的定义也有借鉴意义：<br>Holograms       // 存放prefab相关内容<br>HoloToolkit     // HoloToolkit第三方库<br>Resources      // 存放资源文件，按照Materials, Modles, Shaders, Sounds, Textures 目录分类<br>Scripts        // 项目相关脚本</p>
+<h2 id="Gesture"><a href="#Gesture" class="headerlink" title="Gesture"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/gestures" target="_blank" rel="noopener">Gesture</a></h2><p>Hand gestures allow users take action in mixed reality.  While hand gestures do not provide a precise location in space, the simplicity of putting on a HoloLens and immediately interacting with content allows users to get to work without any accessories.</p>
+<p>To take actions, hand gestures use gaze as targeting mechanism. The combination of gaze and the Select gesture results in a gaze-and-commit interaction. </p>
+<p>HoloLens recognizes hand gestures by tracking the position of either or both hands that are visible to the device. HoloLens sees hands when they are in either the <strong>ready state</strong> (back of the hand facing you with index finger up) or the <strong>pressed state</strong> (back of the hand facing you with the index finger down). When hands are in other poses, the HoloLens will ignore them. 也就是目前Holoens还只支持Tap，Bloom两种手势。但可以在此基础上扩展，比如2次Tap代表新的手势，2个手Tap，Hold，可以做Scale</p>
+<p>HoloLens looks for hand input within a cone in front of the device, known as the gesture frame, which extends above, below, left and right of the display frame where holograms appear. This lets you keep your elbow comfortably at your side while providing hand input. </p>
+<p>For each hand that HoloLens detects, you can access its position (without orientation) and its pressed state. As the hand nears the edge of the gesture frame, you’re also provided with a direction vector, which you can show to the user so they know how to move their hand to get it back where HoloLens can see it.</p>
+<p>Interactions: Low-level spatial input</p>
+<ol>
+<li><p>Select(known as air-tap) : ready state -&gt; pressed state -&gt; ready state<br>也可以使用”Select”命令达成同样的效果<br>Think of Select as the equivalent of a mouse click, a universal action that you learn once and then apply across all your apps, using either hands, motion controllers or voice.</p>
+</li>
+<li><p>Home(known as Bloom) is a special system action that is used to go back to the Start Menu.</p>
+</li>
+</ol>
+<p>Composite gestures: High-level spatial input<br>Your app can recognize more than just individual presses and releases. By combining presses and releases with movement of your hand, you can perform more complex composite gestures as well:<br><strong>Tap</strong>: A Select press and release. 鼠标单击</p>
+<p><strong>Hold</strong>: Holding a Select press beyond the system’s Hold threshold. 鼠标左键长按<br>Hold gestures are similar to a touch tap-and-hold and can be used to take a secondary action, such as picking up an object instead of activating it, or showing a context menu.</p>
+<p><strong>Manipulation</strong>: A Select press, followed by <strong>absolute</strong> movement of your hand through 3-dimensional world. 鼠标左键选中，可以大范围的移动<br>Manipulation gestures can be used to move, resize or rotate a hologram when you want the hologram to react 1:1 to the user’s hand movements.</p>
+<p><strong>Navigation</strong>: A Select press, followed by relative movement of your hand or the controller within a 3-dimensional unit cube, potentially on axis-aligned rails. 鼠标左键选中，相对小范围的移动<br>Navigation gestures operate like a virtual joystick, and can be used to navigate UI widgets, such as radial menus. Navigation can be used to build velocity-based continuous scrolling or zooming gestures, similar to scrolling a 2D UI by clicking the middle mouse button and then moving the mouse up and down.</p>
+<p>One benefit of using gesture recognition is that you can configure a gesture recognizer just for the gestures the currently targeted hologram can accept. 通过定制gestureRecoginzer的行为，可以让Hologram支持不同的手势事件。</p>
+<h3 id="Gesture-design"><a href="#Gesture-design" class="headerlink" title="Gesture design"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/gesture_design" target="_blank" rel="noopener">Gesture design</a></h3><p>Interaction on HoloLens is built around Gaze, Gesture, and Voice. Interactions are built on gaze to target and gesture or voice to act upon whatever element has been targeted.<br>The three key component gestures of HoloLens : Bloom, Air tap, Tap and hold</p>
+<p>Hold is simply maintaining the downward finger position of the air tap. This allows “mouseup”/“mousedown” interactions, “click and drag” interactions, and more.</p>
+<p>In general, gestures can be thought of as being discrete or continuous in nature, Discrete gestures are those in which there is a binary ‘completed’/’not completed’ state of the gesture. The air tap is the simplest of these</p>
+<p>Continuous gestures are those in which the amount of action within the gesture matters to the output.  Movement is a key category of these continuous gestures.</p>
+<p>For both discrete and continuous gestures on HoloLens, the hand must be within a “gesture frame”, in a range that the gesture-sensing cameras can see appropriately (very roughly from nose to waist, and between the shoulders).</p>
+<p>In the case of continuous gestures in particular, there is some risk of users moving their hands outside of the gesture frame while in mid-gesture (while moving some holographic object, for example), and losing their intended outcome. 这个需要注意，当手势动作超出了识别范围，程序应该如何处理：</p>
+<ol>
+<li>User education on the gesture frame’s existence and approximate boundaries</li>
+<li>Notifying users when their gestures are nearing/breaking the gesture frame boundaries within an application, to the degree that a lost gesture will lead to undesired outcomes. </li>
+<li>Consequences of breaking the gesture frame boundaries should be minimized. In general, this means that the outcome of a gesture should be stopped at the boundary, but not reversed. </li>
+</ol>
+<h3 id="Gaze-gestures-and-motion-controllers-in-DirectX"><a href="#Gaze-gestures-and-motion-controllers-in-DirectX" class="headerlink" title="Gaze, gestures, and motion controllers in DirectX"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/gaze,_gestures,_and_motion_controllers_in_directx" target="_blank" rel="noopener">Gaze, gestures, and motion controllers in DirectX</a></h3><p>To access the user’s gaze, you use the SpatialPointerPose type.<br>There are two levels of API you can target when handling gestures or motion controllers in mixed reality:</p>
+<ul>
+<li>Interactions (SourcePressed, SourceReleased and SourceUpdated), accessed using a <strong>SpatialInteractionManager</strong><br>可以处理Hand，MotionController，Voice三种SpatialInteractionSource</li>
+<li>Composite gestures (Tapped, Hold, Manipulation, Navigation), accessed using a <strong>SpatialGestureRecognizer</strong></li>
+</ul>
+<p>By routing interactions from the SpatialInteractionManager to a hologram’s SpatialGestureRecognizer, apps can detect Tap, Hold, Manipulation, and Navigation events uniformly across hands, voice, and spatial input devices, without having to handle presses and releases manually.</p>
+<h3 id="Gestures-and-motion-controllers-in-Unity"><a href="#Gestures-and-motion-controllers-in-Unity" class="headerlink" title="Gestures and motion controllers in Unity"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/gestures_and_motion_controllers_in_unity" target="_blank" rel="noopener">Gestures and motion controllers in Unity</a></h3><p>Unity provides both low level access (raw position/orientation/velocity information) and a high level gesture recognizer that exposes more complex gesture events (for example: tap, double tap, hold, manipulation and navigation).</p>
+<p>Unity提供的API基本是Win10 Holographic API的封装:</p>
+<ul>
+<li><p>Interactions: Low-level spatial input<br>Namespace: UnityEngine.VR.WSA.Input<br>Types: InteractionManager, InteractionSourceState, InteractionSource, InteractionSourceProperties, InteractionSourceKind, InteractionSourceLocation<br>Low-level spatial input allows you to get much more detailed information on interaction sources, such as the source’s hand pose or pointing pose, or the state of a motion controller’s touchpad or thumbstick.</p>
+</li>
+<li><p>Gestures: High-level spatial input<br>Namespace: UnityEngine.VR.WSA.Input<br>Types: GestureRecognizer, GestureSettings, InteractionSourceKind</p>
+</li>
+</ul>
+<p>You can access the hand pose through either Unity’s cross-vendor input API (VR.InputTracking.GetLocalPosition/Rotation) or through the Windows-specific API (sourceState.sourcePose.TryGetPosition/Rotation).</p>
+<p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/input_porting_guide_for_unity" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/input_porting_guide_for_unity</a></p>
+<h3 id="Holograms-211-Gesture"><a href="#Holograms-211-Gesture" class="headerlink" title="Holograms 211: Gesture"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/holograms_211" target="_blank" rel="noopener">Holograms 211: Gesture</a></h3><p>Hand detected, Navigation gesture, Manipulation gesture<br>本教程除了Holograms 101的air-tap外，还提供关于Gesture的如下特性：</p>
+<ul>
+<li><p>Detect when the user’s hand is being tracked and provide feedback to the user.<br>跟踪手的状态，并通过Cursor可视化的方式反馈给用户<br>InteractionManager(SourceDetected, SourceLost, SourcePressed, SourceReleased)，通过这些事件可以感知到gesture frame的范围</p>
+</li>
+<li><p>Use a <strong>navigation</strong> gesture to rotate our holograms.<br>介绍navigation手势的用途及实现： scrolling or zooming<br>GestureRecognizer.SetRecognizableGestures(GestureSettings.NavigationX)</p>
+</li>
+</ul>
+<ol>
+<li>Instantiate the NavigationRecognizer as a new GestureRecognizer.</li>
+<li>Use SetRecognizableGestures to recognize NavigationX and Tap gestures.</li>
+<li>Handle NavigationStarted, NavigationUpdated, NavigationCompleted, NavigationCanceled events，记录当前状态</li>
+</ol>
+<ul>
+<li>Provide feedback when the user’s hand is about to go out of view.</li>
+</ul>
+<ul>
+<li>Use <strong>manipulation</strong> events to allow users to move holograms with their hands.<br>介绍manipulation手势的用途及实现： move, resize or rotate<br>GestureRecognizer.SetRecognizableGestures(GestureSettings.ManipulationTranslate);</li>
+</ul>
+<p>例子最后的模型expansion效果，值得借鉴</p>
+<h2 id="Voice-input"><a href="#Voice-input" class="headerlink" title="Voice input"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/voice_input" target="_blank" rel="noopener">Voice input</a></h2><p>Voice is one of the three key forms of input on HoloLens. You simply gaze at a hologram and speak your command.  Voice input can be a natural way to communicate your intent. Voice is especially good at traversing complex interfaces because it lets users cut through nested menus with one command.Voice input is powered by the same engine that supports speech in all other Universal Windows Apps.</p>
+<ul>
+<li>The “select” command<br>Even without specifically adding voice support to your app, your users can activate your holograms simply by saying “select”. This behaves the same as a press and release with your hand. You will hear a sound and see a tooltip with “select” appear as confirmation.</li>
+</ul>
+<p>也可以说出”Hey Cortana”来呼叫Cortana来做更多的语音命令工作。对于中文语音的支持，现在还不支持，要做的话，需要第三方的语音识别库。</p>
+<ul>
+<li>“See It, Say It”<br>HoloLens has a “see it, say it” model for voice input, where labels on buttons tell users what voice commands they can say as well. For example, when looking at a 2D app, a user can say the “Adjust” command which they see in the App bar to adjust the position of the app in the world.</li>
+</ul>
+<p>When apps follow this rule, users can easily understand what to say to control the system. To reinforce this, while gazing at a button, you will see a “voice dwell” tooltip that comes up after a second if the button is voice-enabled and displays the command to speak to “press” it.</p>
+<p>可以加一个麦克风的图标，然后在ICON旁边或上面显示语音命令。</p>
+<p>There are also a number of voice commands you can say while gazing at a hologram to quickly perform manipulation tasks ：<br>Face me， Bigger | Enhance，Smaller</p>
+<ul>
+<li>Dictation<br>Rather than typing with air-taps, voice dictation can be more efficient to enter text into an app. This can greatly accelerate input with less effort for the user.<br>这个就是Speech-To-Text功能，相比打字输入，的确是人性化很多，难点在于准确度和本地化的问题。在中国，科大讯飞应该会有优势。</li>
+</ul>
+<p>At this time, all speech recognition on HoloLens is tuned and optimized specifically to native speakers of United States English.</p>
+<h3 id="Voice-design"><a href="#Voice-design" class="headerlink" title="Voice design"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/voice_design" target="_blank" rel="noopener">Voice design</a></h3><p>Because users speak with a variety of dialects and accents, proper choice of speech keywords will make sure that your users’ commands are interpreted unambiguously.</p>
+<ul>
+<li>Bset Practices<br><strong>Use concise commands</strong> - When possible, choose keywords of two or more syllables. One-syllable words tend to use different vowel sounds when spoken by persons of different accents. Example: “Play video” is better than “Play the currently selected video”<br><strong>Use simple vocabulary</strong> - Example: “Show note” is better than “Show placard”<br><strong>Make sure commands are non destructive</strong> - Make sure any action that can be taken by a speech command is non destructive and can easily be undone in case another person speaking near the user accidentally triggers a command.<br><strong>Avoid similar sounding commands</strong> - Avoid registering multiple speech commands that sound very similar. Example: “Show more” and “Show store” can be very similar sounding.<br><strong>Unregister your app when not it use</strong> - When your app is not in a state in which a particular speech command is valid, consider unregistering it so that other commands are not confused for that one.<br><strong>Test with different accents</strong> - Test your app with users of different accents.<br>Maintain voice command consistency - If “Go back” goes to the previous page, maintain this behavior in your applications.<br><strong>Avoid using system commands</strong> - The following voice commands are reserved for the system. These should not be used by applications.<br>“Hey Cortana”<br>“Select”</li>
+</ul>
+<p>Voice strengths : </p>
+<ol>
+<li><p>Voice input is a natural way to communicate our intents. Voice is especially good at interface traversals because it can help users cut through multiple steps of an interface (a user might say “go back” while looking at Web page, instead of having to go up and hit the back button in the app). This small time savings has a powerful emotional effect on user’s perception of the experience and gives them a small amount superpower.</p>
+</li>
+<li><p>Using voice is also a convenient input method when we have our arms full or are multi-tasking. On devices where typing on a keyboard is difficult, voice dictation can be an efficient alternative way to input. </p>
+</li>
+<li><p>Lastly, in some cases when the range of accuracy for gaze and gesture are limited, Voice might be a user’s only trusted method input.</p>
+</li>
+</ol>
+<p>Voice’s weaknesses :</p>
+<ol>
+<li><p>Voice also has some weaknesses. Fine-grained control is one of them. (for example a user might say “louder,” but can’t say how much. “A little” is hard to quantify. Moving or scaling things with voice is also difficult (voice does not offer the granularity of control).</p>
+</li>
+<li><p>Voice can also be imperfect. Sometimes a voice system incorrectly hears a command or fails to hear a command. Recovering from such an errors is a challenge in any interface. </p>
+</li>
+<li><p>Lastly, voice may not be socially acceptable in public places. There are some things that users can’t or shouldn’t say. These cliffs allow speech to be used for what it is best at.</p>
+</li>
+</ol>
+<h3 id="Voice-input-in-DirectX"><a href="#Voice-input-in-DirectX" class="headerlink" title="Voice input in DirectX"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/voice_input_in_directx" target="_blank" rel="noopener">Voice input in DirectX</a></h3><ul>
+<li>Use a SpeechRecognizer for continuous recognition of voice commands</li>
+</ul>
+<ol>
+<li>create a new Windows::Media::SpeechRecognition::SpeechRecognizer instance</li>
+<li>create a list of speech commands for the recognizer to listen for</li>
+<li>The list of commands is loaded into the list of constraints for the speech recognizer. This is done by using a SpeechRecognitionListConstraint object.</li>
+<li>Subscribe to the ResultGenerated event on the speech recognizer’s SpeechContinuousRecognitionSession. This event notifies your app when one of your commands has been recognized.</li>
+<li>Your OnResultGenerated event handler receives event data in a SpeechContinuousRecognitionResultGeneratedEventArgs instance. Save the event data so that you can make use of it in a subsequent update loop.</li>
+<li>Make use of the data in Update() loop</li>
+</ol>
+<ul>
+<li>Use dictation for one-shot recognition of speech phrases and sentences</li>
+</ul>
+<p>You can configure a speech recognizer to listen for phrases or sentences spoken by the user. In this case, we apply a SpeechRecognitionTopicConstraint that tells the speech recognizer what type of input to expect. </p>
+<p>通过识别一段语句中是否有需要的命令来执行动作。</p>
+<p>Conditions in the environment can sometimes prevent speech recognition from working. For example, the room might be too noisy or the user might speak at too high a volume. The speech recognition API provides info, where possible, about conditions that have caused a degradation in quality.</p>
+<ul>
+<li>Use speech synthesis to provide audible voice prompts<br>也就是传统的TTS，将文本转换为语音。除了使用此种方案，根据不同的场景，也可以使用pre-recorded voice clip, a visual UI的方式达成<br>The holographic speech samples use speech synthesis to provide audible instructions to the user. </li>
+</ul>
+<ol>
+<li>using Windows::Media::SpeechSynthesis::SpeechSynthesizer()创建SpeechSynthesizer对象，</li>
+<li>准备语音文本</li>
+<li>使用SynthesizeTextToStreamAsync开启异步合成任务，生成byte stream</li>
+<li>使用HRTF Audio effect，将byte stream播放出来</li>
+</ol>
+<p><a href="https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/SpeechRecognitionAndSynthesis" target="_blank" rel="noopener">https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/SpeechRecognitionAndSynthesis</a></p>
+<p><a href="https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/HolographicVoiceInput" target="_blank" rel="noopener">https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/HolographicVoiceInput</a></p>
+<h3 id="Voice-input-in-Unity"><a href="#Voice-input-in-Unity" class="headerlink" title="Voice input in Unity"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/voice_input_in_unity" target="_blank" rel="noopener">Voice input in Unity</a></h3><p>Unity提供了三种方法支持Voice Input，将SpeechRecognizer的应用场景更细化，这些类都在在UnityEngine.Windows.Speech namespace ： </p>
+<ol>
+<li>With the KeywordRecognizer (one of two types of PhraseRecognizers), your app can be given an array of string commands to listen for. </li>
+<li>With the GrammarRecognizer (the other type of PhraseRecognizer), your app can be given an SRGS file defining a specific grammar to listen for. </li>
+<li>With the DictationRecognizer, your app can listen for any word and provide the user with a note or other display of their speech.</li>
+</ol>
+<p>要使用Voice Input，首先要开启Microphone能力:<br>Edit -&gt; Project Settings -&gt; Player -&gt; Windows Store -&gt; Publishing Settings -&gt; Capabilities -&gt; Microphone</p>
+<ul>
+<li>Phrase Recognition<br>To enable your app to listen for specific phrases spoken by the user then take some action, you need to:</li>
+</ul>
+<ol>
+<li>Specify which phrases to listen for using a KeywordRecognizer or GrammarRecognizer</li>
+<li>Handle the OnPhraseRecognized event and take action corresponding to the phrase recognized</li>
+</ol>
+<ul>
+<li>Dictation<br>Use the DictationRecognizer to convert the user’s speech to text. The DictationRecognizer exposes dictation functionality and supports registering and listening for hypothesis and phrase completed events, so you can give feedback to your user both while they speak and afterwards. </li>
+</ul>
+<ol>
+<li>Create a new DictationRecognizer</li>
+<li>Handle Dictation events</li>
+<li>Start the DictationRecognizer</li>
+</ol>
+<p>除了开启 <strong>Microphone</strong> 能力外，还要开启 <strong>Internet Client</strong> 能力。</p>
+<h3 id="Holograms-212-Voice-Input"><a href="#Holograms-212-Voice-Input" class="headerlink" title="Holograms 212: Voice Input"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/holograms_212" target="_blank" rel="noopener">Holograms 212: Voice Input</a></h3><p>一些设计语音命令DO and Don’t<br><strong>DO</strong></p>
+<ul>
+<li>Create concise commands; </li>
+<li>Use a simple vocabulary; </li>
+<li>Be consistent<br><strong>DON’T</strong></li>
+<li>Using single syllable commands<br>Use “Play Video”, not “Play”</li>
+<li>Use system commands<br>Don’t use : Select, Go Back, Scroll Tool, Zoom Tool, Drag Tool, Adjust, Remove</li>
+<li>Use similar Sounds</li>
+</ul>
+<p>When using the Dictation Recognizer, keep in mind that:</p>
+<ul>
+<li>You must be connected to WiFi for the Dictation Recognizer to work.</li>
+<li>Timeouts occur after a set period of time. There are two timeouts to be aware of:<br>If the recognizer starts and doesn’t hear any audio for the first five seconds, it will timeout.<br>If the recognizer has given a result but then hears silence for twenty seconds, it will timeout.</li>
+<li>Only one type of recognizer (Keyword or Dictation) can run at a time.</li>
+</ul>
+<p>Grammar Recognizer to recognize the user’s speech according to an SRGS(Speech Recognition Grammar Specification) file, 制定简单的规则，提供一定的弹性，减少硬编码</p>
+<h2 id="Spatial-sound"><a href="#Spatial-sound" class="headerlink" title="Spatial sound"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/spatial_sound" target="_blank" rel="noopener">Spatial sound</a></h2><p>In Windows Mixed Reality, the audio engine provides the aural component of the mixed-reality experience by simulating 3D sound using direction, distance, and environmental simulations.<br>By analyzing how sound reaches both our ears, our brain determines the distance and direction of the object emitting the sound. An HRTF (or Head Related Transfer Function) simulates this interaction by modeling the spectral response that characterizes how an ear receives sound from a point in space. The spatial audio engine uses personalized HRTFs to expand the mixed reality experience, and simulate sounds that are coming from various directions and distances.</p>
+<p>Because the general principle of mixed reality is to ground holograms in the user’s physical world or virtual environment, most sounds from holograms should be spatialized.<br>Recommended use for spatial sound voices include:</p>
+<ul>
+<li>Gaze Mixing<br>highlighting objects, particularly when out of view. When a hologram needs a user’s attention, play a sound on that hologram (e.g. have a virtual dog bark). This helps the user to find the hologram when it is not in view.</li>
+<li>Audio Haptics<br>reactive audio for touchless interactions. For example, play a sound when the user’s hand or motion controller enters and exits the gesture frame. Or play a sound when the user selects a hologram.</li>
+<li>Immersion<br>ambient sounds surrounding the user</li>
+</ul>
+<p>Windows’ spatial sound engine only supports a 48k sample rate for playback. Most middleware, such as Unity, will automatically convert sound files into the supported format, but when using Windows Audio APIs directly please match the format of the content to the format supported by the effect.</p>
+<h3 id="Spatial-Sound-design"><a href="#Spatial-Sound-design" class="headerlink" title="Spatial Sound design"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/spatial_sound_design" target="_blank" rel="noopener">Spatial Sound design</a></h3><p>Spatial sound is a powerful tool for immersion, accessibility, and UX design in mixed reality applications. We use sound cues in our daily lives to locate objects, get someone’s attention, or get a better understanding of our environment. The more closely your app’s sound behaves like it does in the real world, the more convincing and engaging your virtual world will be.</p>
+<p>Spatial sound does four key things for mixed reality development: </p>
+<ul>
+<li>Grounding</li>
+<li>User attention</li>
+<li>Immersion</li>
+<li>Interaction design</li>
+</ul>
+<p>Best practices when using spatial sound:</p>
+<ul>
+<li>Real sounds work better than synthesized or unnatural sounds</li>
+<li>Expectation trumps simulation</li>
+<li>Most sounds should be spatialized</li>
+<li>Avoid invisible emitters</li>
+<li>Avoid spatial masking</li>
+</ul>
+<p>General concepts to keep in mind when using spatial sound:</p>
+<ul>
+<li>Spatial sound is a simulation</li>
+<li>Normalize all sounds</li>
+<li>Object discovery and user interfaces</li>
+<li>Use spatial sound over standard 3D sound as much as possible</li>
+</ul>
+<h3 id="Spatial-Sound-in-DirectX"><a href="#Spatial-Sound-in-DirectX" class="headerlink" title="Spatial Sound in DirectX"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/spatial_sound_in_directx" target="_blank" rel="noopener">Spatial Sound in DirectX</a></h3><p>Add spatial sound to your Windows Mixed Reality apps based on DirectX by using the XAudio2 and xAPO audio libraries.</p>
+<h3 id="Spatial-sound-in-Unity"><a href="#Spatial-sound-in-Unity" class="headerlink" title="Spatial sound in Unity"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/spatial_sound_in_unity" target="_blank" rel="noopener">Spatial sound in Unity</a></h3><p>By default, Unity does not load a spatializer plugin.<br>Spatial Sound, in Unity, is enabled using an audio spatializer plugin. The plugin files are bundled directly into Unity so enabling spatial sound is as easy as going to Edit &gt; Audio &gt; Spatializer and enabling the Microsoft HRTF extension. </p>
+<p>Spatial Sound is used in your Unity project by adjusting three settings on your Audio Source components. </p>
+<ul>
+<li>In the Hierarchy panel, select the game object that has an attached Audio Source</li>
+<li>In the Inspector panel, under the Audio Source component<br>Check the Spatialize option.<br>Set Spatial Blend to 3D (numeric value 1).<br>For best results, expand 3D Sound Settings and set Volume Rolloff to Custom Rolloff.</li>
+</ul>
+<h3 id="Holograms-220-Spatial-sound"><a href="#Holograms-220-Spatial-sound" class="headerlink" title="Holograms 220: Spatial sound"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/holograms_220" target="_blank" rel="noopener">Holograms 220: Spatial sound</a></h3><ul>
+<li><p>Provide gesture feedback using sound.</p>
+</li>
+<li><p>Sound, like light, can be occluded.<br>A classic example is a concert hall. When a listener is standing outside of the hall and the door is closed, the music sounds muffled. There is also typically a reduction in volume. When the door is opened, the full spectrum of the sound is heard at the actual volume.</p>
+</li>
+</ul>
+<p>Sound and Experience Design</p>
+<ul>
+<li>Normalize all sounds</li>
+<li>Design for an untethered experience</li>
+<li>Emit sound from logical locations on your holograms</li>
+<li>Familiar sounds are most localizable</li>
+<li>Be cognizant of user expectations</li>
+<li>Avoid hidden emitters</li>
+</ul>
+<p>Sound Mixing</p>
+<ul>
+<li>Target your mix for 70% volume on the HoloLens</li>
+<li>HoloLens at 100% volume should drown out external sounds</li>
+<li>Use the Unity AudioMixer to adjust categories of sounds</li>
+<li>Mix sounds based on the user’s gaze</li>
+<li>Building your mix</li>
+</ul>
+<h2 id="Spatial-mapping"><a href="#Spatial-mapping" class="headerlink" title="Spatial mapping"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/spatial_mapping" target="_blank" rel="noopener">Spatial mapping</a></h2><p>// TODO : 泛泛而看，有空要回来再细读<br>Spatial mapping provides a detailed representation of real-world surfaces in the environment around the HoloLens, allowing developers to create a convincing mixed reality experience.By merging the real world with the virtual world, an application can make holograms seem real. </p>
+<p>The two primary object types used for spatial mapping are the ‘Spatial Surface Observer’ and the ‘Spatial Surface’.<br>The application provides the Spatial Surface Observer with one or more bounding volumes, to define the regions of space in which the application wishes to receive spatial mapping data. For each of these volumes, spatial mapping will provide the application with a set of Spatial Surfaces. Each spatial surface describes real-world surfaces in a small volume of space, represented as a triangle mesh attached to a world-locked spatial coordinate system.</p>
+<p><strong>Common Usage Scenarios</strong></p>
+<ul>
+<li><p>Occlusion<br>One of the primary uses of spatial mapping surfaces is simply to occlude holograms.This simple behavior has a huge impact on the perceived realism of holograms, helping to create a visceral sense that really inhabit the same physical space as the user.<br>Occlusion also provides information to the user; when a hologram appears to be occluded by a real-world surface, this provides additional visual feedback as to the spatial location of that hologram in the world. </p>
+</li>
+<li><p>Visualization<br>Most of the time it is appropriate for spatial surfaces to be invisible; to minimize visual clutter and let the real world speak for itself. However, sometimes it is useful to visualize spatial mapping surfaces directly, despite the fact that their real-world counterparts are already visible.</p>
+</li>
+</ul>
+<p>By visualizing surfaces, the application can share with the user its understanding of the environment.<br>The surface meshes provided by spatial mapping may not be particularly ‘clean’. Thus it is important to visualize them appropriately. It is also possible to perform mesh processing to improve mesh properties, before the surfaces are rendered.</p>
+<ul>
+<li>Placement<br>Applications can also use the shape and direction of surfaces to guide hologram placement. </li>
+</ul>
+<p>At its extreme, user input can be simplified away entirely and spatial surfaces can be used to perform entirely automatic hologram placement.<br>Note also that the ability of an application to use spatial surfaces for placement depends heavily on the application’s scanning experience. If a surface has not been scanned, then it cannot be used for placement. It is up to the application to make this clear to the user, so that they can either help scan new surfaces or select a new location.</p>
+<p>Visual feedback to the user is of paramount importance during placement. The user needs to know where the hologram is in relation to the nearest surface with grounding effects. They should understand why the movement of their hologram is being constrained (for example, due to collision with another nearby surface). If they cannot place a hologram in the current location, then visual feedback should make it clear why not. </p>
+<ul>
+<li>Physics<br>The use of physics simulation is another way in which spatial mapping can be used to reinforce the presence of holograms in the user’s physical space. When my holographic rubber ball rolls realistically off my desk, bounces across the floor and disappears under the couch, it might be hard for me to believe that it’s not really there.<br>Physics simulation also provides the opportunity for an application to use natural and familiar physics-based interactions. </li>
+</ul>
+<p>In order to generate realistic physical behaviors, you will likely need to perform some mesh processing such as filling holes, removing floating hallucinations and smoothing rough surfaces.</p>
+<p>You will also need to consider how your application’s scanning experience influences its physics simulation.</p>
+<ul>
+<li>Navigation<br>Applications can use spatial mapping data to grant holographic characters (or agents) the ability to navigate the real world in the same way a real person would. This can help reinforce the presence of holographic characters by restricting them to the same set of natural, familiar behaviors as those of the user and their friends.<br>Navigation capabilities could be useful to users as well. Once a navigation map has been built in a given area, it could be shared to provide holographic directions for new users unfamiliar with that location. </li>
+</ul>
+<p>The key technical challenges involved in implementing navigation functionality will be reliable detection of walkable surfaces (humans don’t walk on tables!) and graceful adaptation to changes in the environment (humans don’t walk through closed doors!). The mesh may require some processing before it is usable for path-planning and navigation by a virtual character. Smoothing the mesh and removing hallucinations may help avoid characters becoming stuck. </p>
+<p>These challenges have received a great deal of attention in the development of videogame technology, and there is a wealth of available research literature on these topics.</p>
+<p>Note that the built-in NavMesh functionality in Unity cannot be used with spatial mapping surfaces. This is because spatial mapping surfaces are not known until the application starts, whereas NavMesh data files need to be generated from source assets ahead of time. Also note that, the spatial mapping system will not provide information about surfaces very far away from the user’s current location. So the application must ‘remember’ surfaces itself if it is to build a map of a very large area.</p>
+<p><strong>Using The Surface Observer</strong><br>The starting point for spatial mapping is the surface observer. Program flow is as follows:</p>
+<ul>
+<li><p>Create a surface observer object<br>Provide one or more spatial volumes, to define the regions of interest in which the application wishes to receive spatial mapping data. A spatial volume is simply a shape defining a region of space, such as a sphere or a box.</p>
+</li>
+<li><p>Use polling or notification to retrieve information about spatial surfaces<br>You may ‘poll’ the surface observer for spatial surface status at any time. Alternatively, you may register for the surface observer’s ‘surfaces changed’ event, which will notify the application when spatial surfaces have changed.</p>
+</li>
+<li><p>Process surfaces changes</p>
+</li>
+<li>Process the asynchronous mesh request</li>
+</ul>
+<p><strong>Mesh Caching</strong><br>Spatial surfaces are represented by dense triangle meshes. Storing, rendering and processing these meshes can consume significant computational and storage resources. As such, each application should adopt a mesh caching scheme appropriate to its needs, in order to minimize the resources used for mesh processing and storage. This scheme should determine which meshes to retain and which to discard, as well as when to update the mesh for each spatial surface.</p>
+<p><strong>Rendering</strong><br>There are three primary ways in which spatial mapping meshes tend to be used for rendering:</p>
+<ul>
+<li>For surface visualization</li>
+<li>For occluding holograms behind real-world surfaces</li>
+<li>For modifying the appearance of holograms occluded by real-world surfaces</li>
+</ul>
+<p>Performance is an important concern when rendering spatial mapping meshes. Here are some rendering performance techniques specific to rendering spatial mapping meshes:</p>
+<ul>
+<li>Adjust triangle density</li>
+<li>Perform frustum culling</li>
+<li>Adjust rendering order</li>
+</ul>
+<p><strong>Mesh Processing</strong><br>An application may want to perform various operations on spatial surface meshes to suit its needs. The index and vertex data provided with each spatial surface mesh uses the same familiar layout as the vertex and index buffers that are used for rendering triangle meshes in all modern rendering APIs. However, one key fact to be aware of is that spatial mapping triangles have a front-clockwise winding order. </p>
+<p><strong>Raycasting and Collision</strong><br>In order for a physics API (such as Havok) to provide an application with raycasting and collision functionality for spatial surfaces, the application must provide spatial surface meshes to the physics API. </p>
+<h3 id="Spatial-mapping-design"><a href="#Spatial-mapping-design" class="headerlink" title="Spatial mapping design"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/spatial_mapping_design" target="_blank" rel="noopener">Spatial mapping design</a></h3><p>In order to provide the best user experience, it is important to understand the factors that affect the quality of spatial mapping data gathered by HoloLens.<br>Errors in spatial mapping data fall into one of three categories:</p>
+<ul>
+<li>Holes: Real-world surfaces are missing from the spatial mapping data.</li>
+<li>Hallucinations: Surfaces exist in the spatial mapping data that do not exist in the real world.</li>
+<li>Bias: Surfaces in the spatial mapping data are imperfectly aligned with real-world surfaces, either pushed in or pulled out.</li>
+</ul>
+<p>Several factors can affect the frequency and severity of these errors:</p>
+<ul>
+<li><p>User motion<br>The camera used for scanning provides data within a 70-degree cone, from a minimum of 0.8 meters to a maximum of 3.1 meters distance from the camera. Real-world surfaces will only be scanned within this field of view. Note that these values are subject to change in future versions.</p>
+</li>
+<li><p>Surface materials<br>The materials found on real-world surfaces vary greatly. These impact the quality of spatial mapping data because they affect how infrared light is reflected.<br>Dark surfaces may not scan until they come closer to the camera, because they reflect less light.<br>Mirrors, because they create illusory reflections of real spaces and surfaces, can cause both hole errors and hallucination errors.</p>
+</li>
+<li><p>Scene motion</p>
+</li>
+<li><p>Lighting interference</p>
+</li>
+</ul>
+<p><strong>The environment scanning experience</strong><br>Each application that uses spatial mapping should consider providing a ‘scanning experience’; the process through which the application guides the user to scan surfaces that are necessary for the application to function correctly.</p>
+<p>Two principles:<br>clear communication with the user is the primary concern.<br>applications should attempt to strike a balance between efficiency and reliability. </p>
+<p>To help design the right scanning experience, consider which of the following possibilities are applicable to your application:</p>
+<ul>
+<li>No scanning experience</li>
+<li>Find a suitable location</li>
+<li>Find a suitable configuration of surfaces</li>
+<li>Scan part of the environment</li>
+<li>Scan the whole room</li>
+<li>Take an initial snapshot of the environment</li>
+<li>Take use-initiated snapshots of the environment</li>
+<li>Allow the user to change the environment</li>
+<li>Guide the user to avoid errors in the spatial mapping data</li>
+</ul>
+<p><strong>Mesh processing</strong><br>It may help to detect common types of errors in surfaces and to filter, remove or modify the spatial mapping data as appropriate.</p>
+<ul>
+<li>Hole filling</li>
+<li>Hallucination removal</li>
+<li>Smoothing</li>
+<li>Plane finding</li>
+</ul>
+<p>Useful tools</p>
+<ul>
+<li>Hololens emulator can be used to provide reliable, repeatable input, which can be useful for debugging problems and evaluating changes to your code.</li>
+<li>To reproduce a scenarios, capture spatial mapping data over the network from a live HoloLens, then save it to disk and reuse it in subsequent debugging sessions.</li>
+<li>The Windows device portal 3D view provides a way to see all of the spatial surfaces currently available via the spatial mapping system. </li>
+</ul>
+<h3 id="Room-scan-visualization"><a href="#Room-scan-visualization" class="headerlink" title="Room scan visualization"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/room_scan_visualization" target="_blank" rel="noopener">Room scan visualization</a></h3><h3 id="Spatial-mapping-in-DirectX"><a href="#Spatial-mapping-in-DirectX" class="headerlink" title="Spatial mapping in DirectX"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/spatial_mapping_in_directx" target="_blank" rel="noopener">Spatial mapping in DirectX</a></h3><p><a href="https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/HolographicSpatialMapping" target="_blank" rel="noopener">https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/HolographicSpatialMapping</a></p>
+<h3 id="Spatial-mapping-in-Unity"><a href="#Spatial-mapping-in-Unity" class="headerlink" title="Spatial mapping in Unity"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/spatial_mapping_in_unity" target="_blank" rel="noopener">Spatial mapping in Unity</a></h3><p>SurfaceObserver<br>SpatialMapping prefab</p>
+<p>Unity includes full support for spatial mapping, which is exposed to developers in the following ways:<br>Spatial mapping components available in the HoloToolkit, which provide a convenient and rapid path for getting started with spatial mapping<br>Lower-level spatial mapping APIs, which provide full control and enable more sophisticated application specific customization<br>To use spatial mapping in your app, the spatialPerception capability needs to be set in your AppxManifest.</p>
+<ul>
+<li><p>Getting started with Unity’s built-in spatial mapping components<br>Unity offers 2 components for easily adding spatial mapping to your app, <strong>Spatial Mapping Renderer</strong> and <strong>Spatial Mapping Collider</strong>.</p>
+</li>
+<li><p>Using the low-level Unity Spatial Mapping API<br>Unity封装Win10 API : Windows.Perception.Spatial.Surfaces，提供Low-level的Spatial Mapping API<br>Namespace: UnityEngine.VR.WSA<br>Types: SurfaceObserver, SurfaceChange, SurfaceData, SurfaceId</p>
+</li>
+</ul>
+<p>The following is an outline of the suggested flow for an application that uses the spatial mapping APIs :</p>
+<ol>
+<li>Instantiate one SurfaceObserver object for each application-defined region of space that you need spatial mapping data for.</li>
+<li>Specify the region of space that each SurfaceObserver object will provide data for by calling either SetVolumeAsSphere, SetVolumeAsAxisAlignedBox, SetVolumeAsOrientedBox, or SetVolumeAsFrustum.</li>
+<li>Handling Surface Changes OnSurfaceChanged</li>
+<li>Handling data ready<br>The OnDataReady handler receives a SurfaceData object. The WorldAnchor, MeshFilter and (optionally) MeshCollider objects it contains reflect the latest state of the associated spatial surface. </li>
+<li>Start processing on updates<br>SurfaceObserver.Update() should be called on a delay, not every frame.<br>void Start () {<br> …<br>  StartCoroutine(UpdateLoop());<br>}</li>
+</ol>
+<p>IEnumerator UpdateLoop()<br>{<br>    var wait = new WaitForSeconds(2.5f);<br>    while(true)<br>    {<br>        surfaceObserver.Update(OnSurfaceChanged);<br>        yield return wait;<br>    }<br>}</p>
+<ul>
+<li>Higher-level mesh analysis: SpatialUnderstanding<br>目前只能做简单的特征检测，比如floor, ceiling, and walls，如果使用Vuforia这样的recognition SDK，则遇到不通用的问题，这个还有很长的路要走。<br>When placing holograms in the physical world it is often desirable to go beyond spatial mapping’s mesh and surface planes. When placement is done procedurally, a higher level of environmental understanding is desirable. This usually requires making decisions about what is floor, ceiling, and walls.<br>The HoloToolkit.SpatialUnderstanding library encapsulates this technology, allowing you to quickly find empty spaces on the walls, place objects on the ceiling, identify placed for character to sit, and a myriad of other spatial understanding queries.<br>The code for the C++ solver has been wrapped into a UWP dll and exposed to Unity with a drop in prefab contained within the HoloToolkit.</li>
+</ul>
+<p>There are three primary interfaces exposed by the module: topology for simple surface and spatial queries, shape for object detection, and the object placement solver for constraint based placement of object sets.</p>
+<p>The understanding dll internally stores the playspace as a grid of 8cm sized voxel cubes.</p>
+<h3 id="Holograms-230-Spatial-mapping"><a href="#Holograms-230-Spatial-mapping" class="headerlink" title="Holograms 230: Spatial mapping"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/holograms_230" target="_blank" rel="noopener">Holograms 230: Spatial mapping</a></h3><p>主要介绍几个场景，包括环境Scanning，将扫描结果Visualization，对mesh数据的处理，找到Planes(Walls，Ceilings，Floors)，然后placement Hologram到识别到的Plane上，最后Determine if a hologram is occluded by the spatial mapping mesh.Apply different occlusion techniques to achieve a fun effect.</p>
+<p>Scanning, Visualization, Processing, Placement, Occlusion</p>
+<ul>
+<li>You know how to scan your environment and load spatial mapping data to Unity.</li>
+<li>You understand the basics of shaders and how materials can be used to re-visualize the world.</li>
+<li>You learned of new processing techniques for finding planes and removing triangles from a mesh.</li>
+<li>You were able to move and place holograms on surfaces that made sense.</li>
+<li>You experienced different occlusion techniques and harnessed the power of x-ray vision!</li>
+</ul>
+<h2 id="Shared-experiences-in-mixed-reality"><a href="#Shared-experiences-in-mixed-reality" class="headerlink" title="Shared experiences in mixed reality"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/shared_experiences_in_mixed_reality" target="_blank" rel="noopener">Shared experiences in mixed reality</a></h2><p>Holographic apps may share spatial anchors from one HoloLens to another, enabling users to render a hologram at the same place in the real world across multiple devices.</p>
+<p>Before you begin designing for shared experiences, it’s important to define the target scenarios. These scenarios help clarify what you’re designing and establish a common vocabulary to help compare and contrast features required in your experience. Understanding the core problem, and the different avenues for solutions, is key to uncovering opportunities inherent in this new medium.</p>
+<p>Through internal prototypes and explorations from our HoloLens partner agencies, we created six questions to help you define shared scenarios. These questions form a framework, not intended to be exhaustive, to help distill the important attributes of your scenarios.</p>
+<ol>
+<li>How are they sharing?<br>There are many ways to share, but we’ve found that most of them fall into three categories: </li>
+</ol>
+<ul>
+<li>Presentation<br>When the same content is being shown to several users. \</li>
+<li>Collaboration<br>When people are working together to achieve some common goals.</li>
+<li>Guidance<br>When one person is helping someone to solve a problem in a more one-one style interaction. </li>
+</ul>
+<ol>
+<li><p>What is the group size?<br>We have found that the needs of groups can fall into three size categories:<br>1:1<br>Small &lt; 7<br>Large &gt;= 7</p>
+</li>
+<li><p>Where is everyone?<br>Following categories help convey where users are located:<br>Co-located: All your users will be in the same physical space.<br>Remote: All your users will be in separate physical spaces.<br>Both: Your users will be a mix of co-located and remote spaces.</p>
+</li>
+<li><p>When are they sharing?<br>Consider your experiences as one of these categories of time:</p>
+</li>
+</ol>
+<ul>
+<li>Synchronously: Sharing the holographic experience at the same time.</li>
+<li>Asynchronously: Sharing the holographic experience at different times. </li>
+<li>Both: Your users will sometimes be sharing synchronously but other times asynchronously.</li>
+</ul>
+<ol>
+<li>How similar are their physical environments?<br>Consider your sharing experiences fitting into one of these two categories:</li>
+</ol>
+<ul>
+<li>Similar: Environments that tend to have similar furniture, ambient light and sound, physical room size. </li>
+<li>Dissimilar: Environments that are quite different in furniture settings, room sizes, light and sound considerations.</li>
+</ul>
+<p>It’s important to think about the environment as it will influence:<br>How will people experience these objects. For example: If your experience works best on a table and the user has no table? Or on a flat floor surface but the user has a cluttered space.<br>Scale of the objects. For example: Placing a 6 feet human model on a table could be challenging but a heart model would work great.</p>
+<ol>
+<li>What devices are they using?<br>immersive devices, holographic devices,  2D devices</li>
+</ol>
+<p>The key to shared experiences is multiple users seeing the same holograms in the world on their own device. One of the most common methods to do this is to use spatial anchors in your app. </p>
+<h3 id="Coordinate-Systems"><a href="#Coordinate-Systems" class="headerlink" title="Coordinate Systems"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/coordinate_systems" target="_blank" rel="noopener">Coordinate Systems</a></h3><p>Mixed reality experience scales : Orientation-only, Setaed-scale, Standing-scale, Room-scale, World-scale<br>根据不同的设备的能力，提供不同的experienc scale. These experience scales follow a “nesting dolls” model. The key design principle here for Windows Mixed Reality is that a given headset supports apps built for a target experience scale, as well as all lesser scales<br>Orientation-only : 传统的<br>Seated-scale : 6DOF tracking<br>Standing-scale : 6DOF tracking, Floor defined, 360 tracking<br>Room-scale : 6DOF tracking, Floor defined, 360 tracking, Bounds defined<br>World-scale: 6DOF tracking, Floor defined, 360 tracking, Bounds defined, Spatial anchors</p>
+<ul>
+<li>Spatial coordinate systems</li>
+</ul>
+<p>All 3D graphics applications use Cartesian coordinate systems(笛卡尔坐标系) to reason about the positions and orientations of objects in the virtual worlds they render. Such coordinate systems establish 3 perpendicular axes along which to position objects: an X, Y, and Z axis.<br>In mixed reality, your apps will reason about both virtual and physical coordinate systems. Windows calls a coordinate system that has real meaning in the physical world a spatial coordinate system.<br>Spatial coordinate systems express their coordinate values in meters. This means that objects placed 2 units apart in either the X, Y or Z axis will appear 2 meters apart from one another when rendered in mixed reality. This lets you easily render objects and environments at real-world scale.</p>
+<p>Spatial coordinate systems on Windows are always right-handed, which means that the positive X-axis points right, the positive Y-axis points up (aligned to gravity) and the positive Z-axis points towards you.</p>
+<ul>
+<li>Building an orientation-only or seated-scale experience</li>
+</ul>
+<p>The key to holographic rendering is changing your app’s view of its holograms each frame as the user moves around, to match their predicted head motion.  You can build seated-scale experiences that respect changes to the user’s head position and head orientation using a stationary frame of reference(静止参照系).</p>
+<p>For seated-scale experiences in a game engine such as Unity, a stationary frame of reference is what defines the engine’s “world origin”. Objects that are placed at a specific world coordinate use the stationary frame of reference to define their position in the real-world using those same coordinates. Content that stays put in the world, even as the user walks around, is known as world-locked content.</p>
+<p>对于坐标系统的理解还需要结合世界的代码</p>
+<p>An attached frame of reference moves with the user as they walk around, with a fixed heading defined when the app first creates the frame.<br>When the headset can’t figure out where it is in the world, an attached frame of reference provides the only coordinate system which can be used to render holograms. </p>
+<ul>
+<li><p>Building a standing-scale or room-scale experience<br>To go beyond seated-scale on an immersive headset to build a standing-scale experience, you can use the stage frame of reference.<br>To provide a room-scale experience, letting users walk around within the 5-meter boundary they pre-defined, you can check for stage bounds as well.</p>
+</li>
+<li><p>Building a world-scale experience</p>
+</li>
+</ul>
+<p>HoloLens allows for true world-scale experiences that let users wander beyond 5 meters. To build a world-scale app, you’ll need new techniques beyond those used for room-scale experiences.</p>
+<p>Today, when writing games, data visualization apps, or virtual reality apps, the typical approach is to establish one absolute world coordinate system that all other coordinates can reliably map back to. In that environment, you can always find a stable transform that defines a relationship between any two objects in that world. </p>
+<p>By placing a spatial anchor at the location where the user places a hologram and then positioning that hologram relative to its spatial anchor, you can ensure that the hologram maintains optimal stability, even as the user roams across tens of meters.</p>
+<ul>
+<li>Spatial anchors<br>A spatial anchor represents an important point in the world that the system should keep track of over time.  As the device learns about the world, these spatial anchors can adjust their position relative to one another as needed to ensure that each anchor stays precisely where it was placed relative to the real-world. </li>
+</ul>
+<ul>
+<li>Spatial anchor persistence</li>
+</ul>
+<p>Spatial anchors can also allow your app to remember an important location even after your app suspends or the device is shut down.<br>You can save to disk the spatial anchors your app creates, and then load them back again later, by persisting them to your app’s spatial anchor store. When saving or loading an anchor, you provide a string key that is meaningful to your app, in order to identify the anchor later. Think of this key as the filename for your anchor. If you want to associate other data with that anchor, such as a 3D model that the user placed at that location, save that to your app’s local storage and associate it with the key you chose.<br>By persisting anchors to the store, your users can place individual holograms or place a workspace around which an app will place its various holograms, and then find those holograms later where they expect them, over many uses of your app.</p>
+<p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/persistence_in_unity" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/persistence_in_unity</a></p>
+<ul>
+<li>Spatial anchor sharing</li>
+</ul>
+<p>Your app can also share spatial anchors with other devices. By transferring a spatial anchor along with its supporting understanding of the environment and sensor data around it to a second HoloLens, both devices can then reason about the same location. By having each device render a hologram using that shared spatial anchor, both users will see the hologram appear at the same place in the real world.</p>
+<ul>
+<li>Avoid Head-locked content</li>
+</ul>
+<p>We strongly discourage rendering head-locked content, which stays at a fixed spot in the display (such as a HUD). In general, head-locked content is uncomfortable for users and does not feel like a natural part of their world.<br>Head-locked content should usually be replaced with holograms that are attached to the user or placed in the world itself. For example, cursors should generally be pushed out into the world, scaling naturally to reflect the position and distance of the object under the user’s gaze.</p>
+<ul>
+<li>Handling tracking errors</li>
+</ul>
+<p>In some environments such as dark hallways, it may not be possible for a headset using inside-out tracking to locate itself correctly in the world. This can lead holograms to either not show up or appear at incorrect places if handled incorrectly. </p>
+<ol>
+<li>Headset cannot track due to insufficient sensor data</li>
+</ol>
+<p>Sometimes, the device’s sensors are not able to figure out where the device is. This can happen if the room is dark, or if the sensors are covered by hair or hands, or if the surroundings do not have enough texture. Your app should tell the user how to get positional tracking back, rendering some fallback body-locked content that describes some tips, such as uncovering the sensors and turning on more lights.<br>环境太暗，或者被手，头发遮挡，导致定位失效，需要通知用户调整环境</p>
+<ol>
+<li>Headset tracks incorrectly due to dynamic changes in the environment</li>
+</ol>
+<p>Sometimes, the device cannot track properly if there are lot of dynamic changes in the environment. For example, many people walking around in the room. In this case, the holograms may seem to jump or drift as the device tries to track itself in this dynamic environment. We recommend using the device in a less dynamic environment if you hit this scenario.<br>环境太多动态内容，比如人来人往，太复杂的环境导致识别不稳定。</p>
+<ol>
+<li>Headset tracks incorrectly because the environment has changed significantly over time</li>
+</ol>
+<p>Sometimes, when you start using a device in an environment which has undergone lot of changes (e.g. significant movement of furniture, wall hangings etc.), it is possible that some holograms may appear shifted from their original locations. If the newly placed holograms also seem to shift and jump, please ask the user to remove the current space on the device by going to Settings &gt; System &gt; Spaces. Please note that removing a space leads to loss of all the holograms.<br>环境变化太大，系统已经混乱，无法恢复，建议移除</p>
+<ol>
+<li>Headset tracks incorrectly due to identical spaces in an environment</li>
+</ol>
+<p>Sometimes, a home/space may have two identical portions. For example, two identical rooms in a home, two identical corner areas, two large identical posters that cover the device’s field of view. In such scenarios, the device may, at times, get confused between the identical parts and mark them as the same in its internal representation. This may cause the holograms from some areas to appear in other locations.<br>相同的背景导致无法区分，可能出现一个hologram出现在另一个地方的情况</p>
+<p>从上面说明来看，Hololens不但只能用在受限的环境，而且还有诸多要求，要变成随身携带，随时可用还有漫漫长路。</p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/coordinate_systems_in_directx" target="_blank" rel="noopener">Coordinate systems in DirectX</a></li>
+</ul>
+<p>从原生API应用的角度来理解坐标系统，理解会更深入。<br>Handling tracking loss :  <a href="https://developer.microsoft.com/en-us/windows/mixed-reality/tracking_loss_in_unity" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/tracking_loss_in_unity</a></p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/coordinate_systems_in_unity" target="_blank" rel="noopener">Coordinate systems in Unity</a><br>Windows Mixed Reality supports apps across a wide range of experience scales, from orientation-only and seated-scale apps up through room-scale apps. On HoloLens, you can go further and build world-scale apps that let users walk beyond 5 meters, exploring an entire floor of a building and beyond.</li>
+</ul>
+<p>Your first step in building a mixed reality experience in Unity is to determine which experience scale your app will target.</p>
+<h3 id="Spatial-anchors"><a href="#Spatial-anchors" class="headerlink" title="Spatial anchors"></a><a href="https://developer.microsoft.com/en-us/windows/holographic/spatial_anchors" target="_blank" rel="noopener">Spatial anchors</a></h3><p>A spatial anchor represents an important point in the world that the system should keep track of over time. Each anchor has a coordinate system that adjusts as needed, relative to other anchors or frames of reference, in order to ensure that anchored holograms stay precisely in place. By saving spatial anchors to disk and loading them back later, your app can reason about the same location in the real-world across multiple app sessions.</p>
+<p>Rendering a hologram in an anchor’s coordinate system gives you the most accurate positioning for that hologram at any given time. This comes at the cost of small adjustments over time to the hologram’s position, as the system continually moves it back into place relative to the real world.</p>
+<p>or standing-scale or room-scale experiences for tethered desktop headsets that will stay within a 5-meter diameter, you can usually just use the stage frame of reference instead of spatial anchors, providing you a single coordinate system in which to render all content. However, if your app intends to let users wander beyond 5 meters on HoloLens, perhaps operating throughout an entire floor of a building, you’ll need spatial anchors to keep content stable.</p>
+<p><strong>Best practices</strong></p>
+<ul>
+<li>Create spatial anchors where users place them</li>
+<li>Always render anchored holograms within 3 meters of their anchor</li>
+<li>Group holograms that should form a rigid cluster</li>
+<li>Render highly dynamic holograms using the stationary frame of reference instead of a spatial anchor</li>
+<li>Avoid creating a grid of spatial anchors</li>
+<li>Release spatial anchors you no longer need</li>
+</ul>
+<h3 id="Shared-spatial-anchors-in-DirectX"><a href="#Shared-spatial-anchors-in-DirectX" class="headerlink" title="Shared spatial anchors in DirectX"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/shared_spatial_anchors_in_directx" target="_blank" rel="noopener">Shared spatial anchors in DirectX</a></h3><p><a href="https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/HolographicTagAlong" target="_blank" rel="noopener">https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/HolographicTagAlong</a></p>
+<h3 id="Shared-experiences-in-Unity"><a href="#Shared-experiences-in-Unity" class="headerlink" title="Shared experiences in Unity"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/shared_experiences_in_unity" target="_blank" rel="noopener">Shared experiences in Unity</a></h3><p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/persistence_in_unity" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/persistence_in_unity</a></p>
+<p>To share a WorldAnchor, one must establish the anchor to be shared. The user of one HoloLens scans their environment and either manually or programmatically chooses a point in space to be the Anchor for the shared experience. The data that represents this point can then be serialized and transmitted to the other devices that are sharing in the experience. Each device then de-serializes the anchor data and attempts to locate that point in space. In order for Anchor Sharing to work, each device must have scanned in enough of the environment such that the point represented by the anchor can be identified.</p>
+<p>Namespace: UnityEngine.VR.WSA.Sharing<br>Type: WorldAnchorTransferBatch</p>
+<p>UnityEngine.VR.WSA.WorldAnchor</p>
+<p>You can use the Sharing prefab from the HoloToolkit-Unity to implement shared experiences in your applications.</p>
+<h3 id="Holograms-240-Sharing-holograms"><a href="#Holograms-240-Sharing-holograms" class="headerlink" title="Holograms 240: Sharing holograms"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/holograms_240" target="_blank" rel="noopener">Holograms 240: Sharing holograms</a></h3><p>Holograms are given presence in our world by remaining in place as we move about in space. HoloLens keeps holograms in place by using various coordinate systems to keep track of the location and orientation of objects. When we share these coordinate systems between devices, we can create a shared experience that allows us to take part in a shared holographic world.</p>
+<p>, Placement, Real-World Physics, Grand Finale</p>
+<ul>
+<li>Shared Coordinates<br>Setup a network for a shared experience.<br>Establish a common reference point.<br>Share coordinate systems across devices.<br>Everyone sees the same hologram!</li>
+</ul>
+<p>The InternetClientServer and PrivateNetworkClientServer capabilities must be declared for an app to connect to the sharing server. </p>
+<ul>
+<li><p>Discovery<br>Discover each other in our shared experience.<br>Choose and share a player avatar.<br>Attach the player avatar next to everyone’s heads.</p>
+</li>
+<li><p>Placement<br>Place holograms on the spatial map based on players’ head position.</p>
+</li>
+<li><p>Real-World Physics<br>Launch projectiles that bounce off real-world surfaces.<br>Share the projectiles so other players can see them.</p>
+</li>
+</ul>
+<h3 id="Spectator-view"><a href="#Spectator-view" class="headerlink" title="Spectator view"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/spectator_view" target="_blank" rel="noopener">Spectator view</a></h3><p><a href="https://blogs.windows.com/devices/2017/02/13/spectator-view-new-tool-help-others-see-see-hololens" target="_blank" rel="noopener">https://blogs.windows.com/devices/2017/02/13/spectator-view-new-tool-help-others-see-see-hololens</a></p>
+<p>Spectator view allows others to see on a 2D screen what a HoloLens user sees in their world. </p>
+<p>使用MRC，可以用于将MR场景直播。</p>
+<h2 id="Locatable-Camera"><a href="#Locatable-Camera" class="headerlink" title="Locatable Camera"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/locatable_camera" target="_blank" rel="noopener">Locatable Camera</a></h2><p>HoloLens includes a world-facing camera mounted on the front of the device which enables apps to see what the user sees. Developers have access to and control of the camera just as they would for color cameras on smartphones, portables, or desktops. The same universal windows media capture and windows media foundation APIs that work on mobile and desktop work on HoloLens. Unity has also wrapped these windows APIs to abstract simple usage of the camera on HoloLens for tasks such as taking regular photos and videos (with or without holograms) and locating the camera’s position in and perspective on the scene.</p>
+<h3 id="Locatable-camera-in-DirectX"><a href="#Locatable-camera-in-DirectX" class="headerlink" title="Locatable camera in DirectX"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/locatable_camera_in_directx" target="_blank" rel="noopener">Locatable camera in DirectX</a></h3><h3 id="Locatable-camera-in-Unity"><a href="#Locatable-camera-in-Unity" class="headerlink" title="Locatable camera in Unity"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/locatable_camera_in_unity" target="_blank" rel="noopener">Locatable camera in Unity</a></h3><h3 id="Mixed-reality-capture"><a href="#Mixed-reality-capture" class="headerlink" title="Mixed reality capture"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/mixed_reality_capture" target="_blank" rel="noopener">Mixed reality capture</a></h3><h3 id="Mixed-reality-capture-for-developers"><a href="#Mixed-reality-capture-for-developers" class="headerlink" title="Mixed reality capture for developers"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/mixed_reality_capture_for_developers" target="_blank" rel="noopener">Mixed reality capture for developers</a></h3><p><a href="https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/HolographicMixedRealityCapture" target="_blank" rel="noopener">https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/HolographicMixedRealityCapture</a></p>
+<h1 id="Open-Source-Projects"><a href="#Open-Source-Projects" class="headerlink" title="Open Source Projects:"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/Community.html#open_source_projects" target="_blank" rel="noopener">Open Source Projects</a>:</h1><h2 id="HoloToolkit"><a href="#HoloToolkit" class="headerlink" title="HoloToolkit"></a><a href="https://github.com/microsoft/HoloToolkit" target="_blank" rel="noopener">HoloToolkit</a></h2><p>在Windows Holographic API的基础上，封装一些通用功能，主要提供Spatial Mapping, Spatial Understanding, Sharing的C++ dll及Unity Plugin实现。</p>
+<h2 id="HoloToolkit-Unity"><a href="#HoloToolkit-Unity" class="headerlink" title="HoloToolkit-Unity"></a><a href="https://github.com/microsoft/HoloToolkit-Unity" target="_blank" rel="noopener">HoloToolkit-Unity</a></h2><p>可以看到在开发Holograms tutorials的过程中，逐步积累了一些通用的prefab，script，再加上HoloToolkit dll ，对这些内容的封装就构成了HoloToolkit-Unity，也为开发其他应用提供了基础。</p>
+<p>在使用Unity开发Hololens应用前，需要对Unity做一些配置，包括project，Camera的配置，这些都可以预先设置，避免重复劳动，这个库可以作为开发自己应用的起点，值得深入学习。特别是HoloToolkit-Tests可以理解如何使用。</p>
+<p>HoloToolkit-Unity的Example里，提供一些有价值的想法<br><a href="https://github.com/Microsoft/HoloToolkit-Unity/tree/master/Assets/HoloToolkit-Examples/InteractiveElements" target="_blank" rel="noopener">https://github.com/Microsoft/HoloToolkit-Unity/tree/master/Assets/HoloToolkit-Examples/InteractiveElements</a> 封装了如下的UI controls：Button, Toggle Button, RadialButton, CheckBox, Toggle, Progress, Slider</p>
+<h2 id="MRDesignLabs"><a href="#MRDesignLabs" class="headerlink" title="MRDesignLabs"></a><a href="https://github.com/Microsoft/MRDesignLabs" target="_blank" rel="noopener">MRDesignLabs</a></h2><p>This repo is where Microsoft’s Windows Mixed Reality Design team publishes examples and explorations. The goal is to inspire creators and help them to build Mixed Reality experiences.<br>提供了一些通用Controls的代码和例子 ： </p>
+<ul>
+<li><p>Interactable Object<br>Mesh button : using primitives and imported 3D meshes as Interactable Objects<br>Holographic button :<br>Toolbar : Toolbar is a widely used pattern in mixed reality experiences. It is a simple collection of buttons with additional behavior such as Billboarding and tag-a-long.<br>Traditional button :  traditional 2D style button with some dimension. Each input state has a slightly different depth and animation properties.  </p>
+</li>
+<li><p>App Bar and Bounding Box</p>
+</li>
+<li><p>Object Collection<br>Object collection is a script which helps you lay out an array of objects in predefined three-dimensional shapes. It supports four different surface styles - plane, cylinder, sphere and scatter. </p>
+</li>
+<li><p>Dialog<br>Dialog is a transient UI element which appears when something happens that requires notification, approval, or additional information from the user. </p>
+</li>
+<li><p>Progress</p>
+</li>
+</ul>
+<h3 id="Periodic-Table-of-the-Elements"><a href="#Periodic-Table-of-the-Elements" class="headerlink" title="Periodic Table of the Elements"></a>Periodic Table of the Elements</h3><p>包含MRDesignLab提供的一些通用组件(Button，Cursor，Dialog，Keyboard)的例子，这里的问题是这些模块都是采用源代码级的复用方式，那就是要各自维护自己的版本，导致复用程度比较低。</p>
+<h2 id="Galaxy-Explorer"><a href="#Galaxy-Explorer" class="headerlink" title="Galaxy Explorer"></a><a href="https://github.com/Microsoft/GalaxyExplorer" target="_blank" rel="noopener">Galaxy Explorer</a></h2><p>一个完整的开源的Holographic应用，<a href="https://developer.microsoft.com/en-us/windows/mixed-reality/galaxy_explorer对开发过程做了描述.12个人，8周的时间设计，编码，完善。" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/galaxy_explorer对开发过程做了描述.12个人，8周的时间设计，编码，完善。</a></p>
+<h2 id="HoloLens-Companion-Kit"><a href="#HoloLens-Companion-Kit" class="headerlink" title="HoloLens Companion Kit"></a><a href="https://github.com/Microsoft/HoloLensCompanionKit" target="_blank" rel="noopener">HoloLens Companion Kit</a></h2><p>提供与Hololens配对的应用开发的toolkit,辅助Hololens开发的其他平台代码组件</p>
+<ul>
+<li><p>Holographic Remoting Host<br><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/add_holographic_remoting" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/add_holographic_remoting</a></p>
+</li>
+<li><p>KinectIPD</p>
+</li>
+<li><p>MixedRemoteViewCompositor</p>
+</li>
+<li><p>SpectatorView</p>
+</li>
+<li><p>Windows Mixed Reality Commander</p>
+</li>
+</ul>
+<h1 id="Case-Study"><a href="#Case-Study" class="headerlink" title="Case Study"></a><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/category/case_studies" target="_blank" rel="noopener">Case Study</a></h1><p>对MR设计，开发的基本概念，原理，实现有一定的理解之后，可以更广泛的了解和思考不同的MR应用是如何设计和实现的，对于实现自己的MR应用有借鉴和启发作用。</p>
+<p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/case_study_-_3_holostudio_ui_and_interaction_design_learnings" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/case_study_-_3_holostudio_ui_and_interaction_design_learnings</a></p>
+<p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/case_study_-_expanding_the_spatial_mapping_capabilities_of_hololens" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/case_study_-_expanding_the_spatial_mapping_capabilities_of_hololens</a></p>
+<p>Case study - 3 HoloStudio UI and interaction design learnings<br>Case study - AfterNow’s process - envisioning, prototyping, building<br>Case study - Building HoloSketch, a spatial layout and UX sketching app for HoloLens<br>Case study - Capturing and creating content for HoloTour<br>Case study - Creating a galaxy in mixed reality<br>Case study - Creating an immersive experience in Fragments<br>Case study - Creating impossible perspectives for HoloTour<br>Case study - Expanding the spatial mapping capabilities of HoloLens<br><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/case_study_-_looking_through_holes_in_your_reality" target="_blank" rel="noopener">Case study - Looking through holes in your reality</a><br>Case study - My first year on the HoloLens design team</p>
+<p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/case_study_-_spatial_sound_design_for_holotour" target="_blank" rel="noopener">Case study - Spatial sound design for HoloTour</a><br>Case study - The pursuit of More Personal Computing<br>Case study - Using spatial sound in RoboRaid<br>Case study - Using the stabilization plane to reduce holographic turbulence</p>
+<p><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/case_study_-_representing_humans_in_mixed_reality" target="_blank" rel="noopener">Case study - Representing humans in mixed reality</a></p>
+<h1 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h1><p>Hololens提供了环境感知的能力(基于SLAM)，如果需要提供AR那样的识别物体，然后交互的能力，则需要像Vuforia这样的SDK。从2012年Deep Learning在Computer Vision领域的应用，证明了其在物体识别精度上的有效性后，对物体识别的技术都转移到使用Deep Learning上。</p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/using_the_windows_device_portal" target="_blank" rel="noopener">Using the Windows Device Portal</a><br>The Device Portal is a web server on your HoloLens that you can connect to from a web browser on your PC. The Device Portal includes many tools that will help you manage your HoloLens and debug and optimize your apps.<br>Everything in the device portal is built on top of REST API’s that you can optionally use to access the data and control your device programmatically.</li>
+</ul>
+<p>这个Developer辅助功能非常好用，提供非常多可视化功能，可以用来管理Hololens，调试，优化应用。<br>通过浏览器，可以查看，控制Hololens设备；提供3D View管理；提供MRC，实时查看，录像，拍照功能；性能常看，分析等</p>
+<p>而且微软还开源了一个<a href="https://github.com/Microsoft/WindowsDevicePortalWrapper" target="_blank" rel="noopener">Windows Device Portal Wrapper</a>的库，用来开发MR直播很有用，获取MRC视频后转发出去。</p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/Hologram_stability.html" target="_blank" rel="noopener">Hologram stability</a></li>
+</ul>
+<p>Stabilization plane : <a href="https://developer.microsoft.com/en-us/windows/mixed-reality/focus_point_in_unity" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/focus_point_in_unity</a></p>
+<ul>
+<li><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/keyboard_input_in_unity" target="_blank" rel="noopener">Keyboard input in Unity</a></li>
+</ul>
+<ul>
+<li>FAQ<br><a href="https://support.microsoft.com/en-us/help/13456/hololens-and-holograms-faq" target="_blank" rel="noopener">https://support.microsoft.com/en-us/help/13456/hololens-and-holograms-faq</a><br>Hololens使用Fly on Light 传感器在感知周围环境，当出现环境太暗，有遮挡等导致SLAM失效</li>
+</ul>
+<p>要生成Windows Store 离线安装文件(.appx)或部署文件(.appxbundle)，在VS的Project -&gt; Store -&gt; Create App Packages…即可</p>
+<ul>
+<li><p>Performance recommendations for HoloLens apps<br><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/performance_recommendations_for_hololens_apps" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/performance_recommendations_for_hololens_apps</a></p>
+</li>
+<li><p>Current limitations for apps using APIs from the shell<br><a href="https://developer.microsoft.com/en-us/windows/mixed-reality/current_limitations_for_apps_using_apis_from_the_shell" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/windows/mixed-reality/current_limitations_for_apps_using_apis_from_the_shell</a></p>
+</li>
+<li><p><a href="https://www.microsoft.com/en-us/hololens/legal/health-and-safety-information" target="_blank" rel="noopener">Health &amp; Safety</a><br>An interpupillary distance (an eye measurement of the distance between your two pupils) between 51 and 74 is needed to correctly and comfortably view Holograms with HoloLens. This range accommodates most adults and children age 13 and older. </p>
+</li>
+</ul>
+<p>和Oculus Rift等一样，未来避免法律问题，不许13岁以下未成年人使用。对于教育领域的应用来说，初2以上的学生才能使用。<br>可能出现的不适症状：nausea(恶心), motion sickness(晕动症), dizziness(头晕), disorientation(迷失方向), headache(头痛), fatigue(疲劳), eye strain(眼睛疲劳), dry eye(眼睛干涩)</p>
+<h1 id="My-Practices"><a href="#My-Practices" class="headerlink" title="My Practices"></a>My Practices</h1><p>上述主要是文字笔记，实践经验参见 <a href="https://wangwh0204.github.io/2017/09/01/porting-to-hololens/">https://wangwh0204.github.io/2017/09/01/porting-to-hololens/</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/technology/">technology</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Hololens/">Hololens</a><a href="/tags/MR/">MR</a><a href="/tags/Unity/">Unity</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://wangwh0204.github.io/2017/05/25/windows-mixed-reality/" data-title="Windows Mixed Reality | From Computer Vision to AGI Robots" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/06/01/porting-to-hololens/" title="Porting UWP APP to Hololens">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Porting UWP APP to Hololens</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/04/03/stanford-ee267-virtual-reality/"  title="Stanford EE267 - Virtual Reality">
+ <strong>下一篇：</strong><br/> 
+ <span>Stanford EE267 - Virtual Reality
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hololens"><span class="toc-number">1.</span> <span class="toc-text">Hololens</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-Hololens"><span class="toc-number">1.1.</span> <span class="toc-text">Why Hololens</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hololens-Hardware"><span class="toc-number">1.2.</span> <span class="toc-text">Hololens Hardware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apps"><span class="toc-number">1.3.</span> <span class="toc-text">Apps</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commercial"><span class="toc-number">1.4.</span> <span class="toc-text">Commercial</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Windows-Mixed-Reality"><span class="toc-number">2.</span> <span class="toc-text">Windows Mixed Reality</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Development-Overview"><span class="toc-number">2.1.</span> <span class="toc-text">Development Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MR-Application-Types"><span class="toc-number">2.1.1.</span> <span class="toc-text">MR Application Types</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#App-Model"><span class="toc-number">2.1.2.</span> <span class="toc-text">App Model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Win10-Holographic-API"><span class="toc-number">2.1.3.</span> <span class="toc-text">Win10 Holographic API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DirectX-development-overview"><span class="toc-number">2.1.4.</span> <span class="toc-text">DirectX development overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unity-Development-Overview"><span class="toc-number">2.1.5.</span> <span class="toc-text">Unity Development Overview</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Design"><span class="toc-number">2.2.</span> <span class="toc-text">Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Get-started-with-design"><span class="toc-number">2.2.1.</span> <span class="toc-text">Get started with design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interaction-design"><span class="toc-number">2.2.2.</span> <span class="toc-text">Interaction design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Style"><span class="toc-number">2.2.3.</span> <span class="toc-text">Style</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#App-patterns"><span class="toc-number">2.2.4.</span> <span class="toc-text">App patterns</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Controls"><span class="toc-number">2.2.5.</span> <span class="toc-text">Controls</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Resource"><span class="toc-number">2.2.6.</span> <span class="toc-text">Resource</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rendering"><span class="toc-number">2.3.</span> <span class="toc-text">Rendering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gaze"><span class="toc-number">2.4.</span> <span class="toc-text">Gaze</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cursors"><span class="toc-number">2.4.1.</span> <span class="toc-text">Cursors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gaze-targeting"><span class="toc-number">2.4.2.</span> <span class="toc-text">Gaze targeting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gaze-in-Unity"><span class="toc-number">2.4.3.</span> <span class="toc-text">Gaze in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Holograms-210-Gaze"><span class="toc-number">2.4.4.</span> <span class="toc-text">Holograms 210: Gaze</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gesture"><span class="toc-number">2.5.</span> <span class="toc-text">Gesture</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gesture-design"><span class="toc-number">2.5.1.</span> <span class="toc-text">Gesture design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gaze-gestures-and-motion-controllers-in-DirectX"><span class="toc-number">2.5.2.</span> <span class="toc-text">Gaze, gestures, and motion controllers in DirectX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gestures-and-motion-controllers-in-Unity"><span class="toc-number">2.5.3.</span> <span class="toc-text">Gestures and motion controllers in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Holograms-211-Gesture"><span class="toc-number">2.5.4.</span> <span class="toc-text">Holograms 211: Gesture</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Voice-input"><span class="toc-number">2.6.</span> <span class="toc-text">Voice input</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Voice-design"><span class="toc-number">2.6.1.</span> <span class="toc-text">Voice design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Voice-input-in-DirectX"><span class="toc-number">2.6.2.</span> <span class="toc-text">Voice input in DirectX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Voice-input-in-Unity"><span class="toc-number">2.6.3.</span> <span class="toc-text">Voice input in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Holograms-212-Voice-Input"><span class="toc-number">2.6.4.</span> <span class="toc-text">Holograms 212: Voice Input</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spatial-sound"><span class="toc-number">2.7.</span> <span class="toc-text">Spatial sound</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-Sound-design"><span class="toc-number">2.7.1.</span> <span class="toc-text">Spatial Sound design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-Sound-in-DirectX"><span class="toc-number">2.7.2.</span> <span class="toc-text">Spatial Sound in DirectX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-sound-in-Unity"><span class="toc-number">2.7.3.</span> <span class="toc-text">Spatial sound in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Holograms-220-Spatial-sound"><span class="toc-number">2.7.4.</span> <span class="toc-text">Holograms 220: Spatial sound</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spatial-mapping"><span class="toc-number">2.8.</span> <span class="toc-text">Spatial mapping</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-mapping-design"><span class="toc-number">2.8.1.</span> <span class="toc-text">Spatial mapping design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Room-scan-visualization"><span class="toc-number">2.8.2.</span> <span class="toc-text">Room scan visualization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-mapping-in-DirectX"><span class="toc-number">2.8.3.</span> <span class="toc-text">Spatial mapping in DirectX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-mapping-in-Unity"><span class="toc-number">2.8.4.</span> <span class="toc-text">Spatial mapping in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Holograms-230-Spatial-mapping"><span class="toc-number">2.8.5.</span> <span class="toc-text">Holograms 230: Spatial mapping</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shared-experiences-in-mixed-reality"><span class="toc-number">2.9.</span> <span class="toc-text">Shared experiences in mixed reality</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Coordinate-Systems"><span class="toc-number">2.9.1.</span> <span class="toc-text">Coordinate Systems</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spatial-anchors"><span class="toc-number">2.9.2.</span> <span class="toc-text">Spatial anchors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shared-spatial-anchors-in-DirectX"><span class="toc-number">2.9.3.</span> <span class="toc-text">Shared spatial anchors in DirectX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shared-experiences-in-Unity"><span class="toc-number">2.9.4.</span> <span class="toc-text">Shared experiences in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Holograms-240-Sharing-holograms"><span class="toc-number">2.9.5.</span> <span class="toc-text">Holograms 240: Sharing holograms</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spectator-view"><span class="toc-number">2.9.6.</span> <span class="toc-text">Spectator view</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Locatable-Camera"><span class="toc-number">2.10.</span> <span class="toc-text">Locatable Camera</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Locatable-camera-in-DirectX"><span class="toc-number">2.10.1.</span> <span class="toc-text">Locatable camera in DirectX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Locatable-camera-in-Unity"><span class="toc-number">2.10.2.</span> <span class="toc-text">Locatable camera in Unity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mixed-reality-capture"><span class="toc-number">2.10.3.</span> <span class="toc-text">Mixed reality capture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mixed-reality-capture-for-developers"><span class="toc-number">2.10.4.</span> <span class="toc-text">Mixed reality capture for developers</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Open-Source-Projects"><span class="toc-number">3.</span> <span class="toc-text">Open Source Projects:</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HoloToolkit"><span class="toc-number">3.1.</span> <span class="toc-text">HoloToolkit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HoloToolkit-Unity"><span class="toc-number">3.2.</span> <span class="toc-text">HoloToolkit-Unity</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MRDesignLabs"><span class="toc-number">3.3.</span> <span class="toc-text">MRDesignLabs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Periodic-Table-of-the-Elements"><span class="toc-number">3.3.1.</span> <span class="toc-text">Periodic Table of the Elements</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Galaxy-Explorer"><span class="toc-number">3.4.</span> <span class="toc-text">Galaxy Explorer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HoloLens-Companion-Kit"><span class="toc-number">3.5.</span> <span class="toc-text">HoloLens Companion Kit</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Case-Study"><span class="toc-number">4.</span> <span class="toc-text">Case Study</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Others"><span class="toc-number">5.</span> <span class="toc-text">Others</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#My-Practices"><span class="toc-number">6.</span> <span class="toc-text">My Practices</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/IR/" title="IR">IR<sup>3</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/management/" title="management">management<sup>5</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/technology/" title="technology">technology<sup>20</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/thinking/" title="thinking">thinking<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Stanford/" title="Stanford">Stanford<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Computer-Graphics/" title="Computer Graphics">Computer Graphics<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Unity/" title="Unity">Unity<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Computer-Vision/" title="Computer Vision">Computer Vision<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MR/" title="MR">MR<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hololens/" title="Hololens">Hololens<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Agile/" title="Agile">Agile<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OS/" title="OS">OS<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SE/" title="SE">SE<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/OpenGL/" title="OpenGL">OpenGL<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/VR/" title="VR">VR<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UML/" title="UML">UML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robotics/" title="Robotics">Robotics<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robot-Learning/" title="Robot Learning">Robot Learning<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robot-Manipulation/" title="Robot Manipulation">Robot Manipulation<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Web/" title="Web">Web<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Design-Patterns/" title="Design Patterns">Design Patterns<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/09/">九月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">六月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/10/">十月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/08/">八月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2006/01/">一月 2006</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2005/03/">三月 2005</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/09/">九月 2004</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2004/06/">六月 2004</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://cs.stanford.edu/" target="_blank" title="Stanford CS">Stanford CS</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://pair.stanford.edu/" target="_blank" title="Stanford PAIR">Stanford PAIR</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.ri.cmu.edu/" target="_blank" title="CMU RI">CMU RI</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.robot-learning.org/" target="_blank" title="CORL">CORL</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.paperswithcode.com/sota" target="_blank" title="SOTA">SOTA</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> You&#39;ve got to find what you love. And the only way to do great work is to love what you do. If you haven&#39;t found it yet, keep looking. Don&#39;t settle. ― Steve Jobs <br/>
+			I&#39;m not a great programmer; I&#39;m just a good programmer with great habits. ― Kent Beck</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/wangwh0204" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="http://www.zhihu.com/people/wangwh0204" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:wangwh0204@outlook.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2020 
+		
+		<a href="/about" target="_blank" title="steven wang">steven wang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
